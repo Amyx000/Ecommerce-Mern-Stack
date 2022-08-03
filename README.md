@@ -1,1 +1,1 @@
-# Ecommerce-Mern-Stack
+# Ecommerce-Mern-Stack, ongoing
