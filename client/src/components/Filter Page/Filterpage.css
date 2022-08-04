@@ -1,0 +1,152 @@
+
+
+.filter-main{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap:20px;
+    margin:20px;
+}
+
+.filter-head{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+}
+
+.filter-heading1{
+    display: grid;
+    grid-template-columns: auto 30px;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.filter-icon{
+    font-size: 23px;
+    color: rgba(0, 0, 0, 0.31);
+}
+
+.filter-heading{
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+
+.sortbar{
+    text-align: right;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap:20px;
+    align-items: center;
+}
+
+
+
+select{
+    background-color: bisque;
+    border: none;
+    padding: 10px;
+    outline: none;
+}
+
+
+.select-data{
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.064);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.064);
+}
+
+.select-data-head{
+ 
+    display: grid;
+    grid-template-columns: auto 30px;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.add-icon{
+    color: rgba(0, 0, 0, 0.31);
+    font-size: 20px;
+    text-align: center;
+   
+}
+
+.add-icon:hover{
+    cursor: pointer;
+}
+
+.select-data-contain{
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.select-data-contain-hide{
+
+    display: none;
+}
+
+.filter-col{
+    border-right: 1px solid rgba(0, 0, 0, 0.058);
+}
+
+.page-next{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 20px);
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    gap: 19px;
+}
+
+.no{
+    padding: 6px 9px;
+    background-color: bisque;
+    border: 1px solid black;
+    transition: all 0.3s ease-in-out;
+}
+.no-active{
+    padding: 6px 9px;
+    background-color: rgb(145, 18, 18);
+    border: 1px solid black;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.no:hover{
+    background-color: rgb(145, 18, 18);
+    color: white;
+    cursor: pointer;
+}
+
+
+.pagenext-icon{
+    color: rgb(145, 18, 18);
+    transition: all 0.3s ease-in-out;
+}
+
+.pagenext-icon:hover{
+   
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.pageback-icon{
+    color: rgb(145, 18, 18);
+    transition: all 0.3s ease-in-out;
+    
+}
+
+.pageback-icon:hover{
+   
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.pagenext-icon-hide, .pageback-icon-hide{
+    display: none;
+}
