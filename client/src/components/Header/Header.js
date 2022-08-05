@@ -5,6 +5,8 @@ import {FiSearch} from "react-icons/fi";
 import {BiCart, BiUser} from "react-icons/bi"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faMagnifyingGlass, faXmark} from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
+
 
 
 
@@ -15,6 +17,11 @@ function Header() {
     const [menu, Setmenu]=useState("collection-menu-hidden")
     const [search, Setsearch]=useState("searchbar-hidden")
     const [user,Setuser]=useState("user-drop-hide")
+
+
+    const closeusermenu=()=>{
+        Setuser("user-drop-hide");
+    }
 
     const openmenu = ()=>{
 
@@ -70,7 +77,7 @@ function Header() {
     <>
       <div className="navbar">
         <div>
-          <img className="logo" src={logo} alt=""></img>
+          <Link onClick={closeusermenu} to={"/"}><img className="logo" src={logo} alt=""></img></Link>
         </div>
         <div className="navs" onMouseOver={openmenu}>Collection</div>
         <div className="navs"  onMouseOver={closemenu}>For Him</div>
@@ -153,8 +160,8 @@ function Header() {
       <div className={user}>
             <div className="triangle"></div>
             <div className="block">
-                <div className="block-comp">Login</div>
-                <div className="block-comp">Register</div>
+                <Link onClick={closeusermenu} className="block-comp" to={"/login"}>Login</Link>
+                <Link onClick={closeusermenu} className="block-comp" to={"/signup"}>Register</Link>
             </div>
       </div>
       

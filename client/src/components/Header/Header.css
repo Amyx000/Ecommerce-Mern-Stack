@@ -107,6 +107,9 @@ body{
 }
 
 .block {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
   background-color: var(--dropdown);
   width: 150px;
   height: 100px;
@@ -130,9 +133,11 @@ body{
 }
 
 .block-comp{
-    height: 40px;
-    margin-top: 6.5px;
-    padding-left: 20px;
+
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+ 
 }
 
 .block-comp:hover{

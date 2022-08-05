@@ -1,0 +1,100 @@
+
+
+.form-back{
+    background-color: beige;
+    padding: 50px 0;
+}
+
+.form-block{
+    text-align: center;
+    width:fit-content;
+    margin: 0 auto;
+    padding: 40px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.351);
+    background-color: white;
+}
+
+.form-head{
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.form{
+    display: grid;
+    grid-template-columns: 50px minmax(100px,340px);
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+}
+
+.form-input{
+    height: 30px;
+    padding: 5px;
+    border: none;
+    background-color: #DCDCDC;
+    outline: none;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.font-icon-div{
+    background-color: #DCDCDC;
+    height: 30px;
+    padding-top: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+   
+}
+
+.form-btn{
+    background-color: bisque;
+    border: 1px solid rgba(0, 0, 0, 0.184);
+    width: 100%;
+    height: 40px;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.form-btn:hover{
+    background-color: rgb(145, 18, 18);
+    color: white;
+}
+
+.form-btn-div{
+    grid-column: 1/3;
+    
+}
+
+.form-endline{
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.642);
+}
+
+.form-endline-btn{
+    color:rgba(0, 0, 0, 0.642) ;
+    text-decoration: underline;
+}
+
+.form-endline-btn:hover{
+    color: rgb(145, 18, 18);
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+    
+}
+
+.forgot-pass{
+    grid-column: 1/3;
+    font-size: 14px;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.642);
+}
+
+.forgot-pass:hover{
+    color: rgb(145, 18, 18);
+    cursor: pointer;
+}
