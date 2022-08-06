@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./Header.css";
 import logo from "../../assets/logo.png";
 import {FiSearch} from "react-icons/fi";
-import {BiCart, BiUser} from "react-icons/bi"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faMagnifyingGlass, faXmark} from '@fortawesome/free-solid-svg-icons'
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import {Badge} from "@mui/material"
 import { Link } from "react-router-dom";
 
 
@@ -88,10 +90,12 @@ function Header() {
           
         </div>
         <div className="navs">
-        <BiCart className="carticon"/>
+            <Badge badgeContent={"0"} color="secondary">
+                <LocalMallOutlinedIcon color="action" />
+            </Badge>
         </div>
         <div className="navs">
-          <BiUser onClick={openuser} className="usericon" />
+          <PersonOutlineOutlinedIcon onClick={openuser} sx={{ fontSize: 30 }} color="action"/>
         </div>
       </div>
       <div className={menu} onMouseOver={openmenu} onMouseLeave={closemenu}>
