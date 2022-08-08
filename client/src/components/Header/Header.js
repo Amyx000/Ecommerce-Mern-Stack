@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./Header.css";
 import logo from "../../assets/logo.png";
 import {FiSearch} from "react-icons/fi";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faMagnifyingGlass, faXmark} from '@fortawesome/free-solid-svg-icons'
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import {Badge} from "@mui/material"
 import { Link } from "react-router-dom";
 
@@ -13,9 +13,7 @@ import { Link } from "react-router-dom";
 
 
 function Header() {
-    const[a, Seta]=useState(false)
     const[b, Setb]=useState(false)
-    const[icon, Seticon]=useState(faMagnifyingGlass)
     const [menu, Setmenu]=useState("collection-menu-hidden")
     const [search, Setsearch]=useState("searchbar-hidden")
     const [user,Setuser]=useState("user-drop-hide")
@@ -29,8 +27,6 @@ function Header() {
 
         Setmenu("collection-menu")
         Setsearch("searchbar-hidden")
-            Seticon(faMagnifyingGlass)
-            Seta(false);
             Setuser("user-drop-hide")
             Setb(false);
 
@@ -42,19 +38,15 @@ function Header() {
 
     }
 
-    const opensearch = ()=>{
+    const opensearch = ()=>{  
         
-        if(a===false){
+        if(search==="searchbar-hidden"){
             Setsearch("searchbar")
-            Seticon(faXmark)
-            Seta(true);
             Setuser("user-drop-hide")
             Setb(false);
         }
         else{
             Setsearch("searchbar-hidden")
-            Seticon(faMagnifyingGlass)
-            Seta(false);
         }
         
     }
@@ -65,8 +57,6 @@ function Header() {
             Setuser("user-drop")
             Setb(true);
             Setsearch("searchbar-hidden")
-            Seticon(faMagnifyingGlass)
-            Seta(false);
         }
         else{
             Setuser("user-drop-hide")
@@ -79,14 +69,14 @@ function Header() {
     <>
       <div className="navbar">
         <div>
-          <Link onClick={closeusermenu} to={"/"}><img className="logo" src={logo} alt=""></img></Link>
+          <Link className="logo-main" onClick={closeusermenu} to={"/"}><img className="logo" src={logo} alt=""></img><div>Folex</div></Link>
         </div>
         <div className="navs" onMouseOver={openmenu}>Collection</div>
-        <div className="navs"  onMouseOver={closemenu}>For Him</div>
+        <div className="navs"  onMouseOver={closemenu}><Link className="links" to={"/watches"}>For Him</Link></div>
         <div className="navs">For Her</div>
         <div className="navs">About us</div>
-        <div className="navs">
-          <FontAwesomeIcon className="searchicon" icon={icon} onClick={opensearch} />
+        <div className="navs" onClick={opensearch}>
+          {search==="searchbar-hidden"?<SearchOutlinedIcon color="action"/>:<CloseOutlinedIcon color="action"/>}
           
         </div>
         <div className="navs">

@@ -82,10 +82,11 @@ select{
 .select-data-contain{
     margin-top: 15px;
     font-size: 13px;
+   
 }
 
 .select-data-contain-hide{
-
+    
     display: none;
 }
 

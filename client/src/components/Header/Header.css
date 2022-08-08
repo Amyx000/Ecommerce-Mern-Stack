@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Text+Me+One&display=swap');
 
 
 body{
@@ -10,15 +12,29 @@ body{
   grid-template-columns: 2fr repeat(7, 1fr);
   font-size: 1.1rem;
   font-weight: bold;
+  font-family: 'Text Me One', sans-serif;
+  
   background-color: bisque;
   align-items: center;
   justify-items: center;
   border-bottom: 1px solid rgb(196, 181, 163);
 }
 
+.logo-main{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  text-decoration: none;
+  color: #C29427;
+  font-size: 35px;
+  font-family: 'Great Vibes', cursive;
+  
+}
+
 .logo {
   width: 100px;
 }
+
 
 .navs:hover {
   text-decoration: underline;
@@ -41,7 +57,7 @@ body{
 }
 
 .searchbar {
-  background-color: rgba(255, 228, 196, 0.711);
+  background-color: bisque;
   text-align: center;
   padding: 40px;
 }
@@ -49,7 +65,7 @@ body{
 .collection-menu,
 .searchbar {
   position: absolute;
-  top: 86px;
+  top: 81px;
   left: 0;
   right: 0;
   z-index: 1;
@@ -103,7 +119,7 @@ body{
 }
 
 :root{
-    --dropdown: rgb(255, 255, 255);
+    --dropdown: rgb(231, 231, 231);
 }
 
 .block {
@@ -115,7 +131,7 @@ body{
   height: 100px;
   position: absolute;
   right: 45px;
-  top: 100px;
+  top: 97px;
   z-index: 1;
 }
 
@@ -128,7 +144,7 @@ body{
   border-bottom: 15px solid var(--dropdown);
   position: absolute;
   right: 55px;
-  top: 86px;
+  top: 82px;
   z-index: 1;
 }
 
@@ -143,8 +159,14 @@ body{
 .block-comp:hover{
     cursor: pointer;
     background-color: bisque;
+    border: 1px solid #C29427;
 }
 
 .user-drop-hide{
     display: none;
+}
+
+.links{
+  text-decoration: none;
+  color: black;
 }

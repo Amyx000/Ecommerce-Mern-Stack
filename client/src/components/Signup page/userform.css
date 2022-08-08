@@ -47,6 +47,10 @@
    
 }
 
+.calen-icon{
+    cursor: pointer;
+}
+
 .form-btn{
     background-color: bisque;
     border: 1px solid rgba(0, 0, 0, 0.184);
@@ -97,4 +101,28 @@
 .forgot-pass:hover{
     color: rgb(145, 18, 18);
     cursor: pointer;
+}
+
+
+.form-calen-hide{
+    display: none;
+}
+
+.Calendar__yearSelector{
+    overflow: scroll !important;
+    
+}
+
+/* .Calendar{
+    position: absolute !important;
+    left:100px !important;
+    top:120px !important;
+    z-index: 1 !important;
+} */
+
+.form-calen{
+    position: absolute !important;
+    left:100px !important;
+    top:120px !important;
+    z-index: 1 !important;
 }
