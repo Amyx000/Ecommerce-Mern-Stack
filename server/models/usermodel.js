@@ -24,6 +24,10 @@ const userschema = new mongoose.Schema({
         type:Date,
         required:true
     },
+    isAdmin:{
+        type:Boolean,
+        default:false
+    }
 })
 
 mongoose.pluralize(null);
