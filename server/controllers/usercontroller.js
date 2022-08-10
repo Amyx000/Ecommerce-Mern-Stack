@@ -1,52 +1,19 @@
 const usermodel = require("../models/usermodel")
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
 
 
-const register_user = async (req,res)=>{
-    const user = await usermodel({
-        name:req.body.name,
-        email:req.body.email,
-        mobile:req.body.mobile,
-        password: await bcrypt.hash(req.body.password, 10),
-        dob:req.body.dob
-    }
-    );
-
-    user.save();
-    res.json(user)
-}
-
-const login_user =async (req,res)=>{
+const getuser = async (req,res)=>{   //tested te get metod wit middleware of autoken
     try{
-        
-        const user = await usermodel.findOne({email:req.body.email})
-
-        if(!user){res.status(400).json("No User Found, Please Register!!")}
-        else{
-            const match = await bcrypt.compare(req.body.password, user.password);
-            
-            if(match===true){
-                const accesstoken =jwt.sign({
-                    id:user._id,
-                    isAdmin:user.isAdmin
-                },
-                process.env.JWT_SECKEY,
-                {expiresIn:"3d"}
-                )
-
-                const{password, ...restdata}=user._doc;
-                res.json({...restdata, accesstoken})  
-            }else{
-                res.status(400).json("Wrong Credentials")
-            }
-            }
+        const user = await usermodel.findOne({_id:req.params.id})
+        if(!user){
+            res.status(400).json("you are not autenthicated")
+        }
+        res.status(200).json(user)
     }
     catch(err){
-        res.json(err)
+        res.status(400).json("you are not autenthicated")
     }
-    
+  
+  
 }
 
-
-module.exports = {register_user, login_user};
+module.exports= {getuser};

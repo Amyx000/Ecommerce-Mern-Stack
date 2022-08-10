@@ -156,6 +156,8 @@ function Header() {
             <div className="block">
                 <Link onClick={closeusermenu} className="block-comp" to={"/login"}>Login</Link>
                 <Link onClick={closeusermenu} className="block-comp" to={"/signup"}>Register</Link>
+                <Link onClick={closeusermenu} className="block-comp" to={"/"}>Account</Link>
+                <Link onClick={closeusermenu} className="block-comp" to={"/"}>Logout</Link>
             </div>
       </div>
       
