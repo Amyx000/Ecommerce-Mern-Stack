@@ -27,6 +27,14 @@ const userschema = new mongoose.Schema({
     isAdmin:{
         type:Boolean,
         default:false
+    },
+    isSeller:{
+        type:Boolean,
+        default:false
+    },
+    isBuyer:{
+        type:Boolean,
+        default:true
     }
 })
 

@@ -29,7 +29,9 @@ const login_user =async (req,res)=>{
             if(match===true){
                 const accesstoken =jwt.sign({
                     id:user._id,
-                    isAdmin:user.isAdmin
+                    isAdmin:user.isAdmin,
+                    isSeller:user.isSeller,
+                    isBuyer:user.isBuyer,
                 },
                 process.env.JWT_SECKEY,
                 {expiresIn:"3d"}
