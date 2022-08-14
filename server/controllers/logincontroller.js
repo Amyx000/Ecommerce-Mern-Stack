@@ -14,7 +14,7 @@ const register_user = async (req,res)=>{
     );
 
     user.save();
-    res.json(user)
+    res.status(200).json("Registered Successfully")
 }
 
 const login_user =async (req,res)=>{
@@ -38,9 +38,8 @@ const login_user =async (req,res)=>{
                 )
 
                 const{password, ...restdata}=user._doc;
-                res.cookie("token", accesstoken)
+                res.cookie("token", accesstoken,{httpOnly:true, secure:true})
                 res.json({...restdata, accesstoken})
-
                 
             }else{
                 res.status(400).json("Wrong Credentials")

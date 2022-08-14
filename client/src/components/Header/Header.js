@@ -18,8 +18,11 @@ function Header() {
     const [search, Setsearch]=useState("searchbar-hidden")
     const [user,Setuser]=useState("user-drop-hide")
 
-
     const closeusermenu=()=>{
+        Setuser("user-drop-hide");
+    }
+
+    const logoutfuc =()=>{
         Setuser("user-drop-hide");
     }
 
@@ -157,7 +160,7 @@ function Header() {
                 <Link onClick={closeusermenu} className="block-comp" to={"/login"}>Login</Link>
                 <Link onClick={closeusermenu} className="block-comp" to={"/signup"}>Register</Link>
                 <Link onClick={closeusermenu} className="block-comp" to={"/"}>Account</Link>
-                <Link onClick={closeusermenu} className="block-comp" to={"/"}>Logout</Link>
+                <Link onClick={logoutfuc} className="block-comp" to={"/"}>Logout</Link>
             </div>
       </div>
       
