@@ -15,6 +15,7 @@ const register_user = async (req,res)=>{
 
     user.save();
     res.status(200).json("Registered Successfully")
+    
 }
 
 const login_user =async (req,res)=>{
@@ -38,7 +39,7 @@ const login_user =async (req,res)=>{
                 )
 
                 const{password, ...restdata}=user._doc;
-                res.cookie("token", accesstoken,{httpOnly:true, secure:true})
+                res.cookie("token", accesstoken,{httpOnly:true})
                 res.json({...restdata, accesstoken})
                 
             }else{

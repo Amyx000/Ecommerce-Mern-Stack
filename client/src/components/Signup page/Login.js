@@ -16,7 +16,7 @@ function Login() {
       const res = await axios.post("http://localhost:5000/auth/login",{
         email:email,
         password:password
-      },{credentials: 'include'})
+      },{withcredentials: true})
       navigate("/")
       console.log(res.data)
     } 

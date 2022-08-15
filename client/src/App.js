@@ -1,6 +1,7 @@
 import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import "./app.css"
+import Account from "./components/Account/Account";
 import Filterpage from "./components/Filter Page/Filterpage";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -22,6 +23,7 @@ function App() {
             <Route path="/watches" element={<Filterpage/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/account" element={<Account/>}/>
         </Routes> 
      </BrowserRouter>
      
