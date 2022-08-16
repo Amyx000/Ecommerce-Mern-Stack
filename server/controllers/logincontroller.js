@@ -39,7 +39,7 @@ const login_user =async (req,res)=>{
                 )
 
                 const{password, ...restdata}=user._doc;
-                res.cookie("token", accesstoken,{httpOnly:true})
+                res.cookie("token", accesstoken,{HttpOnly:true})
                 res.json({...restdata, accesstoken})
                 
             }else{

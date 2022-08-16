@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 
 
 
-
 function Header() {
     const[b, Setb]=useState(false)
     const [menu, Setmenu]=useState("collection-menu-hidden")
@@ -23,6 +22,7 @@ function Header() {
     }
 
     const logoutfuc =()=>{
+
         Setuser("user-drop-hide");
     }
 

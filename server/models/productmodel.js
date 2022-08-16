@@ -2,10 +2,18 @@ const mongoose = require("mongoose")
 
 const productschema = new mongoose.Schema({
 
-    name: {
+      brand: {     //casio
         type: String,
         required: [true, "Please Enter product Name"],
         trim: true,
+      },
+      series: {   //edifice
+        type: String,
+        required:true,
+      },
+      modelno:{   //ed12345
+        type: String,
+        required:true
       },
       description: {
         type: String,
@@ -22,19 +30,19 @@ const productschema = new mongoose.Schema({
       },
       images: [
         {
-          public_id: {
+          displayimg_url: {
             type: String,
             required: true,
           },
-          url: {
+          productpage_url: {
             type: String,
             required: true,
           },
         },
       ],
-      category: {
-        type: String,
-        required: [true, "Please Enter Product Category"],
+      gender:{
+        type:String,
+        required:true
       },
       Stock: {
         type: Number,

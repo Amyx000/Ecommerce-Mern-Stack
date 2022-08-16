@@ -10,8 +10,11 @@ function Login() {
   const[email, Setemail] = useState("")
   const[password, Setpassword] = useState("")
 
-  const clickfuc = async ()=>{
+  function set_cookie(name) {
+    document.cookie = 'token='+name+'; Path=/;';
+  }
 
+  const clickfuc = async ()=>{
     try {
       const res = await axios.post("http://localhost:5000/auth/login",{
         email:email,
@@ -19,6 +22,7 @@ function Login() {
       },{withcredentials: true})
       navigate("/")
       console.log(res.data)
+      set_cookie(res.data.accesstoken)
     } 
     catch (error) {
       console.log(error.response.data)
