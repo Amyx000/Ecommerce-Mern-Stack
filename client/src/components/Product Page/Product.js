@@ -1,23 +1,45 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import "./Product.css"
+import {useLocation} from "react-router-dom"
 import {BsTruck} from "react-icons/bs"
 import {RiStarSmileLine} from "react-icons/ri"
 import {MdOutlineMiscellaneousServices} from "react-icons/md"
+import axios from "axios"
 
 function Product(){
+    const location = useLocation();
+    const [product,Setproduct]=useState([])
+    const [prodimg,Setprodimg]=useState()
+    const product_id = location.pathname.split("watches/")[1]
+
+    useEffect(() => {
+       async function getproductdetails () {
+        try {
+            const res = await axios.get(`http://localhost:5000/products/${product_id}`)
+            Setproduct(res.data.productdata)
+            Setprodimg(res.data.productdata.images[0]?.productpage_url)
+        } catch (error) {
+            console.log(error)
+        }
+      }
+      getproductdetails();
+    }, [product_id])
+
+    console.log(prodimg)
+    
     return(
         <>
         <div className="product-contain">
-            <div>
-                <img className="product-img" src="https://cdn1.ethoswatches.com/media/catalog/product/cache/6e5de5bc3d185d8179cdc7258143f41a/c/o/corum-admiral-082-202-42-v800-pn12-multiple-1.jpg" alt=""></img>
+            <div className="productside">
+                <img className="product-img" src={prodimg} alt=""></img>
             </div>
             <div className="product-info">
-                <div className="name">Corum</div>
-                <div className="series">Admiral 38 Automatic</div>
-                <div className="model">082.202.42/V800 PN12</div>
-                <div className="price">MRP ₹ 6,71,000</div>
+                <div className="name">{product?.brand}</div>
+                <div className="series">{product?.series}</div>
+                <div className="model">{product?.modelno}v</div>
+                <div className="price">MRP ₹ {product?.price}</div>
                 <div className="price-details">*Inclusive of all taxes</div>
-                <div className="price-details">EMI from ₹ 59932</div>
+                <div className="price-details">EMI from ₹ {Math.round(product?.price/12)}</div>
                 <div><button className="addtocart">Add to Cart</button></div>
                 <div className="product-endline">
 

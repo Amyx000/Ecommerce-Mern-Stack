@@ -1,26 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import "./userform.css"
 import { Link, useNavigate } from 'react-router-dom'
 import {AiOutlineMail} from "react-icons/ai"
 import {RiLockPasswordLine} from "react-icons/ri"
 import axios from 'axios'
+import ClockLoader from "react-spinners/ClockLoader"
+
 
 function Login() {
+  let [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const[email, Setemail] = useState("")
   const[password, Setpassword] = useState("")
+
 
   function set_cookie(name) {
     document.cookie = 'token='+name+'; Path=/;';
   }
 
+  const loader = ()=>{
+    setLoading(true)
+        setTimeout(()=>{
+          navigate("/")
+          setLoading(false)
+        },2000)
+  }
   const clickfuc = async ()=>{
+    setLoading(false)
     try {
       const res = await axios.post("http://localhost:5000/auth/login",{
         email:email,
         password:password
       },{withcredentials: true})
-      navigate("/")
+      loader()
       console.log(res.data)
       set_cookie(res.data.accesstoken)
     } 
@@ -29,10 +41,10 @@ function Login() {
     }
    
   }
-  
 
   return (
     <>
+    {loading?<ClockLoader className='clockloader' color={"#8C6B20"} loading={loading} size={150} speedMultiplier={2} />:
     <div className='form-back'>
         <div className='form-block'>
             <div className='form-head'>Login your Account</div>
@@ -47,7 +59,8 @@ function Login() {
             <div className='form-endline'>NOT REGISTERED? <Link className='form-endline-btn' to={"/signup"}>SIGN UP</Link></div>
         
         </div>
-    </div>
+    </div>}
+    
     </>
   )
 }

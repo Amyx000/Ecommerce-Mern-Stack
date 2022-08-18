@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"
 import Productprops from "./Productprops";
 import "./Rowproduct.css"
+import { Link} from "react-router-dom";
 
 
 function Rowproduct (){
+
       const[products,Setproducts]=useState([])
       useEffect(() => {
             async function product(){
@@ -26,7 +28,9 @@ function Rowproduct (){
             
             {products.map(products=>{
                   return(
-                        <Productprops src={products?.images[0].displayimg_url} brand={products?.brand} series={products?.series} price={products?.price}/>
+                        <Link className="productprops" to={`/watches/${products?._id}`}>
+                         <Productprops src={products?.images[0].displayimg_url} brand={products?.brand} series={products?.series} price={products?.price} key={products?._id}/>
+                        </Link>
                   )
             })}
            
