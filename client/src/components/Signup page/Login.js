@@ -8,7 +8,7 @@ import ClockLoader from "react-spinners/ClockLoader"
 
 
 function Login() {
-  let [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const[email, Setemail] = useState("")
   const[password, Setpassword] = useState("")

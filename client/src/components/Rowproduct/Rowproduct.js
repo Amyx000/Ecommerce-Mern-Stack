@@ -3,16 +3,27 @@ import axios from "axios"
 import Productprops from "./Productprops";
 import "./Rowproduct.css"
 import { Link} from "react-router-dom";
+import ClockLoader from "react-spinners/ClockLoader"
 
 
 function Rowproduct (){
-
+      const [loading, setLoading] = useState(false);
       const[products,Setproducts]=useState([])
+
+      const loader = ()=>{
+            setLoading(true)
+                setTimeout(()=>{
+                  setLoading(false)
+                },1000)
+      }
+
       useEffect(() => {
             async function product(){
+
                   try {
                       const res = await axios.get("http://localhost:5000/products")
                       Setproducts(res.data.productdata)
+                      loader()
       
                   } catch (error) {
                         console.log(error)
@@ -24,6 +35,7 @@ function Rowproduct (){
 
     return(
         <>
+        {loading?<ClockLoader className='clockloader' color={"#8C6B20"} loading={loading} size={150} speedMultiplier={2} />:
           <div className="prod-row">
             
             {products.map(products=>{
@@ -34,7 +46,7 @@ function Rowproduct (){
                   )
             })}
            
-          </div>
+          </div>}
         </>
     )
 }
