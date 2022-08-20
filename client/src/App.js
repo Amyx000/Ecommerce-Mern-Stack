@@ -2,6 +2,7 @@ import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import "./app.css"
 import Account from "./components/Account/Account";
+import Cart from "./components/Card/Cart";
 import Filterpage from "./components/Filter Page/Filterpage";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/account" element={<Account/>}/>
+            <Route path="/cart" element={<Cart/>}/>
         </Routes> 
      </BrowserRouter>
      

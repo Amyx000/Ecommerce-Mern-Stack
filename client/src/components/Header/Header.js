@@ -84,7 +84,7 @@ function Header() {
         </div>
         <div className="navs">
             <Badge badgeContent={"0"} color="secondary">
-                <LocalMallOutlinedIcon color="action" />
+                <Link to={"/cart"}><LocalMallOutlinedIcon color="action" /></Link>
             </Badge>
         </div>
         <div className="navs">
