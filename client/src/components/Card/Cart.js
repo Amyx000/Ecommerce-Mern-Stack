@@ -1,10 +1,25 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import "./Cart.css"
 import {RiPercentFill} from "react-icons/ri"
 import Cartprod from "./Cartprod";
+import ClockLoader from "react-spinners/ClockLoader"
 
 function Cart (){
+    const [loading, setLoading] = useState(false);
+    const loader = ()=>{
+        setLoading(true)
+            setTimeout(()=>{
+              setLoading(false)
+            },1000)
+   }
+
+  useEffect(() => {
+    loader()
+}, [])
+
     return(
+        <>
+        {loading?<ClockLoader className='clockloader' color={"#8C6B20"} loading={loading} size={150} speedMultiplier={2} />:
         <div className="cart-main">
             <div className="cart-left">
                 <div className="cart-items">Items:</div>
@@ -46,7 +61,8 @@ function Cart (){
                     <button className="proceed cart-btn">Proceed</button>
                 </div>
             </div>
-        </div>
+        </div>}
+        </>
     )
 }
 
