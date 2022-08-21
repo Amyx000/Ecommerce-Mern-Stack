@@ -9,3 +9,7 @@ body{
     border: 2px solid #8C6B20 !important;
     
 }
+.link{
+    color: black;
+    text-decoration: none;
+}

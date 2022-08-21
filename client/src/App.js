@@ -1,6 +1,7 @@
 import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import "./app.css"
+import About from "./components/About Us/About";
 import Account from "./components/Account/Account";
 import Cart from "./components/Card/Cart";
 import Filterpage from "./components/Filter Page/Filterpage";
@@ -26,6 +27,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/account" element={<Account/>}/>
             <Route path="/cart" element={<Cart/>}/>
+            <Route path="/about" element={<About/>}/>
         </Routes> 
      </BrowserRouter>
      

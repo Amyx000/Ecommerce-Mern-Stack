@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Home.css";
 
 function Home() {
@@ -18,7 +19,7 @@ function Home() {
             design inspired by the famous 4th generation style worn by Apollo 11
             astronauts.
           </div>
-          <button className="contain-btn">DISCOVER THE COLLECTION</button>
+          <Link to={"/watches"}><button className="contain-btn">DISCOVER THE COLLECTION</button></Link>
         </div>
 
       </div>

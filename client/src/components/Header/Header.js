@@ -75,9 +75,9 @@ function Header() {
           <Link className="logo-main" onClick={closeusermenu} to={"/"}><img className="logo" src={logo} alt=""></img><div>Folex</div></Link>
         </div>
         <div className="navs" onMouseOver={openmenu}>Collection</div>
-        <div className="navs"  onMouseOver={closemenu}><Link className="links" to={"/watches"}>For Him</Link></div>
-        <div className="navs">For Her</div>
-        <div className="navs">About us</div>
+        <div className="navs"  onMouseOver={closemenu}><Link className="link" to={"/watches"}>For Him</Link></div>
+        <div className="navs"><Link className="link" to={"/watches"}>For Her</Link></div>
+        <div className="navs"><Link className="link" to={"/about"}>About us</Link></div>
         <div className="navs" onClick={opensearch}>
           {search==="searchbar-hidden"?<SearchOutlinedIcon color="action"/>:<CloseOutlinedIcon color="action"/>}
           
