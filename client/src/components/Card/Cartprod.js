@@ -17,7 +17,7 @@ function Cartprod(props) {
             </div>
         </div>
         <div>₹ {props.price}</div>
-        <div><select>
+        <div><select className='cart-select'>
             <option>1</option>
             <option>2</option>
             <option>3</option>
