@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
+import {useSelector} from "react-redux"
 import "./Cart.css"
 import {RiPercentFill} from "react-icons/ri"
 import Cartprod from "./Cartprod";
 import ClockLoader from "react-spinners/ClockLoader"
 
 function Cart (){
+    const cart = useSelector(state=>state.cart)
     const [loading, setLoading] = useState(false);
     const loader = ()=>{
         setLoading(true)
@@ -27,25 +29,28 @@ function Cart (){
                     <div>PRODUCT</div><div>PRICE</div><div>QUANTITY</div>
                    
                 </div>
-                <Cartprod className="cartprod" img={"https://images.bestsellerclothing.in/data/JJ/sep-9-2021/246286802_g1.jpg?width=47&height=47&mode=fill&fill=blur&format=auto"}
-                    name={"Orange Striped Full Sleeves Shirt"} price={20000}
-                />
-                <Cartprod className="cartprod" img={"https://images.bestsellerclothing.in/data/JJ/sep-9-2021/246286802_g1.jpg?width=47&height=47&mode=fill&fill=blur&format=auto"}
-                    name={"Orange Striped Full Sleeves Shirt"} price={20000}
-                />
-                <Cartprod className="cartprod" img={"https://images.bestsellerclothing.in/data/JJ/sep-9-2021/246286802_g1.jpg?width=47&height=47&mode=fill&fill=blur&format=auto"}
-                    name={"Orange Striped Full Sleeves Shirt"} price={20000}
-                />
+                {cart.products.map((product)=>{
+                    return(
+                        <Cartprod className="cartprod" img={"https://images.bestsellerclothing.in/data/JJ/sep-9-2021/246286802_g1.jpg?width=47&height=47&mode=fill&fill=blur&format=auto"}
+                         name={`${product.brand} ${product.modelno}`} price={product.price}
+                        />
+                    )
+
+                })}
                 
             </div>
             <div className="cart-right">
                 <div className="cart-r-price cart-pad">
                     <div>Sub-Total:</div>
-                    <div>₹ 12000</div>
+                    <div>₹ {cart.total}</div>
+                </div>
+                <div className="cart-r-price cart-pad">
+                    <div>Tax: 9%</div>
+                    <div>₹ {cart.total*0.09}</div>
                 </div>
                 <div className="cart-r-price cart-pad">
                 <div>Total:</div>
-                    <div>₹ 16000</div>
+                    <div>₹ {cart.total*1.09}</div>
                 </div>
                 <div>
                     <div>
