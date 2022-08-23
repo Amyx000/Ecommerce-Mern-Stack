@@ -8,10 +8,13 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import {Badge} from "@mui/material"
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 
 function Header() {
+
+    const cartQuantity = useSelector(state=>state.cart.quantity)
     const[b, Setb]=useState(false)
     const [menu, Setmenu]=useState("collection-menu-hidden")
     const [search, Setsearch]=useState("searchbar-hidden")
@@ -83,7 +86,7 @@ function Header() {
           
         </div>
         <div className="navs">
-            <Badge badgeContent={"0"} color="secondary">
+            <Badge badgeContent={cartQuantity} color="secondary">
                 <Link to={"/cart"}><LocalMallOutlinedIcon color="action" /></Link>
             </Badge>
         </div>

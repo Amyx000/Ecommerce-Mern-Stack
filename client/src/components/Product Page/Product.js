@@ -5,8 +5,11 @@ import {BsTruck} from "react-icons/bs"
 import {RiStarSmileLine} from "react-icons/ri"
 import {MdOutlineMiscellaneousServices} from "react-icons/md"
 import axios from "axios"
+import {useDispatch} from "react-redux"
+import { addProduct } from "../../Redux/Reducers/cartReducer"
 
 function Product(){
+    const dispatch = useDispatch()
     const location = useLocation();
     const [product,Setproduct]=useState([])
     const [prodimg,Setprodimg]=useState()
@@ -25,7 +28,10 @@ function Product(){
       getproductdetails();
     }, [product_id])
 
-    console.log(prodimg)
+    const handleClick = ()=>{
+        dispatch(addProduct({product, price:product.price}));
+        console.log(product)
+    }
     
     return(
         <>
@@ -40,7 +46,7 @@ function Product(){
                 <div className="price">MRP ₹ {product?.price}</div>
                 <div className="price-details">*Inclusive of all taxes</div>
                 <div className="price-details">EMI from ₹ {Math.round(product?.price/12)}</div>
-                <div><button className="addtocart">Add to Cart</button></div>
+                <div><button className="addtocart" onClick={handleClick}>Add to Cart</button></div>
                 <div className="product-endline">
 
                     <RiStarSmileLine className="end-icon"/>
