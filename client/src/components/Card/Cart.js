@@ -29,15 +29,7 @@ function Cart (){
                     <div>PRODUCT</div><div>PRICE</div><div>QUANTITY</div>
                    
                 </div>
-                {cart.products.map((product)=>{
-                    return(
-                        <Cartprod className="cartprod" img={"https://images.bestsellerclothing.in/data/JJ/sep-9-2021/246286802_g1.jpg?width=47&height=47&mode=fill&fill=blur&format=auto"}
-                         name={`${product.brand} ${product.modelno}`} price={product.price}
-                        />
-                    )
-
-                })}
-                
+                        <Cartprod/>
             </div>
             <div className="cart-right">
                 <div className="cart-r-price cart-pad">
@@ -46,11 +38,11 @@ function Cart (){
                 </div>
                 <div className="cart-r-price cart-pad">
                     <div>Tax: 9%</div>
-                    <div>₹ {cart.total*0.09}</div>
+                    <div>₹ {Math.round(cart.total*0.09)}</div>
                 </div>
                 <div className="cart-r-price cart-pad">
                 <div>Total:</div>
-                    <div>₹ {cart.total*1.09}</div>
+                    <div>₹ {Math.round(cart.total*1.09)}</div>
                 </div>
                 <div>
                     <div>

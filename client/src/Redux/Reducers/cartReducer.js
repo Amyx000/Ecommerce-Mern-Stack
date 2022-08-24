@@ -12,9 +12,14 @@ const cartSlice = createSlice({
             state.quantity += 1;
             state.products.push(action.payload.product);
             state.total += action.payload.price;
+        },
+        removeProduct:(state,action)=>{
+            state.quantity -= 1;
+            state.products =state.products.filter((item)=>item._id!==action.payload.product);
+            state.total -= action.payload.price;
         }
     }
 })
 
-export const {addProduct} = cartSlice.actions
+export const {addProduct, removeProduct} = cartSlice.actions
 export default cartSlice.reducer
