@@ -114,3 +114,35 @@
     background-color:#E6E6E6;
     border-radius: 10px;
 }
+
+.emptycart{
+    text-align: center;
+    margin: 100px auto;
+}
+
+.emptycart-title{
+    font-size: 20px;
+    margin: 25px auto;
+}
+
+.emptycart-icon{
+    font-size: 55px;
+}
+
+.emptycart-btn{
+    color: white;
+    border: none;
+    background-color: rgb(145, 18, 18);
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.emptycart-btn:hover{
+    background-color: rgb(176, 17, 17);
+}
+
+.emptycart-btn:active{
+    background-color: bisque;
+}

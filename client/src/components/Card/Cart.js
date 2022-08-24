@@ -4,6 +4,7 @@ import "./Cart.css"
 import {RiPercentFill} from "react-icons/ri"
 import Cartprod from "./Cartprod";
 import ClockLoader from "react-spinners/ClockLoader"
+import Emptycart from "./Emptycart";
 
 function Cart (){
     const cart = useSelector(state=>state.cart)
@@ -20,6 +21,8 @@ function Cart (){
 }, [])
 
     return(
+        <>
+        {cart.quantity===0?<Emptycart/>:
         <>
         {loading?<ClockLoader className='clockloader' color={"#8C6B20"} loading={loading} size={150} speedMultiplier={2} />:
         <div className="cart-main">
@@ -58,7 +61,8 @@ function Cart (){
                     <button className="proceed cart-btn">Proceed</button>
                 </div>
             </div>
-        </div>}
+        </div>}</>
+        }
         </>
     )
 }
