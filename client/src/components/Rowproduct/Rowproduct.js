@@ -32,6 +32,21 @@ function Rowproduct (){
             product();
       }, [])
       
+      
+     //test filter
+      const brand = ["Panerai", "Rado", "Tissot", "Grand Seiko"]
+      const filgen =["Female"]
+            
+      products.forEach((value,index)=>{
+            for(var i=0;i<brand.length;i++){
+            if(value.brand===brand?.[i]&&value.gender===filgen[0])
+            {const filteredProd = value
+            console.log(filteredProd)}}
+      })
+            
+      
+      
+    
 
     return(
         <>

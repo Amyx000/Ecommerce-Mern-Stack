@@ -5,9 +5,11 @@ import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons"
 import {BiFilterAlt} from "react-icons/bi"
 import {MdArrowForwardIos, MdArrowBackIos} from "react-icons/md"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useLocation} from "react-router-dom"
 
 function Filterpage() {
-
+    const locaion = useLocation()
+    console.log(locaion.pathname)
     const[gender,Setgender]=useState("select-data-contain-hide")
     const[price,Setprice]=useState("select-data-contain-hide")
     const[brand,Setbrand]=useState("select-data-contain-hide")
@@ -20,8 +22,12 @@ function Filterpage() {
     const[no2,Setno2]=useState("no")
     const[no3,Setno3]=useState("no")
     const[no4,Setno4]=useState("no")
+    const[filterdata,Setfilterdata]=useState({
+        gender:"",
+        price:"",
+        brand:""
+    })
 
-    
 
     const pagination =(e)=>{
         let pagevalue = e.target.dataset.user;
@@ -102,6 +108,23 @@ function Filterpage() {
         
     }
 
+    const filterfunc = (e)=>{
+        const check = e.target.checked
+        const {name, value}=e.target
+        if(check===true){
+            Setfilterdata((prevalue)=>{
+                return{
+                    ...prevalue,
+                    [name]:[value],
+                }
+            })
+        }
+        else{
+            Setfilterdata({})
+        }
+    }
+    console.log(filterdata)
+
   return (
     <>
       <div className="filter-main">
@@ -117,10 +140,10 @@ function Filterpage() {
                 </div>
                 <div className={gender}>
                     <div>
-                        <input type="checkbox"></input>Male
+                        <input onChange={filterfunc} name="gender" value="male" type="checkbox"></input>Male
                     </div>
                     <div>
-                        <input type="checkbox"></input>Female
+                        <input onChange={filterfunc} name="gender" value="female" type="checkbox"></input>Female
                     </div>
                 </div>
           </div>
@@ -131,16 +154,16 @@ function Filterpage() {
                 </div>
                 <div className={price}>
                     <div>
-                        <input type="checkbox"></input>0-10,000
+                        <input onChange={filterfunc} name="price" value={10000} type="checkbox"></input>0-10,000
                     </div>
                     <div>
-                        <input type="checkbox"></input>10,000-20,000
+                        <input onChange={filterfunc} name="price" value={20000} type="checkbox"></input>10,000-20,000
                     </div>
                     <div>
-                        <input type="checkbox"></input>20,000-50,000
+                        <input onChange={filterfunc} name="price" value={50000} type="checkbox"></input>20,000-50,000
                     </div>
                     <div>
-                        <input type="checkbox"></input>Above 50,000
+                        <input onChange={filterfunc} name="price" value={"other"} type="checkbox"></input>Above 50,000
                     </div>
                 </div>
           </div>
@@ -150,28 +173,28 @@ function Filterpage() {
                     <div>BRAND</div><div onClick={dropbrand} className="add-icon"><FontAwesomeIcon icon={plusicon3}/></div>
                 </div>
                 <div className={brand}>
-                    <div><input type="checkbox"></input>Armani Exchange</div>
-                    <div><input type="checkbox"></input>Balmain</div>
-                    <div><input type="checkbox"></input>Bering</div>
-                    <div><input type="checkbox"></input>Calvin Klein</div>
-                    <div><input type="checkbox"></input>Citizen</div>
-                    <div><input type="checkbox"></input>Daniel Wellington</div>
-                    <div><input type="checkbox"></input>Diesel</div>
-                    <div><input type="checkbox"></input>Emporio Armani</div>                 
-                    <div><input type="checkbox"></input>Ferrari</div>                   
-                    <div><input type="checkbox"></input>Fossil</div>
-                    <div><input type="checkbox"></input>Kenneth Cole</div>
-                    <div><input type="checkbox"></input>Luminox</div>
-                    <div><input type="checkbox"></input>Michael Kors</div>
-                    <div><input type="checkbox"></input>Police</div>
-                    <div><input type="checkbox"></input>Seiko</div>
-                    <div><input type="checkbox"></input>SevenFriday</div>
-                    <div><input type="checkbox"></input>Skagen</div>
-                    <div><input type="checkbox"></input>Tag Heuer</div>
-                    <div><input type="checkbox"></input>Tissot</div>
-                    <div><input type="checkbox"></input>Titan</div>
-                    <div><input type="checkbox"></input>Tommy Hilfiger</div>
-                    <div><input type="checkbox"></input>Victorinox</div>
+                    <div><input onChange={filterfunc} name="brand" value="Armani Exchange" type="checkbox"></input>Armani Exchange</div>
+                    <div><input onChange={filterfunc} name="brand" value="Balmain" type="checkbox"></input>Balmain</div>
+                    <div><input onChange={filterfunc} name="brand" value="Bering" type="checkbox"></input>Bering</div>
+                    <div><input onChange={filterfunc} name="brand" value="Calvin Klein" type="checkbox"></input>Calvin Klein</div>
+                    <div><input onChange={filterfunc} name="brand" value="Citizen" type="checkbox"></input>Citizen</div>
+                    <div><input onChange={filterfunc} name="brand" value="Daniel Wellington" type="checkbox"></input>Daniel Wellington</div>
+                    <div><input onChange={filterfunc} name="brand" value="Diesel" type="checkbox"></input>Diesel</div>
+                    <div><input onChange={filterfunc} name="brand" value="Emporio Armani" type="checkbox"></input>Emporio Armani</div>                 
+                    <div><input onChange={filterfunc} name="brand" value="Ferrari" type="checkbox"></input>Ferrari</div>                   
+                    <div><input onChange={filterfunc} name="brand" value="Fossil" type="checkbox"></input>Fossil</div>
+                    <div><input onChange={filterfunc} name="brand" value="Kenneth Cole" type="checkbox"></input>Kenneth Cole</div>
+                    <div><input onChange={filterfunc} name="brand" value="Luminox" type="checkbox"></input>Luminox</div>
+                    <div><input onChange={filterfunc} name="brand" value="Michael Kors" type="checkbox"></input>Michael Kors</div>
+                    <div><input onChange={filterfunc} name="brand" value="Police" type="checkbox"></input>Police</div>
+                    <div><input onChange={filterfunc} name="brand" value="Seiko" type="checkbox"></input>Seiko</div>
+                    <div><input onChange={filterfunc} name="brand" value="SevenFriday" type="checkbox"></input>SevenFriday</div>
+                    <div><input onChange={filterfunc} name="brand" value="Skagen" type="checkbox"></input>Skagen</div>
+                    <div><input onChange={filterfunc} name="brand" value="Tag Heuer" type="checkbox"></input>Tag Heuer</div>
+                    <div><input onChange={filterfunc} name="brand" value="Tissot" type="checkbox"></input>Tissot</div>
+                    <div><input onChange={filterfunc} name="brand" value="Titan" type="checkbox"></input>Titan</div>
+                    <div><input onChange={filterfunc} name="brand" value="Tommy Hilfiger" type="checkbox"></input>Tommy Hilfiger</div>
+                    <div><input onChange={filterfunc} name="brand" value="Victorinox" type="checkbox"></input>Victorinox</div>
                     
                 </div>
           </div>
