@@ -25,6 +25,7 @@ function Filterpage() {
     const [filgen,Setfilgen]=useState([])
     const [filprice,Setfilprice]=useState([])
     const [filbrand,Setfilbrand]=useState([])
+    const[sort,Setsort]=useState("rec")
 
 
     const pagination =(e)=>{
@@ -105,7 +106,7 @@ function Filterpage() {
         }
         
     }
-    
+
     const filterfunc = (e)=>{
         const check = e.target.checked
         const {name, value}= e.target
@@ -128,9 +129,15 @@ function Filterpage() {
             else{Setfilbrand(filbrand.filter((v)=>(v!==value)))}
         }
     }
+
+    const sortFunc=(e)=>{
+        Setsort(e.target.value)
+    }
+
     console.log("filgen",filgen)
     console.log("filprice",filprice)
     console.log("filbrand",filbrand)
+    console.log("sort",sort)
 
   return (
     <>
@@ -213,10 +220,10 @@ function Filterpage() {
             <div className="sortbar">
                 <div>Sort By:</div>
                 <div className="sort-dropmenu">
-                    <select>
-                    <option>Recommended</option>
-                    <option>Price: low to high</option>
-                    <option>Price: high to low</option>
+                    <select onChange={sortFunc}>
+                    <option value="rec">Recommended</option>
+                    <option value="asc">Price: low to high</option>
+                    <option value="desc">Price: high to low</option>
                     </select>
                 </div>
             </div>

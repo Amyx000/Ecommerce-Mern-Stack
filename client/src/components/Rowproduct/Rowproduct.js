@@ -34,19 +34,15 @@ function Rowproduct (){
       
       
      //test filter
-      const brand = ["Panerai", "Rado", "Tissot", "Grand Seiko"]
-      const filgen =["Female"]
-            
-      products.forEach((value,index)=>{
-            for(var i=0;i<brand.length;i++){
-            if(value.brand===brand?.[i]&&value.gender===filgen[0])
-            {const filteredProd = value
-            console.log(filteredProd)}}
-      })
-            
+      const brand = ["Panerai", "Rado", "Tissot", "Grand Seiko",]
+      const filgen =["Male"]
+      const price =[100000]
+
+     const newprod=products.filter((item)=>{
+           return (brand.includes(item.brand) && filgen.includes(item.gender) && item.price<price?.[0])
+     })   
+     console.log(newprod)    
       
-      
-    
 
     return(
         <>
