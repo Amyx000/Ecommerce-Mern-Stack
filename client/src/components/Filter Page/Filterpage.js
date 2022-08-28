@@ -22,11 +22,9 @@ function Filterpage() {
     const[no2,Setno2]=useState("no")
     const[no3,Setno3]=useState("no")
     const[no4,Setno4]=useState("no")
-    const[filterdata,Setfilterdata]=useState({
-        gender:"",
-        price:"",
-        brand:""
-    })
+    const [filgen,Setfilgen]=useState([])
+    const [filprice,Setfilprice]=useState([])
+    const [filbrand,Setfilbrand]=useState([])
 
 
     const pagination =(e)=>{
@@ -107,23 +105,32 @@ function Filterpage() {
         }
         
     }
-
+    
     const filterfunc = (e)=>{
         const check = e.target.checked
-        const {name, value}=e.target
+        const {name, value}= e.target
         if(check===true){
-            Setfilterdata((prevalue)=>{
-                return{
-                    ...prevalue,
-                    [name]:[value],
-                }
-            })
+            if(name==="gender"){
+                Setfilgen((pre)=>[...pre,value])
+            }
+            else if (name==="price"){
+                Setfilprice((pre)=>[...pre,value])
+            }
+            else{Setfilbrand((pre)=>[...pre,value])}
         }
         else{
-            Setfilterdata({})
+            if(name==="gender"){
+                Setfilgen(filgen.filter((v)=>(v!==value)))
+            }
+            else if (name==="price"){
+                Setfilprice(filprice.filter((v)=>(v!==value)))
+            }
+            else{Setfilbrand(filbrand.filter((v)=>(v!==value)))}
         }
     }
-    console.log(filterdata)
+    console.log("filgen",filgen)
+    console.log("filprice",filprice)
+    console.log("filbrand",filbrand)
 
   return (
     <>
