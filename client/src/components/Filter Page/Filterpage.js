@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Rowproduct from "../Rowproduct/Rowproduct";
 import "./Filterpage.css";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons"
 import {BiFilterAlt} from "react-icons/bi"
 import {MdArrowForwardIos, MdArrowBackIos} from "react-icons/md"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useLocation} from "react-router-dom"
+import {useLocation, useSearchParams} from "react-router-dom"
 
 function Filterpage() {
-    const locaion = useLocation()
-    console.log(locaion.pathname)
+    const location = useLocation()
+    const [searchParams,setSearchParams] = useSearchParams()
     const[gender,Setgender]=useState("select-data-contain-hide")
     const[price,Setprice]=useState("select-data-contain-hide")
     const[brand,Setbrand]=useState("select-data-contain-hide")
@@ -107,6 +107,11 @@ function Filterpage() {
         
     }
 
+    useEffect(() => {
+        setSearchParams({brand:filbrand.join(","),gender:filgen.join(",")})
+    }, [setSearchParams,searchParams,filbrand,filgen])
+    
+
     const filterfunc = (e)=>{
         const check = e.target.checked
         const {name, value}= e.target
@@ -115,7 +120,7 @@ function Filterpage() {
                 Setfilgen((pre)=>[...pre,value])
             }
             else if (name==="price"){
-                Setfilprice((pre)=>[...pre,value])
+                Setfilprice([value])
             }
             else{Setfilbrand((pre)=>[...pre,value])}
         }
@@ -134,10 +139,9 @@ function Filterpage() {
         Setsort(e.target.value)
     }
 
-    console.log("filgen",filgen)
-    console.log("filprice",filprice)
-    console.log("filbrand",filbrand)
-    console.log("sort",sort)
+    const query = searchParams.get("brand")
+    const q = location.search
+    console.log(query,q)
 
   return (
     <>
@@ -154,10 +158,10 @@ function Filterpage() {
                 </div>
                 <div className={gender}>
                     <div>
-                        <input onChange={filterfunc} name="gender" value="male" type="checkbox"></input>Male
+                        <input onChange={filterfunc} name="gender" value="Male" type="checkbox"></input>Male
                     </div>
                     <div>
-                        <input onChange={filterfunc} name="gender" value="female" type="checkbox"></input>Female
+                        <input onChange={filterfunc} name="gender" value="Female" type="checkbox"></input>Female
                     </div>
                 </div>
           </div>
@@ -177,7 +181,7 @@ function Filterpage() {
                         <input onChange={filterfunc} name="price" value={50000} type="checkbox"></input>20,000-50,000
                     </div>
                     <div>
-                        <input onChange={filterfunc} name="price" value={"other"} type="checkbox"></input>Above 50,000
+                        <input onChange={filterfunc} name="price" value={2000000} type="checkbox"></input>51,000 and Above
                     </div>
                 </div>
           </div>
@@ -228,7 +232,7 @@ function Filterpage() {
                 </div>
             </div>
           </div>
-          <Rowproduct />
+          <Rowproduct gender={filgen} price={filprice} brand={filbrand} sort={sort}/>
           <div className="page-next">
                 <div><MdArrowBackIos className={backarrow}/></div>
                 <div className={no1} data-user={"1"} onClick={pagination}>1</div>

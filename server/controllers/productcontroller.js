@@ -14,7 +14,7 @@ const createproduct = async (req, res) => {
 }
 //fetch product data
 const getproduct = async (req, res) => {
-
+    console.log(req.query.brand)
     const productdata = await product.find();
     res.status(200).json({
         success: true,

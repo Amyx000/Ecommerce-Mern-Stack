@@ -6,7 +6,8 @@ import { Link} from "react-router-dom";
 import ClockLoader from "react-spinners/ClockLoader"
 
 
-function Rowproduct (){
+function Rowproduct ({gender,price,brand,sort}){
+
       const [loading, setLoading] = useState(false);
       const[products,Setproducts]=useState([])
 
@@ -32,16 +33,12 @@ function Rowproduct (){
             product();
       }, [])
       
-      
-     //test filter
-      const brand = ["Panerai", "Rado", "Tissot", "Grand Seiko",]
-      const filgen =["Male"]
-      const price =[100000]
 
-     const newprod=products.filter((item)=>{
-           return (brand.includes(item.brand) && filgen.includes(item.gender) && item.price<price?.[0])
-     })   
-     console.log(newprod)    
+      const filteredProd=products.filter((item)=>{
+           return (gender.includes(item.gender) && brand.includes(item.brand) && item.price<=price)
+      })
+     
+     console.log(filteredProd)    
       
 
     return(
@@ -49,7 +46,7 @@ function Rowproduct (){
         {loading?<ClockLoader className='clockloader' color={"#8C6B20"} loading={loading} size={150} speedMultiplier={2} />:
           <div className="prod-row">
             
-            {products.map(products=>{
+            {filteredProd.map(products=>{
                   return(
                         <Link className="productprops" to={`/watches/${products?._id}`}>
                          <Productprops src={products?.images[0].displayimg_url} brand={products?.brand} series={products?.series} price={products?.price} key={products?._id}/>
