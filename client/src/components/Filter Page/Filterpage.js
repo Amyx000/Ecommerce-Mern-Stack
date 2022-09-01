@@ -5,10 +5,9 @@ import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons"
 import {BiFilterAlt} from "react-icons/bi"
 import {MdArrowForwardIos, MdArrowBackIos} from "react-icons/md"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useLocation, useSearchParams} from "react-router-dom"
+import {useSearchParams} from "react-router-dom"
 
 function Filterpage() {
-    const location = useLocation()
     const [searchParams,setSearchParams] = useSearchParams()
     const[gender,Setgender]=useState("select-data-contain-hide")
     const[price,Setprice]=useState("select-data-contain-hide")
@@ -108,8 +107,12 @@ function Filterpage() {
     }
 
     useEffect(() => {
-        setSearchParams({brand:filbrand.join(","),gender:filgen.join(",")})
-    }, [setSearchParams,searchParams,filbrand,filgen])
+        if(filbrand.length===0 && filgen.length===0 && filprice.length===0){
+            setSearchParams({})
+        }
+        else{
+        setSearchParams({brand:filbrand.join(","),gender:filgen.join(","),price:filprice.join(",")}) }
+    }, [setSearchParams,searchParams,filbrand,filgen,filprice])
     
 
     const filterfunc = (e)=>{
@@ -140,8 +143,7 @@ function Filterpage() {
     }
 
     const query = searchParams.get("brand")
-    const q = location.search
-    console.log(query,q)
+    console.log(query)
 
   return (
     <>

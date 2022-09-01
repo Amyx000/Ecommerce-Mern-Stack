@@ -14,12 +14,28 @@ const createproduct = async (req, res) => {
 }
 //fetch product data
 const getproduct = async (req, res) => {
-    console.log(req.query.brand)
-    const productdata = await product.find();
+    const brand = req.query.brand.split(',')
+    const gender = req.query.gender.split(',')
+
+    const queryfunc = (key)=>{
+        var q = {}
+        if(key==''){
+            q["$nin"]=key;
+        }
+        else{
+            q["$in"]=key;
+        }
+        return q
+    }
+    const bnd = queryfunc(brand)
+    const gen = queryfunc(gender)
+
+    const productdata = await product.find({brand:bnd, gender:gen});
     res.status(200).json({
         success: true,
         productdata
     })
+    // console.log(productdata)
 }
 
 //fetch product details by id
