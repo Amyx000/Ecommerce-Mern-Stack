@@ -14,8 +14,10 @@ const createproduct = async (req, res) => {
 }
 //fetch product data
 const getproduct = async (req, res) => {
-    const brand = req.query.brand.split(',')
-    const gender = req.query.gender.split(',')
+    const brand = req.query.brand!==undefined?req.query.brand.split(','):""
+    const gender = req.query.gender!==undefined?req.query.gender.split(','):""
+    const price = req.query.price!==undefined?req.query.price.split("-"):""  //.match(/\d+/g)
+    console.log(price,brand)
 
     const queryfunc = (key)=>{
         var q = {}
@@ -27,10 +29,23 @@ const getproduct = async (req, res) => {
         }
         return q
     }
+    const queryPricefunc = (key)=>{
+        var q = {}
+        if(key==''){
+            q["$nin"]=key;
+        }
+        
+        else{
+            [q.$gt,q.$lt]=key.map(x=>parseInt(x))
+        }
+        return q
+    }
     const bnd = queryfunc(brand)
     const gen = queryfunc(gender)
-
-    const productdata = await product.find({brand:bnd, gender:gen});
+    const prc = queryPricefunc(price)
+ 
+    console.log(prc)
+    const productdata = await product.find({brand:bnd, gender:gen, price:prc});
     res.status(200).json({
         success: true,
         productdata
