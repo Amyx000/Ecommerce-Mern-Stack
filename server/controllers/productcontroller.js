@@ -17,6 +17,8 @@ const getproduct = async (req, res) => {
     const brand = req.query.brand!==undefined?req.query.brand.split(','):""
     const gender = req.query.gender!==undefined?req.query.gender.split(','):""
     const price = req.query.price!==undefined?req.query.price.split("-"):""
+    const sort = req.query.sort
+    console.log(sort)
 
     const queryfunc = (key)=>{
         var q = {}
@@ -48,7 +50,16 @@ const getproduct = async (req, res) => {
     const gen = queryfunc(gender)
     const prc = queryPricefunc(price)
 
-    const productdata = await product.find({brand:bnd, gender:gen, price:prc});
+    let productdata
+    if(sort==="rec" || sort===undefined){
+     productdata = await product.find({brand:bnd, gender:gen, price:prc});
+    }
+    else if(sort==="asc"){
+        productdata = await product.find({brand:bnd, gender:gen, price:prc}).sort({"price":1});
+    }
+    else{
+        productdata = await product.find({brand:bnd, gender:gen, price:prc}).sort({"price":-1});
+    }
     res.status(200).json({
         success: true,
         productdata

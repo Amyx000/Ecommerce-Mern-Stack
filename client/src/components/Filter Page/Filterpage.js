@@ -116,8 +116,8 @@ function Filterpage() {
             setSearchParams({})
         }
         else{
-        setSearchParams({brand:filbrand.join(","),gender:filgen.join(","),price:filprice.join(",")}) }
-    }, [setSearchParams,searchParams,filbrand,filgen,filprice])
+        setSearchParams({brand:filbrand.join(","),gender:filgen.join(","),price:filprice.join(","),sort}) }
+    }, [setSearchParams,searchParams,filbrand,filgen,filprice,sort])
     
 
     const filterfunc = (e)=>{
@@ -147,8 +147,6 @@ function Filterpage() {
         Setsort(e.target.value)
     }
 
-    const query = searchParams.get("brand")
-    console.log(query)
 
   return (
     <>
