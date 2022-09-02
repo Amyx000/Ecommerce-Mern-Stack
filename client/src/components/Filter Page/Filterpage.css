@@ -151,3 +151,21 @@ select{
 .pagenext-icon-hide, .pageback-icon-hide{
     display: none;
 }
+
+
+.noproducts{
+    text-align: center;
+    margin: 100px auto;
+
+}
+
+.noproduct-title{
+    font-size: 20px;
+    font-weight: 400;
+    margin: 25px auto;
+}
+
+.noproduct-icon{
+    font-size: 55px;
+    color: bisque;
+}

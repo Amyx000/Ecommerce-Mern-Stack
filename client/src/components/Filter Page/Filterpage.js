@@ -3,11 +3,16 @@ import Rowproduct from "../Rowproduct/Rowproduct";
 import "./Filterpage.css";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons"
 import {BiFilterAlt} from "react-icons/bi"
+import {CgCloseO} from "react-icons/cg"
 import {MdArrowForwardIos, MdArrowBackIos} from "react-icons/md"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useSearchParams} from "react-router-dom"
+import {useSelector} from "react-redux"
+
 
 function Filterpage() {
+    const productlength =useSelector(state=>state.product.productlength)
+    console.log(productlength)
     const [searchParams,setSearchParams] = useSearchParams()
     const[gender,Setgender]=useState("select-data-contain-hide")
     const[price,Setprice]=useState("select-data-contain-hide")
@@ -174,16 +179,16 @@ function Filterpage() {
                 </div>
                 <div className={price}>
                     <div>
-                        <input onChange={filterfunc} name="price" value={10000} type="checkbox"></input>0-10,000
+                        <input onChange={filterfunc} name="price" value={"0-10000"} type="radio"></input>0-10,000
                     </div>
                     <div>
-                        <input onChange={filterfunc} name="price" value={20000} type="checkbox"></input>10,000-20,000
+                        <input onChange={filterfunc} name="price" value={"10000-20000"} type="radio"></input>10,000-20,000
                     </div>
                     <div>
-                        <input onChange={filterfunc} name="price" value={50000} type="checkbox"></input>20,000-50,000
+                        <input onChange={filterfunc} name="price" value={"20000-50000"} type="radio"></input>20,000-50,000
                     </div>
                     <div>
-                        <input onChange={filterfunc} name="price" value={2000000} type="checkbox"></input>51,000 and Above
+                        <input onChange={filterfunc} name="price" value={"50000-2000000"} type="radio"></input>50,000 and Above
                     </div>
                 </div>
           </div>
@@ -235,6 +240,11 @@ function Filterpage() {
             </div>
           </div>
           <Rowproduct gender={filgen} price={filprice} brand={filbrand} sort={sort}/>
+          {productlength===0?
+          <div className='noproducts'>
+                <CgCloseO className='noproduct-icon'/>
+                <div className='noproduct-title'>No product Found!</div>
+          </div>:
           <div className="page-next">
                 <div><MdArrowBackIos className={backarrow}/></div>
                 <div className={no1} data-user={"1"} onClick={pagination}>1</div>
@@ -242,8 +252,7 @@ function Filterpage() {
                 <div className={no3} data-user={"3"} onClick={pagination}>3</div>
                 <div className={no4} data-user={"4"} onClick={pagination}>4</div>
                 <div><MdArrowForwardIos className={nextarrow}/></div>
-             
-          </div>
+          </div>}
         </div>
       </div>
     </>
