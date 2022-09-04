@@ -8,11 +8,11 @@ import {MdArrowForwardIos, MdArrowBackIos} from "react-icons/md"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useSearchParams} from "react-router-dom"
 import {useSelector} from "react-redux"
+import useQueryState from "../../Customhooks/useQueryState"
 
 
 function Filterpage() {
     const productlength =useSelector(state=>state.product.productlength)
-    console.log(productlength)
     const [searchParams,setSearchParams] = useSearchParams()
     const[gender,Setgender]=useState("select-data-contain-hide")
     const[price,Setprice]=useState("select-data-contain-hide")
@@ -30,7 +30,8 @@ function Filterpage() {
     const [filprice,Setfilprice]=useState([])
     const [filbrand,Setfilbrand]=useState([])
     const[sort,Setsort]=useState("rec")
-
+    const [brandquery, setBrandquery] = useQueryState("brand")
+    const [sortquery, setSortquery] = useQueryState("sort")
 
     const pagination =(e)=>{
         let pagevalue = e.target.dataset.user;
@@ -110,15 +111,15 @@ function Filterpage() {
         }
         
     }
-
-    useEffect(() => {
-        if(filbrand.length===0 && filgen.length===0 && filprice.length===0){
-            setSearchParams({})
-        }
-        else{
-        setSearchParams({brand:filbrand.join(","),gender:filgen.join(","),price:filprice.join(","),sort}) }
-    }, [setSearchParams,searchParams,filbrand,filgen,filprice,sort])
     
+
+    // useEffect(() => {
+    //     if(filbrand.length===0 && filgen.length===0 && filprice.length===0){
+    //         setSearchParams({})
+    //     }
+    //     else{
+    //     setSearchParams({brand:filbrand.join(","),gender:filgen.join(","),price:filprice.join(","),sort}) }
+    // }, [setSearchParams,searchParams,filbrand,filgen,filprice,sort])   
 
     const filterfunc = (e)=>{
         const check = e.target.checked
@@ -130,7 +131,10 @@ function Filterpage() {
             else if (name==="price"){
                 Setfilprice([value])
             }
-            else{Setfilbrand((pre)=>[...pre,value])}
+            else{
+                Setfilbrand((pre)=>[...pre,value])
+                
+            }
         }
         else{
             if(name==="gender"){
@@ -143,10 +147,13 @@ function Filterpage() {
         }
     }
 
+
     const sortFunc=(e)=>{
         Setsort(e.target.value)
+        setSortquery(e.target.value)
     }
-
+console.log(searchParams.get("sort"))
+console.log(sort)
 
   return (
     <>
