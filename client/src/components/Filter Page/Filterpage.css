@@ -169,3 +169,36 @@ select{
     font-size: 55px;
     color: bisque;
 }
+
+
+.clrfilter-main{
+    display: flex;
+    justify-content: center;
+}
+
+.clrfilter-main-none{
+    display: none;
+}
+
+.clrfilter{
+
+    background-color: bisque;
+    border: none;
+    border-radius: 3px;
+    font-size: 1rem;
+    padding: 10px;
+    width: 80%;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s all ease-in-out;
+}
+
+
+.clrfilter:hover{
+    background-color:rgb(145, 18, 18);
+    color: white;
+}
+
+.clrfilter:active{
+    background-color: bisque;
+}

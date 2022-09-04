@@ -6,14 +6,15 @@ import {BiFilterAlt} from "react-icons/bi"
 import {CgCloseO} from "react-icons/cg"
 import {MdArrowForwardIos, MdArrowBackIos} from "react-icons/md"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useSearchParams} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 import {useSelector} from "react-redux"
 import useQueryState from "../../Customhooks/useQueryState"
 
 
 function Filterpage() {
+    const navigate=useNavigate()
+    const location=useLocation()
     const productlength =useSelector(state=>state.product.productlength)
-    const [searchParams,setSearchParams] = useSearchParams()
     const[gender,Setgender]=useState("select-data-contain-hide")
     const[price,Setprice]=useState("select-data-contain-hide")
     const[brand,Setbrand]=useState("select-data-contain-hide")
@@ -29,9 +30,11 @@ function Filterpage() {
     const [filgen,Setfilgen]=useState([])
     const [filprice,Setfilprice]=useState([])
     const [filbrand,Setfilbrand]=useState([])
-    const[sort,Setsort]=useState("rec")
     const [brandquery, setBrandquery] = useQueryState("brand")
+    const [genderquery, setGenderquery] = useQueryState("gender")
+    const [pricequery, setPricequery] = useQueryState("price")
     const [sortquery, setSortquery] = useQueryState("sort")
+    const[clrfill,setClrfill]=useState("clrfilter-main-none")
 
     const pagination =(e)=>{
         let pagevalue = e.target.dataset.user;
@@ -111,15 +114,26 @@ function Filterpage() {
         }
         
     }
-    
+   
+    useEffect(() => {
+        setBrandquery(filbrand?.join(",")||null)
+      // eslint-disable-next-line
+    }, [filbrand])
 
-    // useEffect(() => {
-    //     if(filbrand.length===0 && filgen.length===0 && filprice.length===0){
-    //         setSearchParams({})
-    //     }
-    //     else{
-    //     setSearchParams({brand:filbrand.join(","),gender:filgen.join(","),price:filprice.join(","),sort}) }
-    // }, [setSearchParams,searchParams,filbrand,filgen,filprice,sort])   
+    useEffect(() => {
+        setGenderquery(filgen?.join(",")||null)
+      // eslint-disable-next-line
+    }, [filgen])
+
+    useEffect(() => {
+        setPricequery(filprice.length!==0?filprice[0]:null)
+      // eslint-disable-next-line
+    }, [filprice])
+
+    useEffect(() => {
+        {location?.search?setClrfill("clrfilter-main"):setClrfill("clrfilter-main-none")}
+    }, [location])
+    
 
     const filterfunc = (e)=>{
         const check = e.target.checked
@@ -133,7 +147,6 @@ function Filterpage() {
             }
             else{
                 Setfilbrand((pre)=>[...pre,value])
-                
             }
         }
         else{
@@ -145,15 +158,16 @@ function Filterpage() {
             }
             else{Setfilbrand(filbrand.filter((v)=>(v!==value)))}
         }
-    }
 
+    }
 
     const sortFunc=(e)=>{
-        Setsort(e.target.value)
         setSortquery(e.target.value)
+
     }
-console.log(searchParams.get("sort"))
-console.log(sort)
+    const clearFilter=()=>{
+        navigate("")
+    }
 
   return (
     <>
@@ -228,6 +242,7 @@ console.log(sort)
                     
                 </div>
           </div>
+          <div className={clrfill}><button className="clrfilter" onClick={clearFilter}>Clear Filter</button></div>
 
         </div>
         <div className="product-col">
@@ -244,7 +259,7 @@ console.log(sort)
                 </div>
             </div>
           </div>
-          <Rowproduct gender={filgen} price={filprice} brand={filbrand} sort={sort}/>
+          <Rowproduct/>
           {productlength===0?
           <div className='noproducts'>
                 <CgCloseO className='noproduct-icon'/>

@@ -8,7 +8,7 @@ import { showProductdata } from "../../Redux/Reducers/productReducer";
 import {useDispatch} from "react-redux"
 
 
-function Rowproduct ({gender,price,brand,sort}){
+function Rowproduct (){
       const dispatch =useDispatch()
       const location =useLocation()
       const [loading, setLoading] = useState(false);
