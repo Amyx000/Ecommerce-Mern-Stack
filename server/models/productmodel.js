@@ -6,14 +6,17 @@ const productschema = new mongoose.Schema({
         type: String,
         required: [true, "Please Enter product Name"],
         trim: true,
+        index:"text",
       },
       series: {   //edifice
         type: String,
         required:true,
+        index:"text",
       },
       modelno:{   //ed12345
         type: String,
-        required:true
+        required:true,
+        index:"text",
       },
       description: {
         type: String,

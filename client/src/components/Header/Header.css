@@ -104,7 +104,7 @@ body{
 }
 
 .searchicon {
-  font-size: 1.3rem;
+  cursor: pointer;
 }
 
 .menu-head {

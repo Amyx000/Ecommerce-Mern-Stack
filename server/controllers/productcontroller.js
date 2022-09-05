@@ -1,4 +1,4 @@
-const { findById } = require("../models/productmodel")
+const { findById, db } = require("../models/productmodel")
 const product = require("../models/productmodel")
 
 //creating product by admin
@@ -18,7 +18,7 @@ const getproduct = async (req, res) => {
     const gender = req.query.gender!==undefined?req.query.gender.split(','):""
     const price = req.query.price!==undefined?req.query.price.split("-"):""
     const sort = req.query.sort
-    console.log(sort)
+    const search=req.query.search||""
 
     const queryfunc = (key)=>{
         var q = {}
@@ -30,6 +30,7 @@ const getproduct = async (req, res) => {
         }
         return q
     }
+
     const queryPricefunc = (key)=>{
         var q = {}
         if(key==''){
@@ -52,13 +53,13 @@ const getproduct = async (req, res) => {
 
     let productdata
     if(sort==="rec" || sort===undefined){
-     productdata = await product.find({brand:bnd, gender:gen, price:prc});
+     productdata = await product.find({brand:bnd, gender:gen, price:prc, $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]});
     }
     else if(sort==="asc"){
-        productdata = await product.find({brand:bnd, gender:gen, price:prc}).sort({"price":1});
+        productdata = await product.find({brand:bnd, gender:gen, price:prc, $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]}).sort({"price":1});
     }
     else{
-        productdata = await product.find({brand:bnd, gender:gen, price:prc}).sort({"price":-1});
+        productdata = await product.find({brand:bnd, gender:gen, price:prc, $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]}).sort({"price":-1});
     }
     res.status(200).json({
         success: true,

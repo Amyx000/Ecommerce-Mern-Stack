@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import "./Header.css";
 import logo from "../../assets/logo.png";
-import {FiSearch} from "react-icons/fi";
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import {Badge} from "@mui/material"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 
 
 function Header() {
-
+    const navigate = useNavigate()
     const cartQuantity = useSelector(state=>state.cart.quantity)
     const[b, Setb]=useState(false)
     const [menu, Setmenu]=useState("collection-menu-hidden")
     const [search, Setsearch]=useState("searchbar-hidden")
     const [user,Setuser]=useState("user-drop-hide")
+    const[searchquery,Setsearchquery]=useState("")
 
     const closeusermenu=()=>{
         Setuser("user-drop-hide");
@@ -68,7 +68,29 @@ function Header() {
             Setuser("user-drop-hide")
             Setb(false);
         }
+    }
 
+    const searchFunc=()=>{
+        if(searchquery===""){
+            alert("Please enter something before searching")
+        }
+        else{
+            Setsearchquery("")
+            Setsearch("searchbar-hidden")
+            navigate(`/watches?search=${searchquery}`)
+        }
+    }
+
+    const searchFuncOnKey=(e)=>{
+        if(e.key==='Enter'){
+        if(searchquery===""){
+            alert("Please enter something before searching")
+        }
+        else{
+            Setsearchquery("")
+            Setsearch("searchbar-hidden")
+            navigate(`/watches?search=${searchquery}`)
+        }} 
     }
 
   return (
@@ -154,7 +176,8 @@ function Header() {
       </div>
       
       <div className={search}>
-        <input className="searchinput" type="text" placeholder="Search"></input><FiSearch/>
+        <input className="searchinput" value={searchquery} onChange={e=>Setsearchquery(e.target.value)} onKeyDown={searchFuncOnKey} type="text" placeholder="Search"></input>
+        <SearchOutlinedIcon className="searchicon" color="action" onClick={searchFunc}/>
       </div>
 
       <div className={user}>
