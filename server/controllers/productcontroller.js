@@ -19,6 +19,11 @@ const getproduct = async (req, res) => {
     const price = req.query.price!==undefined?req.query.price.split("-"):""
     const sort = req.query.sort
     const search=req.query.search||""
+    const prodlimit =2
+    let page = isNaN(Number(req.query.page))?1:Number(req.query.page)
+    if(page===0){
+        page=1 
+    }
 
     const queryfunc = (key)=>{
         var q = {}
@@ -53,13 +58,20 @@ const getproduct = async (req, res) => {
 
     let productdata
     if(sort==="rec" || sort===undefined){
-     productdata = await product.find({brand:bnd, gender:gen, price:prc, $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]});
+     productdata = await product.find(
+        {brand:bnd, gender:gen, price:prc,
+            $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]
+        }).skip((page-1)*prodlimit).limit(prodlimit);
     }
     else if(sort==="asc"){
-        productdata = await product.find({brand:bnd, gender:gen, price:prc, $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]}).sort({"price":1});
+        productdata = await product.find({brand:bnd, gender:gen, price:prc,
+            $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]
+        }).sort({"price":1}).skip((page-1)*prodlimit).limit(prodlimit);
     }
     else{
-        productdata = await product.find({brand:bnd, gender:gen, price:prc, $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]}).sort({"price":-1});
+        productdata = await product.find({brand:bnd, gender:gen, price:prc,
+            $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]
+        }).sort({"price":-1}).skip((page-1)*prodlimit).limit(prodlimit);
     }
     res.status(200).json({
         success: true,

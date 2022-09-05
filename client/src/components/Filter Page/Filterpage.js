@@ -34,11 +34,12 @@ function Filterpage() {
     const [genderquery, setGenderquery] = useQueryState("gender")
     const [pricequery, setPricequery] = useQueryState("price")
     const [sortquery, setSortquery] = useQueryState("sort")
+    const[pagequery,setpagequery]=useQueryState("page")
     const[clrfill,setClrfill]=useState("clrfilter-main-none")
 
     const pagination =(e)=>{
         let pagevalue = e.target.dataset.user;
-
+        setpagequery(e.target.dataset.user)
         if(pagevalue==="1"){
             Setbackarrow("pageback-icon-hide")
             Setnextarrow("pagenext-icon")
