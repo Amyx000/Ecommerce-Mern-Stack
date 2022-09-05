@@ -30,11 +30,13 @@ function Filterpage() {
     const [filgen,Setfilgen]=useState([])
     const [filprice,Setfilprice]=useState([])
     const [filbrand,Setfilbrand]=useState([])
+    /* eslint-disable */
     const [brandquery, setBrandquery] = useQueryState("brand")
     const [genderquery, setGenderquery] = useQueryState("gender")
     const [pricequery, setPricequery] = useQueryState("price")
     const [sortquery, setSortquery] = useQueryState("sort")
-    const[pagequery,setpagequery]=useQueryState("page")
+    const[pagequery, setpagequery]=useQueryState("page")
+    /* eslint-disable */
     const[clrfill,setClrfill]=useState("clrfilter-main-none")
 
     const pagination =(e)=>{
@@ -132,7 +134,9 @@ function Filterpage() {
     }, [filprice])
 
     useEffect(() => {
-        {location?.search?setClrfill("clrfilter-main"):setClrfill("clrfilter-main-none")}
+        
+        location?.search?setClrfill("clrfilter-main"):setClrfill("clrfilter-main-none")
+      
     }, [location])
     
 
