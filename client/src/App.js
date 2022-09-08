@@ -25,7 +25,7 @@ function App() {
             <Route path="/watches" element={<Filterpage/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
-            <Route path="/account" element={<Account/>}/>
+            <Route path="/account/*" element={<Account/>}/>
             <Route path="/cart" element={<Cart/>}/>
             <Route path="/about" element={<About/>}/>
         </Routes> 

@@ -1,0 +1,138 @@
+.account{
+    margin: 0 8vw 50px 8vw;
+}
+
+.account-main{
+    display:grid;
+    grid-template-columns: auto 1fr;
+    gap: 30px;
+    border-top: 1px solid #d4d5d9;
+}
+
+.account-main-l{
+    border-right: 1px solid #d4d5d9;
+    box-shadow:3px 0px 5px rgb(0 0 0 / 10%);
+    padding: 30px;
+}
+
+.account-main-sec{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-top: 1px solid #d4d5d9;
+}
+
+.account-main-head{
+    margin-bottom: 12px;
+    color: #7e818c;
+    font-size: 13px;
+}
+
+.account-main-subhead{
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.account-main-subhead:hover{
+    color: #C29427;
+    font-weight: 600;
+}
+
+.account-main-title{
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+.account-main-title:hover{
+    color: #C29427;
+    font-weight: 600;
+}
+
+.account-main-r{
+    background-color: #f8f8f8dc;
+    margin-top: 20px;
+    padding: 25px 15px;
+    border-radius: 5px;
+}
+
+.account-r-top{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 30px;
+    text-align: left;
+}
+
+.acc-img{
+    border-radius: 50%;
+    width: 9vw;
+}
+.acc-name{
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.account-r-bot{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin: 20px 5vw 0 5vw;
+    gap: 20px;
+}
+
+.account-r-bot>div{
+    border: 1px solid #d4d5d9;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.account-r-bot>div:hover{
+    background-color: rgb(236, 235, 235);
+}
+
+.profile-main{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    margin-top: 70px;
+}
+
+.profile-main>div{
+    padding:10px;
+    text-align: center;
+}
+
+.profile-main>input{
+    padding:5px;
+    width: 80%;
+    outline-color:#C29427;
+    border: 1px solid #d4d5d9;
+    border-radius: 5px;
+}
+
+.input-disabled{
+    background-color: #eeeaeadc;
+}
+
+.acc-btn-main{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 6vw;
+    margin-top: 40px;
+}
+
+.acc-btn{
+    background-color: bisque;
+    border: 1px solid rgba(0, 0, 0, 0.184);
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.acc-btn:active{
+    border: 2px solid rgba(0, 0, 0, 0.495);
+}
+
+.acc-title{
+    font-size: 1.3rem;
+}
