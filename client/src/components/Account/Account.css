@@ -84,6 +84,7 @@
     padding: 30px;
     text-align: center;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .account-r-bot>div:hover{
@@ -95,6 +96,7 @@
     grid-template-columns: 1fr 3fr;
     align-items: center;
     margin-top: 70px;
+    margin-right:9vw;
 }
 
 .profile-main>div{
@@ -102,9 +104,12 @@
     text-align: center;
 }
 
+.profile-main>div>span{
+    color: red;
+}
+
 .profile-main>input{
     padding:5px;
-    width: 80%;
     outline-color:#C29427;
     border: 1px solid #d4d5d9;
     border-radius: 5px;
@@ -117,7 +122,7 @@
 .acc-btn-main{
     display: flex;
     justify-content: flex-end;
-    padding-right: 6vw;
+    margin-right: 9vw;
     margin-top: 40px;
 }
 
@@ -135,4 +140,38 @@
 
 .acc-title{
     font-size: 1.3rem;
+}
+
+.acc-pass-main{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap:10px;
+    margin: 60px 13vw;
+    padding: 20px;
+    box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+}
+
+.acc-pass-main>input{
+    padding: 5px;
+    outline-color:#C29427;
+    border: 1px solid #d4d5d9;
+    border-radius: 5px;
+}
+
+.acc-pass-main>button{
+    background-color: bisque;
+    border: 1px solid rgba(0, 0, 0, 0.184);
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    width: max-content;
+    justify-self: center;
+}
+
+.acc-pass-main>div{
+    font-size: 15px;
+}
+
+.acc-pass-main>div>span{
+    color: red;
 }

@@ -59,6 +59,61 @@ function Account() {
               <div className='acc-btn-main'><button className='acc-btn'>Update</button></div>
               </>
             }/>
+            <Route path='/password' element={
+              <>
+              <div className='acc-title'>Change Password</div>
+              <div className='acc-pass-main'>
+                <div><span>* </span>Current Password</div>
+                <input type="text" placeholder='Current Password'/>
+                <div><span>* </span>New Password</div>
+                <input type="text" placeholder='New Password'/>
+                <div><span>* </span>Confirm Password</div>
+                <input type="text" placeholder='Confirm Password'/>
+                <button>Change Password</button>
+              </div>
+              </>
+            }/>
+            <Route path='/addresses' element={
+              <>
+              <div className='acc-title'>Addresses</div>
+              <div className='profile-main'>
+                <div><span>* </span>Name</div><input type="text" value={""}/>
+                <div><span>* </span>Address</div><input type="text" value={""}/>
+                <div><span>* </span>City</div><input type="text" value={""}/>
+                <div><span>* </span>Post Code</div><input type="text" value={""}/>
+                <div><span>* </span>State</div><input type="text" value={""}/>
+              </div>
+              <div className='acc-btn-main'><button className='acc-btn'>Submit</button></div>
+              </>
+            }/>
+            <Route path='/wishlist' element={
+              <>
+              <div className='acc-title'>Wishlist</div>
+              <div className='acc-pass-main'>
+                <div>You don't have any wishlist!</div>
+                <Link className='links' to={"/account"}><button>Continue</button></Link>
+              </div>
+              </>
+            }/>
+            <Route path='/orders' element={
+              <>
+              <div className='acc-title'>Orders</div>
+              <div className='acc-pass-main'>
+                <div>You don't have any order placed!</div>
+                <Link className='links' to={"/account"}><button>Continue</button></Link>
+              </div>
+              </>
+            }/>
+            <Route path='/admin' element={
+              <>
+              <div className='acc-title'>Admin Dashboard</div>
+              </>
+            }/>
+            <Route path='/seller' element={
+              <>
+              <div className='acc-title'>Seller Dashboard</div>
+              </>
+            }/>
           </Routes>
         </div>
 
