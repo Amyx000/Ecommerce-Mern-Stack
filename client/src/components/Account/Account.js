@@ -1,8 +1,10 @@
 import React from 'react'
 import "./Account.css"
 import {Routes, Route, Link} from "react-router-dom"
+import {useSelector} from "react-redux"
 
 function Account() {
+  const userdata =useSelector(state=>state.user.userdata)
   return (
     <>
     <div className='account'>
@@ -36,8 +38,8 @@ function Account() {
                     <img className='acc-img' src='https://images.bestsellerclothing.in/temp/ans-myaccount/person.png' alt=''></img>
                   </div>
                   <div>
-                    <div className='acc-name'>Arman Kazi</div>
-                    <div>armankazi111@gmail.com</div>
+                    <div className='acc-name'>{userdata.name}</div>
+                    <div>{userdata.email}</div>
                   </div>
                 </div>
                 <div className='account-r-bot'>
@@ -52,9 +54,9 @@ function Account() {
               <>
               <div className='acc-title'>Your Personal Details</div>
               <div className='profile-main'>
-                <div>Name:</div><input type="text" value={"Arman Kazi"}/>
-                <div>Email:</div><input className='input-disabled' type="text" value={"test123@gmail.com"} readOnly/>
-                <div>Mobile:</div><input className='input-disabled' type="text" value={987654321} readOnly/>
+                <div>Name:</div><input type="text" value={userdata.name}/>
+                <div>Email:</div><input className='input-disabled' type="text" value={userdata.email} readOnly/>
+                <div>Mobile:</div><input className='input-disabled' type="text" value={userdata.mobile} readOnly/>
               </div>
               <div className='acc-btn-main'><button className='acc-btn'>Update</button></div>
               </>

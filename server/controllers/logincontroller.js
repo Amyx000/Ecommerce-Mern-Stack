@@ -30,16 +30,14 @@ const login_user =async (req,res)=>{
             if(match===true){
                 const accesstoken =jwt.sign({
                     id:user._id,
-                    isAdmin:user.isAdmin,
-                    isSeller:user.isSeller,
-                    isBuyer:user.isBuyer,
+                    userType:user.userType,
                 },
                 process.env.JWT_SECKEY,
                 {expiresIn:"3d"}
                 )
 
                 const{password, ...restdata}=user._doc;
-                res.cookie("token", accesstoken,{HttpOnly:true})
+                res.cookie("token",accesstoken,{httpOnly: true,expires: new Date(Date.now() + 3600000)})
                 res.json({...restdata, accesstoken})
                 
             }else{

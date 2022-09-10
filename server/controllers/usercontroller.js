@@ -39,7 +39,7 @@ const deleteuser = async (req,res)=>{
 const updateusertype = async (req,res)=>{
     try {
         const user = await usermodel.findByIdAndUpdate(req.params.id,
-            {$set:{isAdmin:req.body.admin, isSeller:req.body.seller, isBuyer:req.body.buyer}},
+            {$set:{userType:req.body.userType}},
             {new: true}
         )
         res.status(200).json(user)

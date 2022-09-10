@@ -24,18 +24,10 @@ const userschema = new mongoose.Schema({
         type:Date,
         required:true
     },
-    isAdmin:{
-        type:Boolean,
-        default:false
+    userType:{
+        type:String,
+        default:"buyer"
     },
-    isSeller:{
-        type:Boolean,
-        default:false
-    },
-    isBuyer:{
-        type:Boolean,
-        default:true
-    }
 })
 
 mongoose.pluralize(null);

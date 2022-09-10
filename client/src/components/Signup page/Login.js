@@ -5,18 +5,17 @@ import {AiOutlineMail} from "react-icons/ai"
 import {RiLockPasswordLine} from "react-icons/ri"
 import axios from 'axios'
 import ClockLoader from "react-spinners/ClockLoader"
+import {useDispatch} from "react-redux"
+import { loggedUser } from '../../Redux/Reducers/userReducer'
 
 
 function Login() {
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const[email, Setemail] = useState("")
   const[password, Setpassword] = useState("")
 
-
-  function set_cookie(name) {
-    document.cookie = 'token='+name+'; Path=/;';
-  }
 
   const loader = ()=>{
     setLoading(true)
@@ -31,10 +30,9 @@ function Login() {
       const res = await axios.post("http://localhost:5000/auth/login",{
         email:email,
         password:password
-      },{withcredentials: true})
+      },{withCredentials: true})
       loader()
-      console.log(res.data)
-      set_cookie(res.data.accesstoken)
+      dispatch(loggedUser(res.data))
     } 
     catch (error) {
       console.log(error.response.data)

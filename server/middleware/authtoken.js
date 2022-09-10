@@ -28,7 +28,7 @@ const authtoken_admin=(req,res,next)=>{
     if(token){
         const user=jwt.verify(token,process.env.JWT_SECKEY)
         req.user=user
-        if(req.user.isAdmin===true){
+        if(req.user.userType==="admin"){
             next();
         }
         else{
@@ -51,7 +51,7 @@ const authtoken_seller=(req,res,next)=>{
     if(token){
         const user=jwt.verify(token,process.env.JWT_SECKEY)
         req.user=user
-        if(req.user.isSeller===true && req.user.isAdmin===false){
+        if(req.user.userType==="seller"){
             next();
         }
         else{
