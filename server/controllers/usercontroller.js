@@ -1,5 +1,6 @@
 const usermodel = require("../models/usermodel")
-
+const jwt = require("jsonwebtoken")
+const { findById } = require("../models/usermodel")
 
 const getuser = async (req,res)=>{  
     
@@ -11,6 +12,18 @@ const getuser = async (req,res)=>{
 
         else{res.status(200).json(user)}
   
+}
+
+//get logged user
+
+const loggeduser = async (req, res)=>{
+    try {
+        const user = await usermodel.findById(req.user.id).select("-password")
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error)
+    }
+    
 }
 
 const getalluser = async (req,res)=>{
@@ -50,4 +63,4 @@ const updateusertype = async (req,res)=>{
 }
 
 
-module.exports= {getuser, getalluser, deleteuser, updateusertype};
+module.exports= {getuser, getalluser, deleteuser, updateusertype, loggeduser};

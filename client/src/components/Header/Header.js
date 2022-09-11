@@ -8,6 +8,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import {Badge} from "@mui/material"
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 
 
@@ -24,9 +25,15 @@ function Header() {
         Setuser("user-drop-hide");
     }
 
-    const logoutfuc =()=>{
-
+    const logoutfuc = async()=>{
         Setuser("user-drop-hide");
+       try {
+        await axios.get("http://localhost:5000/account/logout",{withCredentials:true})
+
+       } catch (error) {
+        console.log(error.code)
+       }
+
     }
 
     const openmenu = ()=>{

@@ -1,10 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Account.css"
-import {Routes, Route, Link} from "react-router-dom"
-import {useSelector} from "react-redux"
+import {Routes, Route, Link, useNavigate} from "react-router-dom"
+import axios from 'axios'
 
 function Account() {
-  const userdata =useSelector(state=>state.user.userdata)
+  const navigate = useNavigate()
+  const[user,setuser]=useState("")
+  
+  useEffect(() => {
+    async function authenticated(){
+      const res = await axios.get("http://localhost:5000/account/isauth",{withCredentials: true,})
+      if(res.data===false){navigate("/")}
+
+    }
+    
+    authenticated()
+      // eslint-disable-next-line
+  }, [])
+  
+  useEffect(() => {
+
+    const getloggeduser=async()=>{
+      try {
+        const res = await axios.get("http://localhost:5000/account",{withCredentials: true,})
+        setuser(res.data)
+      } catch (error) {
+        console.log(error.response.data)
+      }
+      
+    }
+    getloggeduser()
+      // eslint-disable-next-line
+  }, [])
+  
   return (
     <>
     <div className='account'>
@@ -38,8 +66,8 @@ function Account() {
                     <img className='acc-img' src='https://images.bestsellerclothing.in/temp/ans-myaccount/person.png' alt=''></img>
                   </div>
                   <div>
-                    <div className='acc-name'>{userdata.name}</div>
-                    <div>{userdata.email}</div>
+                    <div className='acc-name'>{user.name}</div>
+                    <div>{user.email}</div>
                   </div>
                 </div>
                 <div className='account-r-bot'>
@@ -54,9 +82,9 @@ function Account() {
               <>
               <div className='acc-title'>Your Personal Details</div>
               <div className='profile-main'>
-                <div>Name:</div><input type="text" value={userdata.name}/>
-                <div>Email:</div><input className='input-disabled' type="text" value={userdata.email} readOnly/>
-                <div>Mobile:</div><input className='input-disabled' type="text" value={userdata.mobile} readOnly/>
+                <div>Name:</div><input type="text" value={user.name}/>
+                <div>Email:</div><input className='input-disabled' type="text" value={user.email} readOnly/>
+                <div>Mobile:</div><input className='input-disabled' type="text" value={user.mobile} readOnly/>
               </div>
               <div className='acc-btn-main'><button className='acc-btn'>Update</button></div>
               </>

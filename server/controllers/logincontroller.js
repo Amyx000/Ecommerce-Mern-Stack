@@ -48,9 +48,31 @@ const login_user =async (req,res)=>{
     catch(err){
         res.json(err)
     }
-    
+}
+
+const logout_user = (req,res)=>{
+try {
+    res.clearCookie("token")
+    res.status(200).json("Logout Success")
+} catch (error) {
+    console.log(error)
+}
+}
+
+const isAuth = (req,res)=>{
+    const token = req.cookies.token;
+    if(token){
+        const user=jwt.verify(token,process.env.JWT_SECKEY, (err,user)=>{
+            if (err) res.status(200).json(false);
+            else{res.json(true)}
+        })
+        
+    }
+    else{
+        res.status(200).json(false)
+    }
 }
 
 
 
-module.exports = {register_user, login_user};
+module.exports = {register_user, login_user, logout_user, isAuth};
