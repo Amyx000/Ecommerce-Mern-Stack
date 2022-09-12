@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import "./Header.css";
 import logo from "../../assets/logo.png";
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
@@ -20,6 +20,21 @@ function Header() {
     const [search, Setsearch]=useState("searchbar-hidden")
     const [user,Setuser]=useState("user-drop-hide")
     const[searchquery,Setsearchquery]=useState("")
+    const[isAuth,SetisAuth]=useState(false)
+
+    useEffect(() => {
+        async function authenticated(){
+          const res = await axios.get("http://localhost:5000/account/isauth",{withCredentials: true,})
+          if(res.data===false){
+           SetisAuth(false)
+          }
+          else{
+            SetisAuth(true)}
+        }
+        
+        authenticated()
+
+    }, [user, navigate])
 
     const closeusermenu=()=>{
         Setuser("user-drop-hide");
@@ -190,10 +205,15 @@ function Header() {
       <div className={user}>
             <div className="triangle"></div>
             <div className="block">
+                {isAuth===false?
+                <>
                 <Link onClick={closeusermenu} className="block-comp" to={"/login"}>Login</Link>
                 <Link onClick={closeusermenu} className="block-comp" to={"/signup"}>Register</Link>
+                </>
+                :<>
                 <Link onClick={closeusermenu} className="block-comp" to={"/account"}>Account</Link>
                 <Link onClick={logoutfuc} className="block-comp" to={"/"}>Logout</Link>
+                </>}
             </div>
       </div>
       
