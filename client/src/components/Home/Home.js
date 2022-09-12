@@ -1,10 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
+import ClockLoader from "react-spinners/ClockLoader"
+
 
 function Home() {
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(true);
+  
+  const loader = ()=>{
+    setLoading(true)
+        setTimeout(()=>{
+          setLoading(false)
+    },1000)
+  }
+
+  useEffect(() => {
+    loader()
+  }, [navigate])
+  
+
   return (
     <>
+    {loading?<ClockLoader className='clockloader' color={"#8C6B20"} loading={loading} size={150} speedMultiplier={2} />:
       <div className="topsection">
         <img
           className="bannerimg"
@@ -22,7 +40,7 @@ function Home() {
           <Link to={"/watches"}><button className="contain-btn">DISCOVER THE COLLECTION</button></Link>
         </div>
 
-      </div>
+      </div>}
     </>
   );
 }

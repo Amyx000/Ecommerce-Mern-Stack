@@ -11,14 +11,14 @@ import {useDispatch} from "react-redux"
 function Rowproduct (){
       const dispatch =useDispatch()
       const location =useLocation()
-      const [loading, setLoading] = useState(false);
+      const [loading, setLoading] = useState(true);
       const[products,Setproducts]=useState([])
 
       const loader = ()=>{
             setLoading(true)
                 setTimeout(()=>{
                   setLoading(false)
-                },1000)
+            },1000)
       }
 
       useEffect(() => {

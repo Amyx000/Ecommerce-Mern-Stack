@@ -1,0 +1,13 @@
+
+
+.error{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    font-size: 6vw;
+    font-weight: bold;
+}
+
+.error>div>img{
+    width: 50vw;
+}
