@@ -28,6 +28,23 @@ const userschema = new mongoose.Schema({
         type:String,
         default:"buyer"
     },
+    address:[{
+        shipname:{
+            type:String,
+        },
+        street:{
+            type:String,
+        },
+        city:{
+            type:String,
+        },
+        postcode:{
+            type:Number,
+        },
+        state:{
+            type:String,
+        }
+    }]
 })
 
 mongoose.pluralize(null);

@@ -62,5 +62,15 @@ const updateusertype = async (req,res)=>{
     }
 }
 
+//Add user address
 
-module.exports= {getuser, getalluser, deleteuser, updateusertype, loggeduser};
+const addAddress =async (req,res)=>{
+    try {
+        const user = await usermodel.findByIdAndUpdate(req.user.id,{$push:{address:req.body}},{new:true})
+        res.status(200).json(user.address)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports= {getuser, getalluser, deleteuser, updateusertype, loggeduser, addAddress};
