@@ -59,6 +59,7 @@ function Account() {
         state
       },{withCredentials: true})
       console.log(res.data)
+      Setshipname("");Setstreet("");Setcity("");Setpostcode("");Setstate("")
 
     } catch (error) {
       console.log(error)
@@ -145,7 +146,7 @@ function Account() {
                    <div><span>* </span>City</div><input type="text" value={city} onChange={e=>Setcity(e.target.value)}/>
                    <div><span>* </span>Post Code</div><input type="text" value={postcode} onChange={e=>Setpostcode(e.target.value)}/>
                    <div><span>* </span>State</div>
-                   <select onChange={e=>Setstate(e.target.value)}>
+                   <select value={state} onChange={e=>Setstate(e.target.value)}>
                     <option value={""} disabled selected>Select State</option>
                     <option value={"Andhra Pradesh"}>Andhra Pradesh</option>
                     <option value={"Arunachal Pradesh"}>Arunachal Pradesh</option>
