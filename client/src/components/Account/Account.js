@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import "./Account.css"
 import {Routes, Route, Link, useNavigate} from "react-router-dom"
 import axios from 'axios'
 import ClockLoader from "react-spinners/ClockLoader"
+import Dialog from '../Dialog Box/Dialog'
 
 function Account() {
   const navigate = useNavigate()
@@ -13,6 +14,13 @@ function Account() {
   const[city,Setcity]=useState("")
   const[postcode,Setpostcode]=useState("")
   const[state,Setstate]=useState("")
+  const[currpass,Setcurrpass]=useState("")
+  const[newpass,Setnewpass]=useState("")
+  const[confirmpass,Setconfirmpass]=useState("")
+  const[name,Setname]=useState("")
+  const[alert,Setalert]=useState("")
+  const[profilealert,Setprofilealert]=useState("")
+  const childRef = useRef(null);
   
   const loader = ()=>{
     setLoading(true)
@@ -40,6 +48,7 @@ function Account() {
       try {
         const res = await axios.get("http://localhost:5000/account",{withCredentials: true,})
         setuser(res.data)
+        Setname(res.data.name)
       } catch (error) {
         console.log(error.response.data)
       }
@@ -64,6 +73,44 @@ function Account() {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const changepassFunc= async ()=>{
+    if(!currpass || !newpass || !confirmpass){
+      Setalert("please enter all field !")
+    }
+    else if(newpass!==confirmpass){
+      Setalert("confirm password not match !")
+    }else{
+      try {
+        const res = await axios.post("http://localhost:5000/account/password",
+          {currpass,confirmpass},
+          {withCredentials:true}
+        )
+        Setalert(res.data);Setcurrpass("");Setnewpass("");Setconfirmpass("")
+      } catch (error) {
+        Setalert(error.response.data)
+      }
+    }
+  }
+
+  const changeName = async ()=>{
+    if(!name){
+     Setprofilealert("Please enter the name !") 
+    }else{
+      try {
+        const res =await axios.post("http://localhost:5000/account/profile",
+          {name},
+          {withCredentials:true}
+        )
+        Setname(res.data)
+        Setprofilealert("")
+        childRef.current.openDialog()
+      } catch (error) {
+        console.log(error)
+      }
+    }
+   
   }
   
   return (
@@ -113,33 +160,46 @@ function Account() {
                </div>
                }/>
                <Route path='/profile' element={
-                 <>
-                 <div className='acc-title'>Your Personal Details</div>
-                 <div className='profile-main'>
-                   <div>Name:</div><input type="text" value={user.name}/>
-                   <div>Email:</div><input className='input-disabled' type="text" value={user.email} readOnly/>
-                   <div>Mobile:</div><input className='input-disabled' type="text" value={user.mobile} readOnly/>
+                 <div className='profile'>
+                    <div className='acc-title'>Your Personal Details</div>
+                    <div className='profile-main'>
+                      <div>Name:</div><input type="text" value={name} onChange={e=>Setname(e.target.value)}/>
+                      <div>Email:</div><input className='input-disabled' type="text" value={user.email} readOnly/>
+                      <div>Mobile:</div><input className='input-disabled' type="text" value={user.mobile} readOnly/>
+                    </div>
+                    <div>{profilealert}</div>
+                    <div className='acc-btn-main'><button className='acc-btn' onClick={changeName}>Update</button></div>
+                    <Dialog msg={"Name Changed Successfully !"} color={"dg"} ref={childRef}/>
                  </div>
-                 <div className='acc-btn-main'><button className='acc-btn'>Update</button></div>
-                 </>
                }/>
                <Route path='/password' element={
                  <>
                  <div className='acc-title'>Change Password</div>
                  <div className='acc-pass-main'>
                    <div><span>* </span>Current Password</div>
-                   <input type="text" placeholder='Current Password'/>
+                   <input type="password" value={currpass} onChange={e=>Setcurrpass(e.target.value)} placeholder='Current Password'/>
                    <div><span>* </span>New Password</div>
-                   <input type="text" placeholder='New Password'/>
+                   <input type="password" value={newpass} onChange={e=>Setnewpass(e.target.value)} placeholder='New Password'/>
                    <div><span>* </span>Confirm Password</div>
-                   <input type="text" placeholder='Confirm Password'/>
-                   <button>Change Password</button>
+                   <input type="password" value={confirmpass} onChange={e=>Setconfirmpass(e.target.value)} placeholder='Confirm Password'/>
+                   <div className='acc-alert'>{alert}</div>
+                   <button className='acc-btn' onClick={changepassFunc}>Change Password</button>
                  </div>
                  </>
                }/>
                <Route path='/addresses' element={
                  <>
                  <div className='acc-title'>Addresses</div>
+                 <div className='add-display'>
+                    <div>Default:</div>
+                    <div className='add-block'>
+                      <div>Arman Kazi</div>
+                      <div>1297, sainagar</div>
+                      <div>Rajapur, 45866</div>
+                      <div>Gujrat</div>
+                    </div>
+                    <div><button className='acc-btn'>Edit</button></div>
+                 </div>
                  <div className='profile-main'>
                    <div><span>* </span>Name</div><input type="text" value={shipname} onChange={e=>Setshipname(e.target.value)}/>
                    <div><span>* </span>Street</div><input type="text" value={street} onChange={e=>Setstreet(e.target.value)}/>

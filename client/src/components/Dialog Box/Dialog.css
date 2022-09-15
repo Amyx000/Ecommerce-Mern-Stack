@@ -1,0 +1,45 @@
+
+
+.dialog{
+    position: absolute;
+    top:90px;
+    left: 17vw;
+    background-color: bisque;
+    z-index: 100;
+    width: 50%;
+    height: 50%;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.dialog-msg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-top: 30px;
+    
+}
+
+.dialog-icon{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dialog-icon-close{
+    cursor: pointer;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.655);
+}
+
+.dialog-hide{
+    display: none;
+}
+
+.dr{
+    color:red;
+}
+
+.dg{
+    color:green;
+}

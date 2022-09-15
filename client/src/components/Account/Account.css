@@ -93,15 +93,17 @@
 
 .profile-main{
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: auto 1fr;
+    column-gap: 30px;
     align-items: center;
-    margin-top: 70px;
-    margin-right:9vw;
+    margin-top: 40px;
+    margin-left: 4vw;
+    margin-right: 4vw;
 }
 
 .profile-main>div{
     padding:10px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .profile-main>div>span{
@@ -122,8 +124,7 @@
 .acc-btn-main{
     display: flex;
     justify-content: flex-end;
-    margin-right: 9vw;
-    margin-top: 40px;
+    margin:20px 4vw 0 4vw;
 }
 
 .acc-btn{
@@ -132,10 +133,11 @@
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
+
 }
 
 .acc-btn:active{
-    border: 2px solid rgba(0, 0, 0, 0.495);
+    box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.495);
 }
 
 .acc-title{
@@ -159,11 +161,6 @@
 }
 
 .acc-pass-main>button{
-    background-color: bisque;
-    border: 1px solid rgba(0, 0, 0, 0.184);
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
     width: max-content;
     justify-self: center;
 }
@@ -172,8 +169,21 @@
     font-size: 15px;
 }
 
+.acc-alert{
+    color: red;
+    justify-self: center;
+}
+
 .acc-pass-main>div>span{
     color: red;
+}
+
+.profile{
+    position: relative;
+}
+.profile>div:nth-child(3){
+    color: red;
+    text-align: center;
 }
 
 .profile-main>select{
@@ -185,4 +195,21 @@
 
 .profile-main>select>option{
     background-color: bisque;
+}
+
+.add-block{
+    background-color: white;
+    font-size: 14px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.add-display{
+    margin: 20px 4vw 0 4vw;
+}
+
+.add-display>div:last-child{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
 }

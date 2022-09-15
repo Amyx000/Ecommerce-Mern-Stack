@@ -1,6 +1,6 @@
 const usermodel = require("../models/usermodel")
-const jwt = require("jsonwebtoken")
 const { findById } = require("../models/usermodel")
+const bcrypt = require("bcrypt")
 
 const getuser = async (req,res)=>{  
     
@@ -73,4 +73,36 @@ const addAddress =async (req,res)=>{
     }
 }
 
-module.exports= {getuser, getalluser, deleteuser, updateusertype, loggeduser, addAddress};
+//change password
+
+const changePass = async (req,res)=>{
+    try {
+        const user = await usermodel.findById(req.user.id);
+        const match = await bcrypt.compare(req.body.currpass, user.password);
+        if(match===true){
+            const newpass = await usermodel.findByIdAndUpdate(req.user.id,
+                {$set:{password: await bcrypt.hash(req.body.confirmpass, 10)}},
+                {new:true}
+            )
+            res.status(200).json("Password Changed Successfully")
+
+        }else{res.status(400).json("current password not matched!")}
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const changeName = async (req,res)=>{
+    try {
+        const user = await usermodel.findByIdAndUpdate(req.user.id,
+            {$set:{name:req.body.name}},
+            {new:true}
+        )
+        res.status(200).json(user.name)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports= {getuser, getalluser, deleteuser, updateusertype, loggeduser, addAddress, changePass, changeName};
