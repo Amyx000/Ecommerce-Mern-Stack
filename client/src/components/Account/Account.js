@@ -20,6 +20,8 @@ function Account() {
   const[name,Setname]=useState("")
   const[alert,Setalert]=useState("")
   const[profilealert,Setprofilealert]=useState("")
+  const[address,Setaddress]=useState("")
+  const[updateadd,Setupdateadd]=useState({})
   const childRef = useRef(null);
   
   const loader = ()=>{
@@ -49,6 +51,10 @@ function Account() {
         const res = await axios.get("http://localhost:5000/account",{withCredentials: true,})
         setuser(res.data)
         Setname(res.data.name)
+        if(res.data.address.length!==0){
+         Setaddress(res.data.address[0])
+         Setupdateadd(res.data.address[0])
+        }else{Setaddress("")}
       } catch (error) {
         console.log(error.response.data)
       }
@@ -56,20 +62,42 @@ function Account() {
     }
     getloggeduser()
       // eslint-disable-next-line
-  }, [])
+  }, [navigate])
 
   const submitAddress = async()=>{
     try {
-      const res = await axios.post("http://localhost:5000/account/addresses",{
+      await axios.post("http://localhost:5000/account/addresses",{
         shipname,
         street,
         city,
         postcode,
         state
       },{withCredentials: true})
-      console.log(res.data)
       Setshipname("");Setstreet("");Setcity("");Setpostcode("");Setstate("")
+      navigate("addresses")
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
+  const delAddress = async ()=>{
+      try {
+        await axios.get("http://localhost:5000/account/addresses/deladdress",
+          {withCredentials:true}
+        )
+        Setaddress("")
+      } catch (error) {
+        console.log(error)
+      }
+  }
+
+  const updateAddress = async ()=>{
+    try {
+      await axios.post("http://localhost:5000/account/addresses/editaddress",
+      {updateadd},
+      {withCredentials:true}
+    )
+      navigate("addresses")
     } catch (error) {
       console.log(error)
     }
@@ -191,16 +219,31 @@ function Account() {
                  <>
                  <div className='acc-title'>Addresses</div>
                  <div className='add-display'>
-                    <div>Default:</div>
-                    <div className='add-block'>
-                      <div>Arman Kazi</div>
-                      <div>1297, sainagar</div>
-                      <div>Rajapur, 45866</div>
-                      <div>Gujrat</div>
-                    </div>
-                    <div><button className='acc-btn'>Edit</button></div>
+                    {!address?
+                    <>
+                      <div className='no-add'>No Address Found !</div>
+                      <Link className='links' to={"add-address"}><button className='acc-btn'>Add Address</button></Link>
+                    </>:
+                    <>
+                      <div>Default:</div>
+                      <div className='add-block'>
+                        <div>{address.shipname},</div>
+                        <div>{address.street},</div>
+                        <div>{address.city}, {address.postcode}</div>
+                        <div>{address.state}</div>
+                      </div>
+                      <div>
+                        <Link className='links' to={"edit-address"}><button className='acc-btn acc-btn-m'>Edit</button></Link>
+                        <button className='acc-btn' onClick={delAddress}>Delete</button>
+                      </div>
+                    </>}
                  </div>
-                 <div className='profile-main'>
+                 </>
+               }/>
+               <Route path='/addresses/add-address' element={
+                <>
+                 <div className='acc-title'> Add Address</div>
+                  <div className='profile-main'>
                    <div><span>* </span>Name</div><input type="text" value={shipname} onChange={e=>Setshipname(e.target.value)}/>
                    <div><span>* </span>Street</div><input type="text" value={street} onChange={e=>Setstreet(e.target.value)}/>
                    <div><span>* </span>City</div><input type="text" value={city} onChange={e=>Setcity(e.target.value)}/>
@@ -239,7 +282,55 @@ function Account() {
                    </select>
                  </div>
                  <div className='acc-btn-main'><button onClick={submitAddress} className='acc-btn'>Submit</button></div>
-                 </>
+                </>
+               }/>
+
+                <Route path='/addresses/edit-address' element={
+                <>
+                 <div className='acc-title'>Edit Address</div>
+                  <div className='profile-main'>
+                   <div><span>* </span>Name</div><input type="text" value={updateadd.shipname} onChange={e=>Setupdateadd(prev=>({...prev,shipname:e.target.value}))}/>
+                   <div><span>* </span>Street</div><input type="text" value={updateadd.street} onChange={e=>Setupdateadd(prev=>({...prev, street:e.target.value}))} />
+                   <div><span>* </span>City</div><input type="text" value={updateadd.city} onChange={e=>Setupdateadd(prev=>({...prev, city:e.target.value}))}/>
+                   <div><span>* </span>Post Code</div><input type="text" value={updateadd.postcode} onChange={e=>Setupdateadd(prev=>({...prev, postcode:e.target.value}))}/>
+                   <div><span>* </span>State</div>
+                   <select value={updateadd.state} onChange={e=>Setupdateadd(prev=>({...prev, state:e.target.value}))}>
+                    <option value={""} disabled selected>Select State</option>
+                    <option value={"Andhra Pradesh"}>Andhra Pradesh</option>
+                    <option value={"Arunachal Pradesh"}>Arunachal Pradesh</option>
+                    <option value={"Assam"}>Assam</option>
+                    <option value={"Bihar"}>Bihar</option>
+                    <option value={"Chhattisgarh"}>Chhattisgarh</option>
+                    <option value={"Goa"}>Goa</option>
+                    <option value={"Gujarat"}>Gujarat</option>
+                    <option value={"Haryana"}>Haryana</option>
+                    <option value={"Himachal Pradesh"}>Himachal Pradesh</option>
+                    <option value={"Jharkhand"}>Jharkhand</option>
+                    <option value={"Karnataka"}>Karnataka</option>
+                    <option value={"Kerala"}>Kerala</option>
+                    <option value={"Madhya Pradesh"}>Madhya Pradesh</option>
+                    <option value={"Maharashtra"}>Maharashtra</option>
+                    <option value={"Manipur"}>Manipur</option>
+                    <option value={"Meghalaya"}>Meghalaya</option>
+                    <option value={"Mizoram"}>Mizoram</option>
+                    <option value={"Nagaland"}>Nagaland</option>
+                    <option value={"Odisha"}>Odisha</option>
+                    <option value={"Punjab"}>Punjab</option>
+                    <option value={"Rajasthan"}>Rajasthan</option>
+                    <option value={"Sikkim"}>Sikkim</option>
+                    <option value={"Tamil Nadu"}>Tamil Nadu</option>
+                    <option value={"Telangana"}>Telangana</option>
+                    <option value={"Tripura"}>Tripura</option>
+                    <option value={"Uttar Pradesh"}>Uttar Pradesh</option>
+                    <option value={"Uttarakhand"}>Uttarakhand</option>
+                    <option value={"West Bengal"}>West Bengal</option>
+                   </select>
+                 </div>
+                 <div className='acc-btn-main'>
+                  <Link className='links' to={"/account/addresses"}><button className='acc-btn acc-btn-m'>Back</button></Link>
+                  <button onClick={updateAddress} className='acc-btn'>Update</button>
+                </div>
+                </>
                }/>
                <Route path='/wishlist' element={
                  <>

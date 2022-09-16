@@ -1,6 +1,6 @@
 const express = require("express");
 const {register_user, login_user, logout_user, isAuth} = require("../controllers/logincontroller");
-const {getuser, getalluser, deleteuser, updateusertype, loggeduser, addAddress, changePass, changeName} = require("../controllers/usercontroller");
+const {getuser, getalluser, deleteuser, updateusertype, loggeduser, addAddress, changePass, changeName, delAddress, updateAddress} = require("../controllers/usercontroller");
 const {authtoken_admin, authtoken } = require("../middleware/authtoken");
 
 const router = express.Router();
@@ -16,6 +16,8 @@ router.get("/users",authtoken_admin,getalluser)
 router.delete("/account/:id",authtoken_admin,deleteuser)
 router.put("/account/:id",authtoken_admin,updateusertype)
 router.post("/account/addresses",authtoken,addAddress)
+router.post("/account/addresses/editaddress",authtoken,updateAddress)
+router.get("/account/addresses/deladdress",authtoken,delAddress)
 router.post("/account/password",authtoken,changePass)
 router.post("/account/profile",authtoken,changeName)
 

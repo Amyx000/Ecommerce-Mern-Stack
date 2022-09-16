@@ -73,6 +73,28 @@ const addAddress =async (req,res)=>{
     }
 }
 
+//Delete user address
+
+const delAddress = async (req,res)=>{
+    try {
+        await usermodel.findByIdAndUpdate(req.user.id,{$unset:{address:""}},{new:true})
+        res.status(200).json("Address Deleted")
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+//update user address
+
+const updateAddress = async (req, res)=>{
+    try {
+         await usermodel.findByIdAndUpdate(req.user.id,{$set:{address:req.body.updateadd}},{new:true})
+        res.status(200).json("Adress Updated")
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 //change password
 
 const changePass = async (req,res)=>{
@@ -105,4 +127,15 @@ const changeName = async (req,res)=>{
     }
 }
 
-module.exports= {getuser, getalluser, deleteuser, updateusertype, loggeduser, addAddress, changePass, changeName};
+module.exports= {
+    getuser,
+    getalluser,
+    deleteuser,
+    updateusertype,
+    loggeduser,
+    addAddress,
+    delAddress,
+    updateAddress,
+    changePass,
+    changeName
+}

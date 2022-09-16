@@ -213,3 +213,12 @@
     justify-content: flex-end;
     margin-top: 20px;
 }
+
+.no-add{
+    display: inline !important;
+    margin-right: 20px;
+}
+
+.acc-btn-m{
+    margin-right: 10px;
+}
