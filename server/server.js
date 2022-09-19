@@ -6,6 +6,7 @@ const dotenv= require("dotenv").config({path:"config/config.env"})
 require("./config/config.js")
 const productroute = require("../server/routes/productrout")
 const userrout = require("./routes/userrout")
+const orderrout = require("./routes/orderrout")
 
 const app = express()
 
@@ -17,8 +18,7 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 app.use("/", productroute)
 app.use("/auth",userrout)
 app.use("/",userrout)
-
-
+app.use("/",orderrout)
 
 
 app.listen(process.env.PORT);

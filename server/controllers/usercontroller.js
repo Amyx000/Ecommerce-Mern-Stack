@@ -1,5 +1,4 @@
 const usermodel = require("../models/usermodel")
-const { findById } = require("../models/usermodel")
 const bcrypt = require("bcrypt")
 
 const getuser = async (req,res)=>{  
