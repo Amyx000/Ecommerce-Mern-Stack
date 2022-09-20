@@ -8,14 +8,13 @@ function Cartprod(props) {
   const dispatch = useDispatch()
   const cart = useSelector(state=>state.cart)
   
-  
   return (
     <>
     {cart.products.map((product)=>{
       return(
         <div className='cart-rc cart-props'>
         <div className='cartprod-left'>
-            <div><img src={"https://images.bestsellerclothing.in/data/JJ/sep-9-2021/246286802_g1.jpg?width=47&height=47&mode=fill&fill=blur&format=auto"} alt=""></img></div>
+            <div><img className='cart-img' src={product.images[0].displayimg_url} alt=""></img></div>
             <div>
                 <div>{`${product.brand} ${product.modelno}`}</div>
                 <div className='cartprod-left-down'>

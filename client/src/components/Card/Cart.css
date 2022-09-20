@@ -71,6 +71,7 @@
 .cart-rc{
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
+    align-items: center;
     font-size: 12px;
     font-weight: bold;
     color: gray;
@@ -79,7 +80,7 @@
 .cartprod-left{
     display: grid;
     grid-template-columns: 1fr 3fr;
-    
+    align-items: center;
 }
 
 .cart-props{
@@ -146,4 +147,8 @@
 
 .emptycart-btn:active{
     background-color: bisque;
+}
+
+.cart-img{
+    width: 50px;
 }

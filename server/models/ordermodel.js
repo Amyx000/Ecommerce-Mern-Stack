@@ -28,10 +28,8 @@ const orderschema = new mongoose.Schema({
             type:String,
             default:"Processing"
         }
-    }],
-    totalprice:{
-        type:Number
-    }
+    }]
+    
 })
 
 mongoose.pluralize(null)

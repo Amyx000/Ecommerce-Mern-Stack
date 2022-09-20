@@ -5,12 +5,12 @@
     grid-template-columns: 52% 1fr;
     margin:20px 50px 20px 50px;
     gap:20px;
+    align-items: center;
 }
 
 .productside{
     height: 62vh;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
