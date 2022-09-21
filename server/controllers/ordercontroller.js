@@ -1,5 +1,6 @@
 const ordermodel = require("../models/ordermodel")
 const Razorpay = require('razorpay');
+const crypto = require("crypto");
 
 var instance = new Razorpay({
     key_id: process.env.RAZOR_KEY_ID,
@@ -59,5 +60,26 @@ const payment = async (req, res)=>{
     }
 }
 
+const paymentVerify = async (req,res)=>{
+    // const{paymentdetails,...restdata}=req.body
+    const{razorpay_order_id,razorpay_payment_id,razorpay_signature}=req.body.paymentdetails
+    const sign= razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSignature = crypto.createHmac('sha256', process.env.RAZOR_KEY_SECRET)
+                                    .update(sign.toString())
+                                    .digest('hex');
+    let success = {"signatureIsValid":"false"}
 
-module.exports={newOrder, loggedOrder, allOrders, updateorderStatus, payment}
+    if(expectedSignature === razorpay_signature){
+     success={"signatureIsValid":"true"}
+        await ordermodel.create(req.body)
+        res.status(200).json(success);
+    };
+  
+}
+
+const getRazorkey = async (req,res)=>{
+    res.status(200).json({key:process.env.RAZOR_KEY_ID})
+}
+
+
+module.exports={newOrder, loggedOrder, allOrders, updateorderStatus, payment,paymentVerify, getRazorkey}

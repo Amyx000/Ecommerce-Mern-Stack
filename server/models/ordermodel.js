@@ -10,7 +10,8 @@ const orderschema = new mongoose.Schema({
         type:Object
     },
     orderdate:{
-        type:Date
+        type:Date,
+        default:Date.now
     },
     orderitems:[{
         product:{
@@ -28,7 +29,18 @@ const orderschema = new mongoose.Schema({
             type:String,
             default:"Processing"
         }
-    }]
+    }],
+    paymentdetails:{
+        razorpay_order_id:{
+            type:String
+        },
+        razorpay_payment_id:{
+            type:String
+        },
+        razorpay_signature:{
+            type:String
+        }
+    }
     
 })
 

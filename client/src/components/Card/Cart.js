@@ -5,6 +5,7 @@ import {RiPercentFill} from "react-icons/ri"
 import Cartprod from "./Cartprod";
 import ClockLoader from "react-spinners/ClockLoader"
 import Emptycart from "./Emptycart";
+import { Link } from "react-router-dom";
 
 function Cart (){
     const cart = useSelector(state=>state.cart)
@@ -37,15 +38,15 @@ function Cart (){
             <div className="cart-right">
                 <div className="cart-r-price cart-pad">
                     <div>Sub-Total:</div>
-                    <div>₹ {cart.total}</div>
+                    <div>₹ {cart.subtotal}</div>
                 </div>
                 <div className="cart-r-price cart-pad">
                     <div>Tax: 9%</div>
-                    <div>₹ {Math.round(cart.total*0.09)}</div>
+                    <div>₹ {Math.round(cart.subtotal*0.09)}</div>
                 </div>
                 <div className="cart-r-price cart-pad">
                 <div>Total:</div>
-                    <div>₹ {Math.round(cart.total*1.09)}</div>
+                    <div>₹ {Math.round(cart.total)}</div>
                 </div>
                 <div>
                     <div>
@@ -58,7 +59,7 @@ function Cart (){
                     </div>
                 </div>
                 <div>
-                    <button className="proceed cart-btn">Proceed</button>
+                    <Link className="links" to={"shipping"}><button className="proceed cart-btn">Proceed Next</button></Link>
                 </div>
             </div>
         </div>}</>

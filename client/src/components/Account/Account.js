@@ -4,8 +4,11 @@ import {Routes, Route, Link, useNavigate} from "react-router-dom"
 import axios from 'axios'
 import ClockLoader from "react-spinners/ClockLoader"
 import Dialog from '../Dialog Box/Dialog'
+import { useDispatch } from 'react-redux'
+import { loggedUser } from '../../Redux/Reducers/userReducer'
 
 function Account() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const[user,setuser]=useState("")
   const [loading, setLoading] = useState(true);
@@ -54,6 +57,7 @@ function Account() {
         if(res.data.address.length!==0){
          Setaddress(res.data.address[0])
          Setupdateadd(res.data.address[0])
+         dispatch(loggedUser({"userid":res.data._id,"address":res.data.address[0]}))
         }else{Setaddress("")}
       } catch (error) {
         console.log(error.response.data)
@@ -86,6 +90,7 @@ function Account() {
           {withCredentials:true}
         )
         Setaddress("")
+        dispatch(loggedUser({}))
       } catch (error) {
         console.log(error)
       }
