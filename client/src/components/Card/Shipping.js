@@ -1,20 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Cart.css"
 import "./Shipping.css"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Message from '../Dialog Box/Message'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { loggedUser } from '../../Redux/Reducers/userReducer'
 
 function Shipping() {
+    const dispatch = useDispatch()
     const navigate=useNavigate()
     const cart = useSelector(state=>state.cart)
-    const address = useSelector(state=>state.user.userdata.address)
+    // const address = useSelector(state=>state.user.userdata.address)
+    const[address,Setaddress]=useState("")
     const[updateadd,Setupdateadd]=useState({})
     const[err,Seterr]=useState(false)
-
+    
     const checkoutFunc = async()=>{
-        if(address.shipname){navigate("/cart/checkout")}
+        if(address){navigate("/cart/checkout")}
         else if(!updateadd.shipname||!updateadd.street||!updateadd.city||!updateadd.postcode||!updateadd.state){
             Seterr(true)
         }else{
@@ -36,6 +39,25 @@ function Shipping() {
         }
     }
 
+    useEffect(() => {
+
+        const getloggeduser=async()=>{
+          try {
+            const res = await axios.get("http://localhost:5000/account",{withCredentials: true,})
+            if(res.data.address.length!==0){
+             Setaddress(res.data.address[0])
+             dispatch(loggedUser({"userid":res.data._id,"address":res.data.address[0]}))
+            }else{Setaddress("")}
+          } catch (error) {
+            console.log(error.response.data)
+          }
+          
+        }
+        getloggeduser()
+          // eslint-disable-next-line
+      }, [navigate])
+    
+
   return (
     <>
         <div className="cart-main">
@@ -43,7 +65,7 @@ function Shipping() {
                 <div className="cart-items">Shipping details</div>
                 <>
                 <div className=''>
-                    {!address.shipname?
+                    {!address?
                     <>
                         <div className='acc-title'>Add Address</div>
                         {err?<Message msg={"Enter all shipping details !"} cls={"msg-color-r msg-mt-10 msg-center"}/>:null}
@@ -101,15 +123,15 @@ function Shipping() {
             <div className="cart-right">
                 <div className="cart-r-price cart-pad">
                     <div>Sub-Total:</div>
-                    <div>₹ {cart.total}</div>
+                    <div>₹ {cart.subtotal}</div>
                 </div>
                 <div className="cart-r-price cart-pad">
                     <div>Tax: 9%</div>
-                    <div>₹ {Math.round(cart.total*0.09)}</div>
+                    <div>₹ {Math.round(cart.subtotal*0.09)}</div>
                 </div>
                 <div className="cart-r-price cart-pad">
                 <div>Total:</div>
-                    <div>₹ {Math.round(cart.total*1.09)}</div>
+                    <div>₹ {Math.round(cart.total)}</div>
                 </div>
                 
                 <div>

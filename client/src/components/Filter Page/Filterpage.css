@@ -47,6 +47,7 @@ select{
     border: none;
     padding: 10px;
     outline: none;
+    border-radius: 6px;
 }
 
 

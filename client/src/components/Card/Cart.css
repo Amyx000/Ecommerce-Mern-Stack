@@ -161,4 +161,20 @@
     right: 0;
     height: 100vh;
     z-index: 1;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.checkout>div{
+    font-size: 1.8rem;
+    font-weight: bolder;
+    background-color: bisque;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.tick{
+    color: green;
+    font-size: 3rem;
 }

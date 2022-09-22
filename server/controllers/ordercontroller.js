@@ -7,15 +7,11 @@ var instance = new Razorpay({
     key_secret: process.env.RAZOR_KEY_SECRET
 })
 
-const newOrder = async (req,res)=>{
-    const order = await ordermodel.create(req.body)
-    res.status(200).json(order)
-}
 
 //get login user orders
 
 const loggedOrder = async (req,res)=>{
-    const order = await ordermodel.find({user:req.user.id})
+    const order = await ordermodel.find({user:req.user.id}).populate("orderitems.product","brand series modelno price images.displayimg_url")
     res.status(200).json(order)
 }
 
@@ -82,4 +78,4 @@ const getRazorkey = async (req,res)=>{
 }
 
 
-module.exports={newOrder, loggedOrder, allOrders, updateorderStatus, payment,paymentVerify, getRazorkey}
+module.exports={loggedOrder, allOrders, updateorderStatus, payment,paymentVerify, getRazorkey}

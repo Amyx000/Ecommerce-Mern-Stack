@@ -222,3 +222,42 @@
 .acc-btn-m{
     margin-right: 10px;
 }
+
+.order-main{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto 2fr 1fr;
+    row-gap: 15px;
+}
+
+.order-main-img{
+    height: 17vh;
+}
+
+.order-main-des{
+    color: #7e818c;
+    font-size: 0.9rem;
+    padding: 10px 0;
+}
+
+.order-main-div1{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+.order-main-div3{
+    border-left: 1px solid rgba(104, 104, 104, 0.406);
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.order-main-div2{
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+.order-msg{
+    justify-items: center;
+}

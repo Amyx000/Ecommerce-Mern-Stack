@@ -6,6 +6,7 @@ import ClockLoader from "react-spinners/ClockLoader"
 import Dialog from '../Dialog Box/Dialog'
 import { useDispatch } from 'react-redux'
 import { loggedUser } from '../../Redux/Reducers/userReducer'
+import Orderprops from './Orderprops'
 
 function Account() {
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ function Account() {
   const[profilealert,Setprofilealert]=useState("")
   const[address,Setaddress]=useState("")
   const[updateadd,Setupdateadd]=useState({})
+  const[orders,Setorders]=useState([])
   const childRef = useRef(null);
   
   const loader = ()=>{
@@ -145,6 +147,21 @@ function Account() {
     }
    
   }
+
+  useEffect(() => {
+    async function loggedorder() {
+      try {
+        const res = await axios.get("http://localhost:5000/user/order",{withCredentials:true})
+        Setorders(res.data)
+        console.log(orders)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    loggedorder()
+    // eslint-disable-next-line
+  }, [navigate])
+  
   
   return (
     <>
@@ -347,13 +364,34 @@ function Account() {
                  </>
                }/>
                <Route path='/orders' element={
-                 <>
-                 <div className='acc-title'>Orders</div>
-                 <div className='acc-pass-main'>
-                   <div>You don't have any order placed!</div>
-                   <Link className='links' to={"/account"}><button>Continue</button></Link>
-                 </div>
-                 </>
+                 orders.length===0?<>
+                    <div className='acc-title'>Orders</div>
+                    <div className='acc-pass-main order-msg'>
+                      <div>You don't have any order placed!</div>
+                      <Link className='links' to={"/account"}><button className='acc-btn'>Continue</button></Link>
+                    </div>
+                 </>:
+                <>
+                <div className='acc-title'>Orders</div>
+                <div className='order-main'>
+                  {orders.map(multiorders=>{
+                    return(
+                      multiorders.orderitems.map(onetimepurchase=>{
+                        return(
+                          <Orderprops
+                            name={`${onetimepurchase.product.brand} ${onetimepurchase.product.modelno}`}
+                            img={onetimepurchase.product.images[0].displayimg_url}
+                            date={multiorders.orderdate}
+                            status={onetimepurchase.orderstatus}
+                            key={onetimepurchase._id}
+                          />
+                        )
+                      })
+                    )
+                  })}
+
+                </div>
+                </>
                }/>
                <Route path='/admin' element={
                  <>
