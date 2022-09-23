@@ -74,21 +74,23 @@
 .account-r-bot{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
     margin: 20px 5vw 0 5vw;
     gap: 20px;
 }
 
 .account-r-bot>div{
     border: 1px solid #d4d5d9;
-    padding: 30px;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
 
+.account-r-bot-div{
+    padding: 30px;
+}
+
 .account-r-bot>div:hover{
-    background-color: rgb(236, 235, 235);
+    background-color: bisque;
 }
 
 .profile-main{

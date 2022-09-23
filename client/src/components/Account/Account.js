@@ -7,6 +7,7 @@ import Dialog from '../Dialog Box/Dialog'
 import { useDispatch } from 'react-redux'
 import { loggedUser } from '../../Redux/Reducers/userReducer'
 import Orderprops from './Orderprops'
+import Adminpanel from './Adminpanel'
 
 function Account() {
   const dispatch = useDispatch()
@@ -202,10 +203,10 @@ function Account() {
                      </div>
                    </div>
                    <div className='account-r-bot'>
-                     <div>Profile</div>
-                     <div>Addresses</div>
-                     <div>Orders</div>
-                     <div>Wishlist</div>
+                     <div><Link className='link' to={"profile"}><div className='account-r-bot-div'>Profile</div></Link></div>
+                     <div><Link className='link' to={"addresses"}><div className='account-r-bot-div'>Addresses</div></Link></div>
+                     <div><Link className='link' to={"orders"}><div className='account-r-bot-div'>Orders</div></Link></div>
+                     <div><Link className='link' to={"wishlist"}><div className='account-r-bot-div'>Wishlist</div></Link></div>
                    </div>
                </div>
                }/>
@@ -393,9 +394,9 @@ function Account() {
                 </div>
                 </>
                }/>
-               <Route path='/admin' element={
+               <Route path='/admin/*' element={
                  <>
-                 <div className='acc-title'>Admin Dashboard</div>
+                 <Adminpanel/>
                  </>
                }/>
                <Route path='/seller' element={

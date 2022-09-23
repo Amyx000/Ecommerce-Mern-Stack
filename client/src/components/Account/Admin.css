@@ -1,0 +1,72 @@
+
+
+.admin{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin:30px;
+    gap:20px;
+}
+
+.admin>div{
+    text-align: center;
+    border-radius: 15px;
+    border: 1px solid #d4d5d9;
+}
+
+.admin-div{
+    padding: 30px;
+}
+
+.admin>div:hover{
+    background-color: bisque;
+    cursor: pointer;
+}
+
+.admin-main{
+    margin-top: 20px;
+    height: 380px;
+    overflow-y: auto;
+}
+
+.admin-table{
+    display: grid;
+    grid-template-columns: auto 3fr 1fr;
+    row-gap: 10px;
+}
+
+.admin-table>div{
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.user-table{
+    grid-template-columns: auto 2fr 3fr 1fr;
+}
+
+.product-table{
+    grid-template-columns: auto 2fr auto 1fr;
+}
+
+.order-table{
+    grid-template-columns: auto 2fr auto 1fr;
+}
+
+.admin-table-head{
+    padding: 7px;
+    background-color: bisque;
+}
+
+.edit-icon{
+    margin-right: 15px;
+}
+
+.admin-icon{
+    color: rgba(36, 36, 36, 0.76);
+    cursor: pointer;
+}
+
+.admin-header{
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
