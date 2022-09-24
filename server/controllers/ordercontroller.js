@@ -18,12 +18,24 @@ const loggedOrder = async (req,res)=>{
 //Get all orders for admin
 
 const allOrders = async(req, res)=>{
-    const orders = await ordermodel.find()
+    const orders = await ordermodel.find().populate("orderitems.product","brand series modelno price images.displayimg_url")
     let totalamount=0
     orders.forEach(v=>{
-        totalamount+=v.totalprice;
+        v.orderitems.forEach(value=>{
+            totalamount+=value.price;
+        })
     })
     res.status(200).json({totalamount, orders})
+}
+
+//get order by order id
+
+const getsingleorder = async(req,res)=>{
+    const order = await ordermodel.findOne(
+            {"orderitems._id":req.params.id},
+            {orderitems:{$elemMatch:{_id:req.params.id}}}
+        ).populate("user orderitems.product"," email brand series modelno price images.displayimg_url").select("address")
+    res.status(200).json(order)
 }
 
 const updateorderStatus = async (req,res)=>{
@@ -78,4 +90,4 @@ const getRazorkey = async (req,res)=>{
 }
 
 
-module.exports={loggedOrder, allOrders, updateorderStatus, payment,paymentVerify, getRazorkey}
+module.exports={loggedOrder, allOrders, getsingleorder, updateorderStatus, payment,paymentVerify, getRazorkey}

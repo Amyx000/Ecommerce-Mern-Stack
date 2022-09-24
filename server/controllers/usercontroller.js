@@ -13,6 +13,17 @@ const getuser = async (req,res)=>{
   
 }
 
+//Get all users
+const getalluser = async (req,res)=>{
+    try {
+        const user = await usermodel.find().select("-password"); //excluding the password in user data
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}
+
+
 //get logged user
 
 const loggeduser = async (req, res)=>{
@@ -23,15 +34,6 @@ const loggeduser = async (req, res)=>{
         console.log(error)
     }
     
-}
-
-const getalluser = async (req,res)=>{
-    try {
-        const user = await usermodel.find().select("-password"); //excluding the password in user data
-        res.status(200).json(user)
-    } catch (error) {
-        res.status(400).json(error)
-    }
 }
 
 const deleteuser = async (req,res)=>{
