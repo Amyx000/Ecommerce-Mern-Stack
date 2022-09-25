@@ -7,6 +7,7 @@ import {MdOutlineEdit} from "react-icons/md"
 import {IoIosCloseCircleOutline} from "react-icons/io"
 import Adminuserprops from "./Adminuserprops";
 import Adminorderpanel from "./Adminorderpanel";
+import Adminproductpanel from "./Adminproductpanel";
 
 function Adminpanel (){
     const [showdailog,Setshowdailog]=useState(false)
@@ -26,12 +27,12 @@ function Adminpanel (){
             Setshowdailog(true)
         }
     }
-
+    // eslint-disable-next-line
     const updateuser =async ()=>{
         await axios.put(`http://localhost:5000/account/${userid}`,{userType:user.userType},{withCredentials:true})
         Setshowdailog(false)
     }
-
+      // eslint-disable-next-line
     const deleteuser= async(id)=>{
         await axios.delete(`http://localhost:5000/account/${id}`,{withCredentials:true})
     }
@@ -46,6 +47,7 @@ function Adminpanel (){
             }
        }
        getalluser()
+       // eslint-disable-next-line
     }, [updateuser,deleteuser])
     
 
@@ -63,23 +65,7 @@ function Adminpanel (){
                     </>
                 }/>
                 <Route path="/product" element={
-                    <>
-                     <div className="admin-route-main">
-                            <div className="admin-header">
-                                <div className='acc-title'>Admin Dashboard - Product</div>
-                                <button className="acc-btn">Add Product</button>
-                            </div>
-                            <div className="admin-main">
-                                    <div className="admin-table product-table">
-                                        <div className="admin-table-head">Product ID</div> <div className="admin-table-head">Product Name</div> <div className="admin-table-head">Price</div> <div className="admin-table-head">Action</div>
-                                        <div>632b6b3e959f6dd10b9972df</div> <div>Rolex Daytona</div> <div>750000</div> <div><MdOutlineEdit className="edit-icon admin-icon"/><RiDeleteBin6Line className="admin-icon"/></div>
-                                    </div>
-                            </div>
-                            <div className="admin-action">
-                                
-                            </div>
-                     </div>
-                    </>
+                    <Adminproductpanel/>
                 }/>
 
                 <Route path="/user" element={

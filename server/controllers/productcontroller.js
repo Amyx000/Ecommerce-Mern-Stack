@@ -12,6 +12,14 @@ const createproduct = async (req, res) => {
     console.log("Successful")
 
 }
+
+//get all product for admin
+
+const getallproducts = async(req,res)=>{
+    const products= await product.find()
+    res.status(200).json(products)
+}
+
 //fetch product data
 const getproduct = async (req, res) => {
     const brand = req.query.brand!==undefined?req.query.brand.split(','):""
@@ -108,11 +116,7 @@ const updateproduct = async (req, res) => {
         })
     }
     else {
-        productdata = await product.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true,
-            useFindAndModify: false
-        });
+        productdata = await product.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
         res.status(200).json({
             success: true,
@@ -144,4 +148,4 @@ const deleteproduct = async (req, res) => {
 
 }
 
-module.exports = { createproduct, getproduct, getproductdetails, updateproduct, deleteproduct } 
+module.exports = { createproduct, getproduct, getallproducts, getproductdetails, updateproduct, deleteproduct } 

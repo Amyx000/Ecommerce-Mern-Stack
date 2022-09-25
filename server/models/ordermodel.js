@@ -28,6 +28,9 @@ const orderschema = new mongoose.Schema({
         orderstatus:{
             type:String,
             default:"Processing"
+        },
+        deliveredAt:{
+            type:Date
         }
     }],
     paymentdetails:{

@@ -20,7 +20,7 @@ const productschema = new mongoose.Schema({
       },
       description: {
         type: String,
-        required: [true, "Please Enter product Description"],
+        default:"Folex watch product"
       },
       price: {
         type: Number,
@@ -49,7 +49,6 @@ const productschema = new mongoose.Schema({
       },
       Stock: {
         type: Number,
-        required: [true, "Please Enter product Stock"],
         maxLength: [4, "Stock cannot exceed 4 characters"],
         default: 1,
       },

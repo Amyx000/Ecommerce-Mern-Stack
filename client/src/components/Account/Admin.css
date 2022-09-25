@@ -87,12 +87,13 @@
     border-radius: 20px;
     border: 1px solid rgb(199, 179, 153);
     box-shadow: 0 0 4px 2px rgb(146, 140, 132);
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .admin-action>div:first-child{
     position: sticky;
     top: 10px;
+    left:10px;
     display: grid;
     grid-template-columns: 1fr auto;
     text-align: center;
@@ -105,9 +106,16 @@
     grid-template-columns: auto 1fr;
     gap:10px;
     align-items: center;
-    margin: 100px 20px 50px 20px;
+    margin: 50px 20px 50px 20px;
+    word-break: break-all;
 }
 
+.admin-action>div:nth-child(2)>input{
+    padding:5px;
+    outline-color:#C29427;
+    border: 1px solid #d4d5d9;
+    border-radius: 5px;
+}
 
 .admin-action>div:last-child{
     display: flex;

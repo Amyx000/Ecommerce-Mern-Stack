@@ -34,17 +34,31 @@ const getsingleorder = async(req,res)=>{
     const order = await ordermodel.findOne(
             {"orderitems._id":req.params.id},
             {orderitems:{$elemMatch:{_id:req.params.id}}}
-        ).populate("user orderitems.product"," email brand series modelno price images.displayimg_url").select("address")
+        ).populate("user orderitems.product orderdate"," email brand series modelno price images.displayimg_url").select("address")
     res.status(200).json(order)
 }
 
 const updateorderStatus = async (req,res)=>{
-    const order = await ordermodel.findOneAndUpdate(
-        { "orderitems._id": req.params.id},
-        {$set:{"orderitems.$.orderstatus": req.body.status}},
-        {new:true}
-    )
-    res.status(200).json(order)
+    try {
+        if(req.body.status==="Delivered")
+    {   const order = await ordermodel.findOneAndUpdate(
+            { "orderitems._id": req.params.id},
+            {$set:{"orderitems.$.orderstatus": req.body.status,"orderitems.$.deliveredAt":Date.now()}},
+            {new:true}
+        )
+         res.status(200).json(order)
+    }
+    else{
+        const order = await ordermodel.findOneAndUpdate(
+            { "orderitems._id": req.params.id},
+            {$set:{"orderitems.$.orderstatus": req.body.status,"orderitems.$.deliveredAt":null}},
+            {new:true}
+        )
+        res.status(200).json(order)
+    }
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 const payment = async (req, res)=>{
