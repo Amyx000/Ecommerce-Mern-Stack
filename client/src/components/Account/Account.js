@@ -28,6 +28,7 @@ function Account() {
   const[address,Setaddress]=useState("")
   const[updateadd,Setupdateadd]=useState({})
   const[orders,Setorders]=useState([])
+  const[admin,Setadmin]=useState(false)
   const childRef = useRef(null);
   
   const loader = ()=>{
@@ -40,6 +41,9 @@ function Account() {
   useEffect(() => {
     async function authenticated(){
       const res = await axios.get("http://localhost:5000/account/isauth",{withCredentials: true,})
+      const adminCheck = await axios.get("http://localhost:5000/admin",{withCredentials:true})
+      Setadmin(adminCheck.data)
+      console.log(admin)
       loader()
       if(res.data===false){
         navigate("/login")
@@ -156,7 +160,7 @@ function Account() {
         Setorders(res.data)
         console.log(orders)
       } catch (error) {
-        console.log(error)
+        console.log(error.code)
       }
     }
     loggedorder()
@@ -183,11 +187,10 @@ function Account() {
                <div className='account-main-head'>ORDERS</div>
                <Link className='link' to={"/account/orders"}><div className='account-main-subhead'>Your Orders</div></Link>
              </div>
-             <div className='account-main-sec'>
+             {admin?<div className='account-main-sec'>
                <div className='account-main-head'>PANELS</div>
                <Link className='link' to={"/account/admin"}><div className='account-main-subhead'>Admin</div></Link>
-               <Link className='link' to={"/account/seller"}><div className='account-main-subhead'>Seller</div></Link>
-             </div>
+             </div>:null}
            </div>
            <div className='account-main-r'>
              <Routes>
@@ -360,7 +363,7 @@ function Account() {
                  <div className='acc-title'>Wishlist</div>
                  <div className='acc-pass-main'>
                    <div>You don't have any wishlist!</div>
-                   <Link className='links' to={"/account"}><button>Continue</button></Link>
+                   <Link className='links' to={"/account"}><button className='acc-btn'>Continue</button></Link>
                  </div>
                  </>
                }/>

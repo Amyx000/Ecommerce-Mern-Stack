@@ -7,7 +7,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr) 2fr;
     padding: 20px;
+    justify-items: left;
 }
+
 
 .foot-head{
     margin-bottom: 10px;

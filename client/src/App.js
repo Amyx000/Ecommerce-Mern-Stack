@@ -33,9 +33,8 @@ function App() {
             <Route path="/cart/checkout" element={<Checkout/>}/>
             <Route path="/about" element={<About/>}/>
         </Routes> 
+        <Footer/>
      </BrowserRouter>
-     
-     <Footer/>
     </>
   );
 }

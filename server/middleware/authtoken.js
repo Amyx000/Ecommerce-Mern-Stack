@@ -28,12 +28,12 @@ const authtoken_admin=(req,res,next)=>{
             next();
         }
         else{
-            res.status(400).json("You don'have the access");
+            res.status(200).json("You don'have the access");
         }
     }   
     else{
         return(
-            res.status(400).json("You are not Authenticated")
+            res.status(200).json("You are not Authenticated")
         )
     }
 

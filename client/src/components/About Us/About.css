@@ -1,0 +1,32 @@
+
+
+.about-main{
+    margin: 50px 15%;
+    display: grid;
+    justify-items: center;
+    text-align: justify;
+    font-size: 1.3rem;
+    gap:20px;
+}
+
+.about-main>div:nth-child(3){
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+
+.about-head{
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin:20px;
+}
+
+.about-icon{
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.about-icon:hover{
+    color: #00acee;
+}

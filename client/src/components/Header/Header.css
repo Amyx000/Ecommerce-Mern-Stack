@@ -128,7 +128,6 @@ body{
   align-items: center;
   background-color: var(--dropdown);
   width: 150px;
-  /* height: 100px; */
   border-radius: 3px;
   position: absolute;
   right: 45px;
@@ -156,7 +155,8 @@ body{
   text-decoration: none;
   color: black;
   border-radius: 3px;
- 
+  box-sizing: border-box;
+  border: 1px solid var(--dropdown);
 }
 
 .block-comp:hover{

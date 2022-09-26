@@ -128,6 +128,15 @@ const changeName = async (req,res)=>{
     }
 }
 
+const adminCheck = (req,res)=>{
+    try {
+        res.status(200).json(true)
+    } catch (error) {
+     console.log(error)
+     if(error){res.status(200).json(false)}
+    }
+}
+
 module.exports= {
     getuser,
     getalluser,
@@ -138,5 +147,6 @@ module.exports= {
     delAddress,
     updateAddress,
     changePass,
-    changeName
+    changeName,
+    adminCheck
 }
