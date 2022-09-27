@@ -3,6 +3,7 @@ import "./About.css";
 import {GrTwitter} from "react-icons/gr"
 
 function About() {
+
   return (
     <div className="about-main">
       <div className="about-head">About Us</div>

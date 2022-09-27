@@ -64,6 +64,7 @@ const getproduct = async (req, res) => {
     const gen = queryfunc(gender)
     const prc = queryPricefunc(price)
 
+    const totalprod = await product.find().count()
     let productdata
     if(sort==="rec" || sort===undefined){
      productdata = await product.find(
@@ -83,7 +84,8 @@ const getproduct = async (req, res) => {
     }
     res.status(200).json({
         success: true,
-        productdata
+        productdata,
+        totalprod
     })
 
 }

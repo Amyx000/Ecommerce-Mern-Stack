@@ -4,31 +4,30 @@ import "./Filterpage.css";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons"
 import {BiFilterAlt} from "react-icons/bi"
 import {CgCloseO} from "react-icons/cg"
-import {MdArrowForwardIos, MdArrowBackIos} from "react-icons/md"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useLocation, useNavigate} from "react-router-dom"
 import {useSelector} from "react-redux"
 import useQueryState from "../../Customhooks/useQueryState"
-
+import Slider from "@mui/material/Slider"
+import Box from '@mui/material/Box';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { orange} from "@mui/material/colors";
+import axios from "axios";
 
 function Filterpage() {
     const navigate=useNavigate()
     const location=useLocation()
     const productlength =useSelector(state=>state.product.productlength)
+    const [totalprod,Settotalprod]=useState("")
     const[gender,Setgender]=useState("select-data-contain-hide")
     const[price,Setprice]=useState("select-data-contain-hide")
     const[brand,Setbrand]=useState("select-data-contain-hide")
     const[plusicon1, Setplusicon1]=useState(faPlus)
     const[plusicon2, Setplusicon2]=useState(faPlus)
     const[plusicon3, Setplusicon3]=useState(faPlus)
-    const[nextarrow,Setnextarrow]=useState("pagenext-icon")
-    const[backarrow,Setbackarrow]=useState("pageback-icon-hide")
-    const[no1,Setno1]=useState("no-active")
-    const[no2,Setno2]=useState("no")
-    const[no3,Setno3]=useState("no")
-    const[no4,Setno4]=useState("no")
     const [filgen,Setfilgen]=useState([])
-    const [filprice,Setfilprice]=useState([])
     const [filbrand,Setfilbrand]=useState([])
     /* eslint-disable */
     const [brandquery, setBrandquery] = useQueryState("brand")
@@ -38,47 +37,47 @@ function Filterpage() {
     const[pagequery, setpagequery]=useQueryState("page")
     /* eslint-disable */
     const[clrfill,setClrfill]=useState("clrfilter-main-none")
+    const [slidevalue, setSlidevalue] = useState([0, 1000000]);
+    const[filprice,Setfilprice]=useState([])
 
-    const pagination =(e)=>{
-        let pagevalue = e.target.dataset.user;
-        setpagequery(e.target.dataset.user)
-        if(pagevalue==="1"){
-            Setbackarrow("pageback-icon-hide")
-            Setnextarrow("pagenext-icon")
-            Setno1("no-active")
-            Setno2("no")
-            Setno3("no")
-            Setno4("no")
-        }
-        
-        else if (pagevalue==="2"){
-            Setbackarrow("pageback-icon")
-            Setnextarrow("pagenext-icon")
-            Setno1("no")
-            Setno2("no-active")
-            Setno3("no")
-            Setno4("no")
-        }
 
-        else if (pagevalue==="3"){
-            Setbackarrow("pageback-icon")
-            Setnextarrow("pagenext-icon")
-            Setno1("no")
-            Setno2("no")
-            Setno3("no-active")
-            Setno4("no") 
+    useEffect(() => {
+        async function product(){
+
+              try {
+                  const res = await axios.get(`http://localhost:5000/products${location.search}`)
+                  Settotalprod(res.data.totalprod)
+                } catch (error) {
+                    console.log(error)     
+                }
         }
-        else {
-            Setbackarrow("pageback-icon")
-            Setnextarrow("pagenext-icon-hide")
-            Setno1("no")
-            Setno2("no")
-            Setno3("no")
-            Setno4("no-active")  
+        product();
+    }, [])
+    console.log(totalprod)
+
+    const theme = createTheme({
+        palette: {
+          primary: {
+            main:orange["A200"]
+          },
+          secondary: {
+            main:orange[200]
+          }
         }
-       
+      });
+
+    const handleChange = (event, newValue) => {
+      setSlidevalue(newValue);
+      if(newValue[0]===0&&newValue[1]===1000000){Setfilprice([])}
+      else{
+        Setfilprice([`${slidevalue[0]}-${slidevalue[1]}`])
+      }
+    };
+  
+    function valuetext(slidevalue) {
+      return `${slidevalue}`;
     }
-
+  
     const dropgender = ()=>{
 
         let gen = gender;
@@ -147,9 +146,6 @@ function Filterpage() {
             if(name==="gender"){
                 Setfilgen((pre)=>[...pre,value])
             }
-            else if (name==="price"){
-                Setfilprice([value])
-            }
             else{
                 Setfilbrand((pre)=>[...pre,value])
             }
@@ -157,9 +153,6 @@ function Filterpage() {
         else{
             if(name==="gender"){
                 Setfilgen(filgen.filter((v)=>(v!==value)))
-            }
-            else if (name==="price"){
-                Setfilprice(filprice.filter((v)=>(v!==value)))
             }
             else{Setfilbrand(filbrand.filter((v)=>(v!==value)))}
         }
@@ -202,19 +195,23 @@ function Filterpage() {
                     <div>PRICE</div><div onClick={dropprice} className="add-icon"><FontAwesomeIcon icon={plusicon2}/></div>
                 </div>
                 <div className={price}>
-                    <div>
-                        <input onChange={filterfunc} name="price" value={"0-10000"} type="radio"></input>0-10,000
-                    </div>
-                    <div>
-                        <input onChange={filterfunc} name="price" value={"10000-20000"} type="radio"></input>10,000-20,000
-                    </div>
-                    <div>
-                        <input onChange={filterfunc} name="price" value={"20000-50000"} type="radio"></input>20,000-50,000
-                    </div>
-                    <div>
-                        <input onChange={filterfunc} name="price" value={"50000-2000000"} type="radio"></input>50,000 and Above
-                    </div>
+                    <ThemeProvider theme={theme}>
+                        <Box sx={{ width: "89%" }}>
+                            <Slider
+                            step={1000}
+                            min={0}
+                            max={1000000}
+                            value={slidevalue}
+                            onChange={handleChange}
+                            valueLabelDisplay="auto"
+                            getAriaValueText={valuetext}
+                            size="small"
+                            color="secondary"
+                            />
+                        </Box>
+                    </ThemeProvider>
                 </div>
+                
           </div>
 
           <div className="select-data">
@@ -270,14 +267,21 @@ function Filterpage() {
                 <CgCloseO className='noproduct-icon'/>
                 <div className='noproduct-title'>No product Found!</div>
           </div>:
-          <div className="page-next">
-                <div><MdArrowBackIos className={backarrow}/></div>
-                <div className={no1} data-user={"1"} onClick={pagination}>1</div>
-                <div className={no2} data-user={"2"} onClick={pagination}>2</div>
-                <div className={no3} data-user={"3"} onClick={pagination}>3</div>
-                <div className={no4} data-user={"4"} onClick={pagination}>4</div>
-                <div><MdArrowForwardIos className={nextarrow}/></div>
-          </div>}
+        //   <div className="page-next">
+        //         <div><MdArrowBackIos className={backarrow}/></div>
+        //         <div className={no1} data-user={"1"} onClick={pagination}>1</div>
+        //         <div className={no2} data-user={"2"} onClick={pagination}>2</div>
+        //         <div className={no3} data-user={"3"} onClick={pagination}>3</div>
+        //         <div className={no4} data-user={"4"} onClick={pagination}>4</div>
+        //         <div><MdArrowForwardIos className={nextarrow}/></div>
+        //   </div>
+         <div className="pagination">
+            <ThemeProvider theme={theme}>
+                <Stack spacing={2}>
+                    <Pagination count={totalprod} onChange={(event,page)=>{setpagequery(page)}} variant="outlined" shape="rounded" color="primary" />
+                </Stack>
+            </ThemeProvider>
+         </div>}
         </div>
       </div>
     </>
