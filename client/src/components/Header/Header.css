@@ -15,7 +15,7 @@ body{
   font-family: 'Text Me One', sans-serif;
   
   background-color: bisque;
-  align-items: center;
+  /* align-items: center; */
   justify-items: center;
   border-bottom: 1px solid rgb(196, 181, 163);
 }
@@ -35,6 +35,11 @@ body{
   width: 100px;
 }
 
+.navs{
+  display: grid;
+  align-items: center;
+}
+
 
 .navs:hover {
   text-decoration: underline;
@@ -43,13 +48,15 @@ body{
 }
 
 .collection-menu {
-  background-color: bisque;
-  height: 60vh;
+  background-color: #141414;
+  color: bisque;
+  /* height: 60vh; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   padding-left: 50px;
   padding-right: 50px;
+  padding-bottom: 20px;
 }
 
 .collection-menu-hidden {
@@ -111,6 +118,7 @@ body{
   padding: 20px;
   margin-bottom: 10px;
   border-bottom: 1px solid rgb(196, 181, 163);
+  font-weight: bold;
 }
 
 .menu-items:hover {

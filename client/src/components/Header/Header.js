@@ -121,17 +121,17 @@ function Header() {
         <div>
           <Link className="logo-main" onClick={closeusermenu} to={"/"}><img className="logo" src={logo} alt=""></img><div>Folex</div></Link>
         </div>
-        <div className="navs" onMouseOver={openmenu}>Collection</div>
-        <div className="navs"  onMouseOver={closemenu}><Link className="link" to={"/watches"}>For Him</Link></div>
-        <div className="navs"><Link className="link" to={"/watches?gender=Female"}>For Her</Link></div>
-        <div className="navs"><Link className="link" to={"/about"}>About us</Link></div>
-        <div className="navs" onClick={opensearch}>
-          {search==="searchbar-hidden"?<SearchOutlinedIcon color="action"/>:<CloseOutlinedIcon color="action"/>}
+        <div className="navs" onMouseOver={openmenu} onMouseDown={openmenu} onMouseLeave={closemenu}>Collection</div>
+        <div className="navs" onClick={closeusermenu}><Link className="link" to={"/watches"}>For Him</Link></div>
+        <div className="navs" onClick={closeusermenu}><Link className="link" to={"/watches?gender=Female"}>For Her</Link></div>
+        <div className="navs" onClick={closeusermenu}><Link className="link" to={"/about"}>About us</Link></div>
+        <div className="navs">
+          {search==="searchbar-hidden"?<SearchOutlinedIcon color="action" onClick={opensearch}/>:<CloseOutlinedIcon color="action" onClick={opensearch}/>}
           
         </div>
         <div className="navs">
             <Badge badgeContent={cartQuantity} color="secondary">
-                <Link to={"/cart"}><LocalMallOutlinedIcon color="action" /></Link>
+                <Link to={"/cart"}><LocalMallOutlinedIcon color="action" onClick={closeusermenu} /></Link>
             </Badge>
         </div>
         <div className="navs">
@@ -140,12 +140,16 @@ function Header() {
       </div>
       <div className={menu} onMouseOver={openmenu} onMouseLeave={closemenu}>
         <div className="column">
-            <div><div className="menu-head">BY BRAND</div>
+            <div><div className="menu-head">TOP BRAND</div>
                     <div>
-                        <div className="menu-items">brands</div>
-                        <div className="menu-items">brands</div>
-                        <div className="menu-items">brands</div>
-                        <div className="menu-items">brands</div>
+                        <div className="menu-items">Omega</div>
+                        <div className="menu-items">Hublot</div>
+                        <div className="menu-items">Rado</div>
+                        <div className="menu-items">Panerai</div>
+                        <div className="menu-items">Breitling</div>
+                        <div className="menu-items">Seiko</div>
+                        <div className="menu-items">Tag Heuer</div>
+                        <div className="menu-items">Tissot</div>
                     </div>
                 </div>
             </div>
@@ -155,31 +159,27 @@ function Header() {
                 <div>
                     <div className="menu-items">Watches For Men</div>
                     <div className="menu-items">Watches For Women</div>
-                    <div className="menu-items">Unisex Watches</div>
-                    <div className="menu-items">Couple Watches</div>
                 </div>
             </div>
 
             <div><div className="menu-head">BY PRICE</div>
                 <div>
-                    <div className="menu-items">₹ 2,500 - ₹ 5,000</div>
-                    <div className="menu-items">₹ 5,000 - ₹ 10,000</div>
-                    <div className="menu-items">₹ 10,000 - ₹ 50,000</div>
+                    <div className="menu-items">₹ 0 - ₹ 50,000</div>
                     <div className="menu-items">₹ 50,000 - ₹ 100,000</div>
+                    <div className="menu-items">₹ 100,000 - ₹ 500,000</div>
+                    <div className="menu-items">Above ₹ 500,000</div>
                 </div>
             </div>
             
         </div>
         
         <div className="column">
-        <div><div className="menu-head">MATERIAL</div>
+        <div><div className="menu-head">SPECIAL EDITION</div>
                     <div>
-                        <div className="menu-items">Ceramic Watches</div>
-                        <div className="menu-items">Gold Watches</div>
-                        <div className="menu-items">Leather Strap Watches</div>
-                        <div className="menu-items">Rose Gold Watches</div>
-                        <div className="menu-items">Rubber Strap Watches</div>
-                        <div className="menu-items">Titanium Watches</div>
+                        <div className="menu-items">Omega Speedmaster</div>
+                        <div className="menu-items">Rado Captain Cook</div>
+                        <div className="menu-items">Tag Heuer Formula 1 Chronograph</div>        
+                        <div className="menu-items">Seiko Prospex</div>        
                     </div>
             </div>
 
@@ -190,8 +190,6 @@ function Header() {
                         <div className="menu-items">Quartz Watches</div>
                         <div className="menu-items">Tourbillon Watches</div>
                         <div className="menu-items">World Time Watches</div>
-                        <div className="menu-items">Chronograph Watches</div>
-                        <div className="menu-items">Perpetual Calendar Watches</div>
                     </div>
             </div>
         </div>
