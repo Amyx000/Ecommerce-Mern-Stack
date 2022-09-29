@@ -29,7 +29,7 @@ function Footer() {
                 <div className="foot-head">COMPANY</div>
                 <Link className="link" to={"/about"}><div className="foot-contain">About us </div></Link>
             </div>
-            <div>
+            <div className="newsletter-main">
                 <div className="newsletter">
                     <div className="mailicon">
                         <GoMailRead />

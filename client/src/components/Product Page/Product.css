@@ -79,3 +79,10 @@
     font-size: 30px;
     color: rgba(0, 0, 0, 0.607);
 }
+
+@media screen and (max-width:450px) {
+    .product-contain{
+      grid-template-columns: 1fr;
+        text-align: center;
+    }
+}

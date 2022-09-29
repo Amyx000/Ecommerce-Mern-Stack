@@ -6,10 +6,8 @@
    
     display: grid;
     grid-template-columns: repeat(3, 1fr) 2fr;
-    padding: 20px;
-    justify-items: left;
+    padding: 20px 40px;
 }
-
 
 .foot-head{
     margin-bottom: 10px;
@@ -19,6 +17,7 @@
     font-size: 14px;
     color: rgba(0, 0, 0, 0.695);
     padding-bottom: 5px;
+    width: max-content;
 }
 
 .foot-contain:hover{
@@ -51,6 +50,7 @@
 .policy{
     text-align: center;
     border-right: 1px solid black;
+    padding: 0 5px;
 }
 
 .note{
@@ -76,24 +76,54 @@
 
 }
 
+.newsletter-main>div:nth-child(2){
+    width: 100%;
+}
+
 .subcribe-input{
-    width: 330px;
+    width: 70%;
     height: 37px;
     border: 0.5px solid rgba(0, 0, 0, 0.329);
     outline: none;
+    box-sizing: border-box;
 
 }
 
 .subcribe-btn{
-
     background-color: rgb(27, 25, 25);
     color: white;
-    height: 40px;
-    border: none;
+    width:30%;
+    height: 37px;
+    border: 0.5px solid rgba(0, 0, 0, 0.329);
+    box-sizing: border-box;
     transition: all 0.5s ease-in-out;
 }
 
 .subcribe-btn:hover{
     background-color: rgb(145, 18, 18);
     cursor: pointer;
+}
+
+@media screen and (max-width:750px) {
+    .footer-main{
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 30px;
+        justify-items: center;
+    }
+    .newsletter-main{
+        grid-column: 1/4;
+    }
+
+    .copyright{
+        font-size: 10px;
+        grid-template-columns: repeat(3, auto) 1fr;
+    }
+  
+  }
+
+@media screen and (max-width:400px) {
+
+    .note{
+        font-size: 8px;
+    }
 }

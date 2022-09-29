@@ -119,7 +119,7 @@ function Header() {
     <>
       <div className="navbar">
         <div>
-          <Link className="logo-main" onClick={closeusermenu} to={"/"}><img className="logo" src={logo} alt=""></img><div>Folex</div></Link>
+          <Link className="logo-main" onClick={closeusermenu} to={"/"}><img className="logo" src={logo} alt=""></img><div className="logo-txt">Folex</div></Link>
         </div>
         <div className="navs" onMouseOver={openmenu} onMouseDown={openmenu} onMouseLeave={closemenu}>Collection</div>
         <div className="navs" onClick={closeusermenu}><Link className="link" to={"/watches"}>For Him</Link></div>
@@ -138,18 +138,19 @@ function Header() {
           <PersonOutlineOutlinedIcon onClick={openuser} sx={{ fontSize: 30 }} color="action"/>
         </div>
       </div>
+      <div className="header-hidden-contain">
       <div className={menu} onMouseOver={openmenu} onMouseLeave={closemenu}>
         <div className="column">
             <div><div className="menu-head">TOP BRAND</div>
                     <div>
-                        <div className="menu-items">Omega</div>
-                        <div className="menu-items">Hublot</div>
-                        <div className="menu-items">Rado</div>
-                        <div className="menu-items">Panerai</div>
-                        <div className="menu-items">Breitling</div>
-                        <div className="menu-items">Seiko</div>
-                        <div className="menu-items">Tag Heuer</div>
-                        <div className="menu-items">Tissot</div>
+                        <Link to={`/watches?brand=${"Omega"}`} className="link"><div className="menu-items">Omega</div></Link>
+                        <Link to={`/watches?brand=${"Hublot"}`} className="link"><div className="menu-items">Hublot</div></Link>
+                        <Link to={`/watches?brand=${"Rado"}`} className="link"><div className="menu-items">Rado</div></Link>
+                        <Link to={`/watches?brand=${"Panerai"}`} className="link"><div className="menu-items">Panerai</div></Link>
+                        <Link to={`/watches?brand=${"Breitling"}`} className="link"><div className="menu-items">Breitling</div></Link>
+                        <Link to={`/watches?brand=${"Seiko"}`} className="link"><div className="menu-items">Seiko</div></Link>
+                        <Link to={`/watches?brand=${"Tag Heuer"}`} className="link"><div className="menu-items">Tag Heuer</div></Link>
+                        <Link to={`/watches?brand=${"Tissot"}`} className="link"><div className="menu-items">Tissot</div></Link>
                     </div>
                 </div>
             </div>
@@ -157,17 +158,17 @@ function Header() {
         <div className="column">
             <div><div className="menu-head">BY GENDER</div>
                 <div>
-                    <div className="menu-items">Watches For Men</div>
-                    <div className="menu-items">Watches For Women</div>
+                <Link to={`/watches?gender=${"Male"}`} className="link"><div className="menu-items">Watches For Men</div></Link>
+                <Link to={`/watches?brand=${"Female"}`} className="link"><div className="menu-items">Watches For Women</div></Link>
                 </div>
             </div>
 
             <div><div className="menu-head">BY PRICE</div>
                 <div>
-                    <div className="menu-items">₹ 0 - ₹ 50,000</div>
-                    <div className="menu-items">₹ 50,000 - ₹ 100,000</div>
-                    <div className="menu-items">₹ 100,000 - ₹ 500,000</div>
-                    <div className="menu-items">Above ₹ 500,000</div>
+                    <Link to={`/watches?price=${"0-50000"}`} className="link"><div className="menu-items">₹ 0 - ₹ 50,000</div></Link>
+                    <Link to={`/watches?price=${"50000-100000"}`} className="link"><div className="menu-items">₹ 50,000 - ₹ 100,000</div></Link>
+                    <Link to={`/watches?price=${"100000-500000"}`} className="link"><div className="menu-items">₹ 100,000 - ₹ 500,000</div></Link>
+                    <Link to={`/watches?price=${"500000-2000000"}`} className="link"><div className="menu-items">Above ₹ 500,000</div></Link>
                 </div>
             </div>
             
@@ -195,10 +196,12 @@ function Header() {
         </div>
       </div>
       
-      <div className={search}>
-        <input className="searchinput" value={searchquery} onChange={e=>Setsearchquery(e.target.value)} onKeyDown={searchFuncOnKey} type="text" placeholder="Search"></input>
-        <SearchOutlinedIcon className="searchicon" color="action" onClick={searchFunc}/>
-      </div>
+      
+            <div className={search}>
+                <input className="searchinput" value={searchquery} onChange={e=>Setsearchquery(e.target.value)} onKeyDown={searchFuncOnKey} type="text" placeholder="Search"></input>
+                <SearchOutlinedIcon className="searchicon" color="action" onClick={searchFunc}/>
+            </div>
+      
 
       <div className={user}>
             <div className="triangle"></div>
@@ -214,7 +217,7 @@ function Header() {
                 </>}
             </div>
       </div>
-      
+    </div>
     </>
   );
 }

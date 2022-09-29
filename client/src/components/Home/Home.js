@@ -2,11 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import ClockLoader from "react-spinners/ClockLoader"
-
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css';
 
 function Home() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true);
+
+  const slideData = {
+    images:[
+      "https://www.freepnglogos.com/uploads/rolex-png-logo/rolex-png-logo-0.png",
+      "https://upload.wikimedia.org/wikipedia/commons/f/fb/Omega_Logo.svg",
+      "https://1000logos.net/wp-content/uploads/2018/10/TAG-Heuer-Logo.png",
+      "https://1000logos.net/wp-content/uploads/2018/10/Tissot-Logo.png",
+      "https://1000logos.net/wp-content/uploads/2020/10/Rado_logo_PNG1.png",
+      "https://1000logos.net/wp-content/uploads/2018/10/Hublot-logo.png"
+  ],
+    brand:["Rolex", "Omega", "Tag Heuer", "Tissot", "Rado", "Hublot"]
+  }
   
   const loader = ()=>{
     setLoading(true)
@@ -52,7 +65,17 @@ function Home() {
         <div>-</div>
         <button className="contain-btn2">Browse all collections</button>
       </div>
-
+      <div className="section3">
+        <Slide slidesToScroll={1} slidesToShow={3} indicators={true} canSwipe={true}>
+            {slideData.images.map((v,i)=>{
+              return(
+                <div className="each-slide-effect" key={i}>
+                  <Link to={`/watches?brand=${slideData.brand[i]}`} className="link linkslider"><img src={v} alt="" className="image-slider-img"></img></Link>
+                </div>
+              )
+            })}
+        </Slide>
+      </div>
       </>}
     </>
   );

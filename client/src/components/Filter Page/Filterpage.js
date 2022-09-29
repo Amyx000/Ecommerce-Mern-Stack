@@ -5,7 +5,7 @@ import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons"
 import {BiFilterAlt} from "react-icons/bi"
 import {CgCloseO} from "react-icons/cg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useLocation, useNavigate} from "react-router-dom"
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom"
 import {useSelector} from "react-redux"
 import useQueryState from "../../Customhooks/useQueryState"
 import Slider from "@mui/material/Slider"
@@ -17,6 +17,7 @@ import { orange} from "@mui/material/colors";
 import axios from "axios";
 
 function Filterpage() {
+    const [searchParams] = useSearchParams()
     const navigate=useNavigate()
     const location=useLocation()
     const productlength =useSelector(state=>state.product.productlength)
@@ -38,7 +39,7 @@ function Filterpage() {
     /* eslint-disable */
     const[clrfill,setClrfill]=useState("clrfilter-main-none")
     const [slidevalue, setSlidevalue] = useState([0, 1000000]);
-    const[filprice,Setfilprice]=useState([])
+    const[filprice,Setfilprice]=useState([searchParams.get("price")])
 
 
     useEffect(() => {
@@ -128,7 +129,7 @@ function Filterpage() {
     }, [filgen])
 
     useEffect(() => {
-        setPricequery(filprice.length!==0?filprice[0]:null)
+      setPricequery(filprice.length!==0?filprice[0]:null)
       // eslint-disable-next-line
     }, [filprice])
 
@@ -267,14 +268,6 @@ function Filterpage() {
                 <CgCloseO className='noproduct-icon'/>
                 <div className='noproduct-title'>No product Found!</div>
           </div>:
-        //   <div className="page-next">
-        //         <div><MdArrowBackIos className={backarrow}/></div>
-        //         <div className={no1} data-user={"1"} onClick={pagination}>1</div>
-        //         <div className={no2} data-user={"2"} onClick={pagination}>2</div>
-        //         <div className={no3} data-user={"3"} onClick={pagination}>3</div>
-        //         <div className={no4} data-user={"4"} onClick={pagination}>4</div>
-        //         <div><MdArrowForwardIos className={nextarrow}/></div>
-        //   </div>
          <div className="pagination">
             <ThemeProvider theme={theme}>
                 <Stack spacing={2}>
