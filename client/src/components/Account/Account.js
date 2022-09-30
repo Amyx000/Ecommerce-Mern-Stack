@@ -7,6 +7,7 @@ import Dialog from '../Dialog Box/Dialog'
 import { useDispatch } from 'react-redux'
 import { loggedUser } from '../../Redux/Reducers/userReducer'
 import Orderprops from './Orderprops'
+import {AiFillCaretDown, AiFillCaretUp} from "react-icons/ai"
 import Adminpanel from './Adminpanel'
 
 function Account() {
@@ -30,6 +31,7 @@ function Account() {
   const[orders,Setorders]=useState([])
   const[admin,Setadmin]=useState(false)
   const childRef = useRef(null);
+  const[accountmenu,Setaccountmenu]=useState("account-main-l-hide")
   
   const loader = ()=>{
     setLoading(true)
@@ -166,30 +168,34 @@ function Account() {
     loggedorder()
     // eslint-disable-next-line
   }, [navigate])
+
+  const accountmenufunc = ()=>{
+    accountmenu==="account-main-l-hide"?Setaccountmenu(""):Setaccountmenu("account-main-l-hide")
+  }
   
   
   return (
     <>
       {loading?<ClockLoader className='clockloader' color={"#8C6B20"} loading={loading} size={150} speedMultiplier={2} />:
        <div className='account'>
-         <h1>Account</h1>
+         <div className='acc-header'><h1>Account</h1><button className='acc-btn' onClick={accountmenufunc}>Menu {accountmenu==="account-main-l-hide"?<AiFillCaretDown/>:<AiFillCaretUp/>}</button></div>
          <div className='account-main'>
-           <div className='account-main-l'>
-             <Link className='link' to={"/account"}><div className='account-main-title'>Overview</div></Link>
+           <div className={`account-main-l ${accountmenu}`}>
+             <Link className='link' to={"/account"}><div className='account-main-title' onClick={()=>Setaccountmenu("account-main-l-hide")}>Overview</div></Link>
              <div className='account-main-sec'>
                <div className='account-main-head'>ACCOUNT</div>
-               <Link className='link' to={"/account/profile"}><div className='account-main-subhead'>Profile</div></Link>
-               <Link className='link' to={"/account/password"}><div className='account-main-subhead'>Change Password</div></Link>
-               <Link className='link' to={"/account/addresses"}><div className='account-main-subhead'>Addresses</div></Link>
-               <Link className='link' to={"/account/wishlist"}><div className='account-main-subhead'>Wishlist</div></Link>
+               <Link className='link' to={"/account/profile"}><div className='account-main-subhead' onClick={()=>Setaccountmenu("account-main-l-hide")}>Profile</div></Link>
+               <Link className='link' to={"/account/password"}><div className='account-main-subhead' onClick={()=>Setaccountmenu("account-main-l-hide")}>Change Password</div></Link>
+               <Link className='link' to={"/account/addresses"}><div className='account-main-subhead' onClick={()=>Setaccountmenu("account-main-l-hide")}>Addresses</div></Link>
+               <Link className='link' to={"/account/wishlist"}><div className='account-main-subhead' onClick={()=>Setaccountmenu("account-main-l-hide")}>Wishlist</div></Link>
              </div>
              <div className='account-main-sec'>
                <div className='account-main-head'>ORDERS</div>
-               <Link className='link' to={"/account/orders"}><div className='account-main-subhead'>Your Orders</div></Link>
+               <Link className='link' to={"/account/orders"}><div className='account-main-subhead' onClick={()=>Setaccountmenu("account-main-l-hide")}>Your Orders</div></Link>
              </div>
              {admin?<div className='account-main-sec'>
                <div className='account-main-head'>PANELS</div>
-               <Link className='link' to={"/account/admin"}><div className='account-main-subhead'>Admin</div></Link>
+               <Link className='link' to={"/account/admin"}><div className='account-main-subhead' onClick={()=>Setaccountmenu("account-main-l-hide")}>Admin</div></Link>
              </div>:null}
            </div>
            <div className='account-main-r'>

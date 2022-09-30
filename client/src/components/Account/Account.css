@@ -263,3 +263,46 @@
 .order-msg{
     justify-items: center;
 }
+
+.acc-header{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.acc-header>button{
+    display: none;
+}
+
+@media screen and (max-width:500px) {
+
+    .account-main{
+        grid-template-columns: 1fr;
+        position: relative;
+    }
+    .account-main-l{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: white;
+        z-index: 10;
+        border: 1px solid #d4d5d9;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .account-main-l-hide{
+        display: none;
+    }
+
+    .account-main-sec{
+        padding-top: 10px;
+        padding-bottom: 0;
+    }
+
+    .acc-header>button{
+        display: inline-block;
+        padding: 8px;
+    }
+    
+}

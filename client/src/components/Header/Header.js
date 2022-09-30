@@ -179,7 +179,7 @@ function Header() {
                     <div>
                         <div className="menu-items">Omega Speedmaster</div>
                         <div className="menu-items">Rado Captain Cook</div>
-                        <div className="menu-items">Tag Heuer Formula 1 Chronograph</div>        
+                        <div className="menu-items">Tag Heuer Formula 1</div>        
                         <div className="menu-items">Seiko Prospex</div>        
                     </div>
             </div>

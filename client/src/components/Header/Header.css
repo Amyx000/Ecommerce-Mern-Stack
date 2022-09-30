@@ -52,11 +52,9 @@ body{
   color: bisque;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
+  /* justify-items: center; */
   gap: 30px;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-bottom: 20px;
+  padding: 0 5vw 20px 5vw;
 }
 
 .menu-items{
@@ -212,6 +210,14 @@ body{
 
   .block{
     right: 1vw;
+  }
+
+  .collection-menu{
+    font-size: 2vw;
+  }
+
+  .searchbar{
+    padding: 5vw;
   }
 
 }

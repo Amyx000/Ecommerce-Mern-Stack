@@ -16,7 +16,7 @@ function Cartprod(props) {
         <div className='cartprod-left'>
             <div><img className='cart-img' src={product.images[0].displayimg_url} alt=""></img></div>
             <div>
-                <div>{`${product.brand} ${product.modelno}`}</div>
+                <div className='cartprod-left-top'>{`${product.brand} ${product.modelno}`}</div>
                 <div className='cartprod-left-down'>
                     <div className='cartprod-left-down-in' onClick={()=>{
                       dispatch(removeProduct({product:product._id,price:product.price}))
