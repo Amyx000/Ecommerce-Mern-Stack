@@ -1,5 +1,4 @@
 
-
 .admin{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -25,13 +24,15 @@
 .admin-main{
     margin-top: 20px;
     height: 380px;
-    overflow-y: auto;
+    overflow: auto;
+    /* width: 60vw; */
 }
 
 .admin-table{
     display: grid;
     grid-template-columns: auto 3fr 1fr;
     row-gap: 10px;
+    /* width: 1000px; */
 }
 
 .admin-table>div{
@@ -73,6 +74,7 @@
 
 .admin-route-main{
     position: relative;
+ 
 }
 
 .admin-action{
@@ -83,7 +85,7 @@
     margin: 0 auto;
     background-color: rgb(253, 245, 236);
     height: 100%;
-    width: 50%;
+    width: 100%;
     border-radius: 20px;
     border: 1px solid rgb(199, 179, 153);
     box-shadow: 0 0 4px 2px rgb(146, 140, 132);
@@ -107,7 +109,6 @@
     gap:10px;
     align-items: center;
     margin: 50px 20px 50px 20px;
-    word-break: break-all;
 }
 
 .admin-action>div:nth-child(2)>input{
@@ -124,4 +125,35 @@
     bottom: 10px;
     left: 0;
     right: 0;
+}
+
+@media screen and (max-width:750px) {
+    
+.admin-main{
+    width: 55vw;
+}
+.admin-table{
+    width: 1000px;
+}
+
+}
+
+@media screen and (max-width:500px) {
+    .admin{
+        grid-template-columns: 1fr;
+        margin: 30px 0;
+    }
+
+    .admin-main{
+        width: 83vw;
+    }
+
+    .admin-table{
+        width: 1000px;
+    }
+
+    .admin-header{
+        grid-template-columns: 1fr;
+    }
+    
 }

@@ -5,12 +5,13 @@
     grid-template-columns: 1fr 4fr;
     gap:20px;
     margin:20px;
+    position: relative;
 }
 
 .filter-head{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    
+    grid-template-columns: 1fr auto;
+    align-items: center;
 }
 
 .filter-heading1{
@@ -207,4 +208,64 @@ select{
 .pagination{
     display: flex;
     justify-content: center;
+}
+
+.closefilterbtn{
+    display: none;
+}
+
+.filter-btn{
+    display: none;
+    text-align: center;
+}
+
+@media screen and (max-width:500px) {
+    .filter-main{
+        grid-template-columns: 1fr;
+        margin: 20px 0;
+        gap:20;
+    }
+
+    .filter-head{
+        grid-template-columns: 1fr 1fr auto;
+        padding: 5px 20px;
+        justify-items: center;
+    }
+
+    .filter-col{
+        display: none;
+        
+    }
+    .filter-col-mob{
+        border-right: none;
+        padding: 0 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: white;
+        z-index: 10;
+        overflow: auto;
+    }
+
+    .closefilterbtn{
+        display: flex;
+        justify-content: center;
+    }
+
+    .filter-btn{
+        display:grid;
+        background-color: bisque;
+        color: rgb(56, 52, 52);
+        padding: 5px 8px;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .sortbar{
+        gap:0;
+    }
+    
 }

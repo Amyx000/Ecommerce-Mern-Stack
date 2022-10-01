@@ -67,3 +67,19 @@
 .productprops{
     text-decoration: none;
 }
+
+@media screen and (max-width:860px) {
+
+    .prod-row{
+        grid-template-columns: repeat(3,1fr);
+    }
+    
+}
+
+@media screen and (max-width:680px) {
+
+    .prod-row{
+        grid-template-columns: repeat(2,1fr);
+    }
+    
+}

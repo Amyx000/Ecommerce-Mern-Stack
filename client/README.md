@@ -1,1 +1,0 @@
-This is an small App where you can generate random RGB color upto 16,777,216 different possible colors from rgb(0,0,0) that is black to rgb(255,255,255) that is white.

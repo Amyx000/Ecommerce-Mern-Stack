@@ -40,6 +40,7 @@ function Filterpage() {
     const[clrfill,setClrfill]=useState("clrfilter-main-none")
     const [slidevalue, setSlidevalue] = useState([0, 1000000]);
     const[filprice,Setfilprice]=useState([searchParams.get("price")])
+    const[filtercol,Setfiltercol]=useState("filter-col")
 
 
     useEffect(() => {
@@ -47,7 +48,9 @@ function Filterpage() {
 
               try {
                   const res = await axios.get(`http://localhost:5000/products${location.search}`)
-                  Settotalprod(res.data.totalprod)
+                  if(res.data.totalprod>=5){Settotalprod(Math.ceil(res.data.totalprod/5))}
+                  else{Settotalprod(1)}
+               
                 } catch (error) {
                     console.log(error)     
                 }
@@ -171,7 +174,7 @@ function Filterpage() {
   return (
     <>
       <div className="filter-main">
-        <div className="filter-col">
+        <div className={filtercol}>
           <div className="filter-heading1">
             <div>FILTER:</div>
             <BiFilterAlt className="filter-icon"/>
@@ -246,11 +249,13 @@ function Filterpage() {
                 </div>
           </div>
           <div className={clrfill}><button className="clrfilter" onClick={clearFilter}>Clear Filter</button></div>
+          <div className="closefilterbtn"><button className="clrfilter" onClick={()=>Setfiltercol("filter-col")}>Close</button></div>
 
         </div>
         <div className="product-col">
           <div className="filter-head">
             <div className="filter-heading">Watches</div>
+            <div className="filter-btn" onClick={()=>Setfiltercol("filter-col-mob")}>Filter</div>
             <div className="sortbar">
                 <div>Sort By:</div>
                 <div className="sort-dropmenu">

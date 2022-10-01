@@ -1,4 +1,3 @@
-const { findById, db } = require("../models/productmodel")
 const product = require("../models/productmodel")
 
 //creating product by admin
@@ -27,7 +26,7 @@ const getproduct = async (req, res) => {
     const price = req.query.price!==undefined?req.query.price.split("-"):""
     const sort = req.query.sort
     const search=req.query.search||""
-    const prodlimit =2
+    const prodlimit =5
     let page = isNaN(Number(req.query.page))?1:Number(req.query.page)
     if(page===0){
         page=1 
@@ -64,7 +63,11 @@ const getproduct = async (req, res) => {
     const gen = queryfunc(gender)
     const prc = queryPricefunc(price)
 
-    const totalprod = await product.find().count()
+    const totalprod = await product.find(
+        {brand:bnd, gender:gen, price:prc,
+            $or:[{brand:{$regex:search,$options:"i"}},{series:{$regex:search,$options:"i"}},{modelno:{$regex:search,$options:"i"}}]
+        }).count()
+
     let productdata
     if(sort==="rec" || sort===undefined){
      productdata = await product.find(
