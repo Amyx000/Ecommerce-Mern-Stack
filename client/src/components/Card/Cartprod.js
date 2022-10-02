@@ -20,7 +20,6 @@ function Cartprod(props) {
                 <div className='cartprod-left-down'>
                     <div className='cartprod-left-down-in' onClick={()=>{
                       dispatch(removeProduct({product:product._id,price:product.price}))
-                      console.log(product?._id)
                     }}><RiDeleteBin6Line/> Remove</div>
                     <div className='cartprod-left-down-in'><AiFillHeart/> Add to Wishlist</div>
                 </div>

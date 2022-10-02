@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"
 import Productprops from "./Productprops";
 import "./Rowproduct.css"
+import {CgCloseO} from "react-icons/cg"
 import {Link, useLocation} from "react-router-dom";
 import ClockLoader from "react-spinners/ClockLoader"
 import { showProductdata } from "../../Redux/Reducers/productReducer";
@@ -41,7 +42,8 @@ function Rowproduct (){
     return(
         <>
         {loading?<ClockLoader className='clockloader' color={"#8C6B20"} loading={loading} size={150} speedMultiplier={2} />:
-
+         <>
+         {products.length!==0?
          <div className="prod-row"> 
                   {products.map(products=>{
                         return(
@@ -50,7 +52,13 @@ function Rowproduct (){
                               </Link>
                         )
                   })}
+          </div>:
+          <div className='noproducts'>
+                  <CgCloseO className='noproduct-icon'/>
+                  <div className='noproduct-title'>No product Found!</div>
           </div>}
+          </>
+          }
         </>
     )
 }

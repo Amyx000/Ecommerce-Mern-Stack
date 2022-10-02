@@ -3,7 +3,6 @@ import Rowproduct from "../Rowproduct/Rowproduct";
 import "./Filterpage.css";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons"
 import {BiFilterAlt} from "react-icons/bi"
-import {CgCloseO} from "react-icons/cg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom"
 import {useSelector} from "react-redux"
@@ -57,7 +56,6 @@ function Filterpage() {
         }
         product();
     }, [])
-    console.log(totalprod)
 
     const theme = createTheme({
         palette: {
@@ -269,10 +267,7 @@ function Filterpage() {
           </div>
           <Rowproduct/>
           {productlength===0?
-          <div className='noproducts'>
-                <CgCloseO className='noproduct-icon'/>
-                <div className='noproduct-title'>No product Found!</div>
-          </div>:
+          null:
          <div className="pagination">
             <ThemeProvider theme={theme}>
                 <Stack spacing={2}>

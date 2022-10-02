@@ -53,7 +53,7 @@ function Adminuserpanel(props) {
     <>
       <div className="admin-route-main">
        <div className="admin-header">
-              <div className='acc-title'>Admin Dashboard - User</div>
+              <div className='acc-title'>Admin Dashboard - User({users.length})</div>
        </div>
        <div className="admin-main">
               <div className="admin-table user-table">

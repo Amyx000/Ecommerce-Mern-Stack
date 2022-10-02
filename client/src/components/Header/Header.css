@@ -13,9 +13,7 @@ body{
   font-size: 1.1rem;
   font-weight: bold;
   font-family: 'Text Me One', sans-serif;
-  
   background-color: bisque;
-  /* align-items: center; */
   justify-items: center;
   border-bottom: 1px solid rgb(196, 181, 163);
 }
@@ -36,6 +34,11 @@ body{
 }
 
 .navs{
+  display: grid;
+  align-items: center;
+}
+
+.navbar>div:first-child{
   display: grid;
   align-items: center;
 }
@@ -144,7 +147,7 @@ body{
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  background-color: var(--dropdown);
+  background-color: bisque;
   width: 150px;
   border-radius: 3px;
   position: absolute;
@@ -159,7 +162,7 @@ body{
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
 
-  border-bottom: 15px solid var(--dropdown);
+  border-bottom: 15px solid bisque;
   position: absolute;
   right: 4.5vw;
   top: 0px;
@@ -171,22 +174,66 @@ body{
 
   padding: 10px;
   text-decoration: none;
-  color: black;
+  color: #141414;
   border-radius: 3px;
   box-sizing: border-box;
-  border: 1px solid var(--dropdown);
+  border: 1px solid #141414;
+  transition: all 0.3s ease-in-out;
 }
 
 .block-comp:hover{
     cursor: pointer;
-    background-color: bisque;
-    border: 1px solid #C29427;
+    background-color: #141414;
+    color: bisque;
+    transition: all 0.3s ease-in-out;
 }
 
 .user-drop-hide{
     display: none;
 }
 
+.navs-menu{
+  display: none;
+}
+
+.mob-menu-hide{
+  display: grid;
+  z-index: 100;
+  grid-template-columns: 1fr;
+  font-size: 30px;
+  color: bisque;
+  background-color:#141414;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  transition: all 0.5s ease-in-out;
+  
+}
+
+.mob-menu-hide>div{
+  display: grid;
+  justify-items: center;
+}
+.mob-menu-hide>div:first-child{
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 50px;
+  padding-right: 20px;
+}
+
+.mb-link{
+  color: bisque !important;
+}
+
+.mob-menu-icon{
+  cursor: pointer;
+}
+
+.header-main{
+  position: relative;
+}
 
 @media screen and (max-width:750px) {
   .navs{
@@ -202,6 +249,7 @@ body{
 
   .navbar{
     grid-template-columns: repeat(8, auto);
+    height: 70px;
   }
 
   .triangle{
@@ -219,6 +267,52 @@ body{
   .searchbar{
     padding: 5vw;
   }
+
+}
+
+
+@media screen and (max-width:535px) {
+  
+  .navs-hide{
+    display: none;
+  }
+
+  .navbar{
+    grid-template-columns: 2fr repeat(3,1fr);
+  }
+
+  .navs-menu{
+    display: grid;
+    align-items: center;
+  }
+
+  .mob-menu{
+    display: grid;
+    z-index: 100;
+    grid-template-columns: 1fr;
+    font-size: 30px;
+    color: bisque;
+    background-color:#141414;
+   position: fixed;
+   top: 0;
+   /* left: 0; */
+   right: 0;
+   width: 100%;
+   height: 100vh;
+   transition: all 0.5s ease-in-out;
+  }
+
+  .mob-menu>div{
+    display: grid;
+    justify-items: center;
+  }
+  .mob-menu>div:first-child{
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 50px;
+    padding-right: 20px;
+  }
+  
 
 }
 

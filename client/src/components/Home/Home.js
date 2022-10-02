@@ -20,6 +20,30 @@ function Home() {
   ],
     brand:["Rolex", "Omega", "Tag Heuer", "Tissot", "Rado", "Hublot"]
   }
+
+  const responsiveSettings = [
+    {
+        breakpoint: 800,
+        settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
+        }
+    },
+    {
+        breakpoint: 500,
+        settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+        }
+    },
+    {
+      breakpoint: 300,
+      settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+      }
+  }
+];
   
   const loader = ()=>{
     setLoading(true)
@@ -51,7 +75,7 @@ function Home() {
             design inspired by the famous 4th generation style worn by Apollo 11
             astronauts.
           </div>
-          <Link to={"/watches"}><button className="contain-btn">DISCOVER THE COLLECTION</button></Link>
+          <Link to={"watches?search=Speedmaster%20Moonwatch"}><button className="contain-btn">DISCOVER THE COLLECTION</button></Link>
         </div>
       </div>
       <div className="section1">
@@ -59,14 +83,14 @@ function Home() {
         <div className="section1-head">CAPTAIN COOK HRITHIK ROSHAN SPECIAL EDITION</div>
       </div>
       <div className="section2">
-        <button className="contain-btn2">Discover now</button>
+        <Link to={"/watches?search=Hrithik%20Roshan%20Edition"} className="link"><button className="contain-btn2">Discover now</button></Link>
         <div>Our featured collections</div>
         <div>Browse our most iconic collections of Swiss-Made timepieces.</div>
         <div>-</div>
-        <button className="contain-btn2">Browse all collections</button>
+        <Link to={"/watches?search=captain%20cook"} className="link"><button className="contain-btn2">Browse all collections</button></Link>
       </div>
       <div className="section3">
-        <Slide slidesToScroll={1} slidesToShow={3} indicators={true} canSwipe={true}>
+        <Slide slidesToScroll={1} slidesToShow={3} indicators={true} canSwipe={true} responsive={responsiveSettings}>
             {slideData.images.map((v,i)=>{
               return(
                 <div className="each-slide-effect" key={i}>

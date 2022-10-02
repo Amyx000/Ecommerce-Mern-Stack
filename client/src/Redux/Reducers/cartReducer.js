@@ -17,10 +17,17 @@ const cartSlice = createSlice({
         removeProduct:(state,action)=>{
             state.quantity -= 1;
             state.products =state.products.filter((item)=>item._id!==action.payload.product);
-            state.total -= action.payload.price;
+            state.subtotal -= action.payload.price;
+            state.total -= action.payload.price*1.09;
+        },
+        emptycart:(state,action)=>{
+            state.quantity=0;
+            state.products=[]
+            state.subtotal=0;
+            state.total=0;
         }
     }
 })
 
-export const {addProduct, removeProduct} = cartSlice.actions
+export const {addProduct, removeProduct, emptycart} = cartSlice.actions
 export default cartSlice.reducer

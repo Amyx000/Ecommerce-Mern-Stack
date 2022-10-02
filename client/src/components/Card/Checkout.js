@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from "../../assets/logo.png"
 import {TiTick} from "react-icons/ti"
 import { useNavigate } from 'react-router-dom';
+import { emptycart} from '../../Redux/Reducers/cartReducer';
 
 function Checkout() {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const cart = useSelector(state=>state.cart)
     const userdata = useSelector(state=>state.user.userdata)
@@ -63,6 +65,7 @@ function Checkout() {
                         },
                         {withCredentials:true}
                     )
+                    dispatch(emptycart())
                     loader()
                     } catch (error) {
                             console.log(error)

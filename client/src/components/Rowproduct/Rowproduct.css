@@ -42,8 +42,8 @@
 .fd-price{
     font-weight: 600;
     padding-top: 20px;
-    margin-left: 40px;
-    margin-right: 40px;
+    /* margin-left: 40px;
+    margin-right: 40px; */
     border-top: 1px solid rgba(0, 0, 0, 0.277);
     color: black;
 }

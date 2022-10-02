@@ -1,4 +1,5 @@
-import React from "react"
+import axios from "axios";
+import React, { useEffect, useState } from "react"
 import { Link, Route, Routes } from "react-router-dom";
 import "./Admin.css"
 import Adminorderpanel from "./Adminorderpanel";
@@ -6,7 +7,24 @@ import Adminproductpanel from "./Adminproductpanel";
 import Adminuserpanel from "./Adminuserpanel";
 
 function Adminpanel (){
-       
+       const[counts,Setcounts]=useState({
+        "userlength": 0,
+        "productlength": 0,
+        "orderlength": 0
+    })
+
+    useEffect(()=>{
+        async function getcounts(){
+           try {
+            const res = await axios.get("http://localhost:5000/getcounts",{withCredentials:true})
+            Setcounts(res.data)
+           } catch (error) {
+            console.log(error.response)
+           }
+        }
+        getcounts()
+    },[])
+
     return(
         <>
             <Routes>
@@ -14,9 +32,9 @@ function Adminpanel (){
                     <>
                         <div className='acc-title'>Admin Dashboard</div>
                         <div className="admin">
-                            <div><Link className="link" to={"product"}><div className="admin-div">Product (20)</div></Link></div>
-                            <div><Link className="link" to={"order"}><div className="admin-div">Order (5)</div></Link></div>
-                            <div><Link className="link" to={"user"}><div className="admin-div">User (10)</div></Link></div>
+                            <div><Link className="link" to={"product"}><div className="admin-div">Product {`(${counts.productlength})`}</div></Link></div>
+                            <div><Link className="link" to={"order"}><div className="admin-div">Order {`(${counts.orderlength})`}</div></Link></div>
+                            <div><Link className="link" to={"user"}><div className="admin-div">User {`(${counts.userlength})`}</div></Link></div>
                         </div>
                     </>
                 }/>

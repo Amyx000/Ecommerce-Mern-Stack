@@ -54,7 +54,7 @@ function Adminorderpanel() {
     <>
       <div className="admin-route-main">
         <div className="admin-header">
-            <div className='acc-title'>Admin Dashboard - Order</div>
+            <div className='acc-title'>Admin Dashboard - Order({orders.length})</div>
         </div>
         <div className="admin-main">
                 <div className="admin-table order-table">

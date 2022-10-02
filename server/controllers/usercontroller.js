@@ -1,4 +1,6 @@
 const usermodel = require("../models/usermodel")
+const productmodel = require("../models/productmodel")
+const ordermodel = require("../models/ordermodel")
 const bcrypt = require("bcrypt")
 
 const getuser = async (req,res)=>{  
@@ -137,6 +139,17 @@ const adminCheck = (req,res)=>{
     }
 }
 
+const getcounts = async(req,res)=>{
+    const userlength = await usermodel.count()
+    const productlength = await productmodel.count()
+    const orderlength = await ordermodel.count()
+
+    res.status(200).json({
+        userlength,productlength,orderlength
+    })
+
+}
+
 module.exports= {
     getuser,
     getalluser,
@@ -148,5 +161,6 @@ module.exports= {
     updateAddress,
     changePass,
     changeName,
-    adminCheck
+    adminCheck,
+    getcounts
 }

@@ -30,7 +30,6 @@ function Product(){
 
     const handleClick = ()=>{
         dispatch(addProduct({product, price:product.price}));
-        console.log(product)
     }
     
     return(

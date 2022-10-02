@@ -5,9 +5,11 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import {AiFillCloseSquare} from "react-icons/ai"
 import {Badge} from "@mui/material"
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import axios from "axios";
 
 
@@ -21,6 +23,7 @@ function Header() {
     const [user,Setuser]=useState("user-drop-hide")
     const[searchquery,Setsearchquery]=useState("")
     const[isAuth,SetisAuth]=useState(false)
+    const[mobmenu,Setmobmenu]=useState("mob-menu-hide")
 
     useEffect(() => {
         async function authenticated(){
@@ -117,25 +120,36 @@ function Header() {
 
   return (
     <>
+        <div className="header-main">
+        <div className={mobmenu}>
+            <div><AiFillCloseSquare onClick={()=>Setmobmenu("mob-menu-hide")} className="mob-menu-icon"/></div>
+            <div>Collection</div>
+            <div><Link className="link mb-link" to={"/watches?gender=Male"} onClick={()=>Setmobmenu("mob-menu-hide")}>For Him</Link></div>
+            <div><Link className="link mb-link" to={"/watches?gender=Female"} onClick={()=>Setmobmenu("mob-menu-hide")}>For Her</Link></div>
+            <div><Link className="link mb-link" to={"/about"} onClick={()=>Setmobmenu("mob-menu-hide")}>About</Link></div>
+            <div><Link className="link mb-link" to={"/login"} onClick={()=>Setmobmenu("mob-menu-hide")}>Login</Link></div>
+      </div>
       <div className="navbar">
         <div>
           <Link className="logo-main" onClick={closeusermenu} to={"/"}><img className="logo" src={logo} alt=""></img><div className="logo-txt">Folex</div></Link>
         </div>
-        <div className="navs" onMouseOver={openmenu} onMouseDown={openmenu} onMouseLeave={closemenu}>Collection</div>
-        <div className="navs" onClick={closeusermenu}><Link className="link" to={"/watches"}>For Him</Link></div>
-        <div className="navs" onClick={closeusermenu}><Link className="link" to={"/watches?gender=Female"}>For Her</Link></div>
-        <div className="navs" onClick={closeusermenu}><Link className="link" to={"/about"}>About us</Link></div>
+        <div className="navs navs-hide" onMouseOver={openmenu} onMouseDown={openmenu} onMouseLeave={closemenu}>Collection</div>
+        <div className="navs navs-hide" onClick={closeusermenu}><Link className="link" to={"/watches"}>For Him</Link></div>
+        <div className="navs navs-hide" onClick={closeusermenu}><Link className="link" to={"/watches?gender=Female"}>For Her</Link></div>
+        <div className="navs navs-hide" onClick={closeusermenu}><Link className="link" to={"/about"}>About us</Link></div>
         <div className="navs">
           {search==="searchbar-hidden"?<SearchOutlinedIcon color="action" onClick={opensearch}/>:<CloseOutlinedIcon color="action" onClick={opensearch}/>}
-          
         </div>
         <div className="navs">
             <Badge badgeContent={cartQuantity} color="secondary">
                 <Link to={"/cart"}><LocalMallOutlinedIcon color="action" onClick={closeusermenu} /></Link>
             </Badge>
         </div>
-        <div className="navs">
+        <div className="navs navs-hide">
           <PersonOutlineOutlinedIcon onClick={openuser} sx={{ fontSize: 30 }} color="action"/>
+        </div>
+        <div className="navs navs-menu">
+          <MenuRoundedIcon onClick={()=>Setmobmenu("mob-menu")} sx={{ fontSize: 30 }} color="action"/>
         </div>
       </div>
       <div className="header-hidden-contain">
@@ -217,6 +231,7 @@ function Header() {
                 </>}
             </div>
       </div>
+    </div>
     </div>
     </>
   );

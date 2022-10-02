@@ -1,6 +1,6 @@
 const express = require("express");
 const {register_user, login_user, logout_user, isAuth} = require("../controllers/logincontroller");
-const {getuser, getalluser, deleteuser, updateusertype, loggeduser, addAddress, changePass, changeName, delAddress, updateAddress, adminCheck} = require("../controllers/usercontroller");
+const {getuser, getalluser, deleteuser, updateusertype, loggeduser, addAddress, changePass, changeName, delAddress, updateAddress, adminCheck, getcounts} = require("../controllers/usercontroller");
 const {authtoken_admin, authtoken } = require("../middleware/authtoken");
 
 const router = express.Router();
@@ -21,6 +21,7 @@ router.get("/account/addresses/deladdress",authtoken,delAddress)
 router.post("/account/password",authtoken,changePass)
 router.post("/account/profile",authtoken,changeName)
 router.get("/admin",authtoken_admin,adminCheck)
+router.get("/getcounts",authtoken_admin,getcounts)
 
 
 module.exports = router;

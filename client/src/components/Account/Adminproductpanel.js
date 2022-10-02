@@ -114,7 +114,7 @@ function Adminproductpanel() {
     <>
        <div className="admin-route-main">
             <div className="admin-header">
-                <div className='acc-title'>Admin Dashboard - Product</div>
+                <div className='acc-title'>Admin Dashboard - Product({products.length})</div>
                 <button className="acc-btn" onClick={Newproductdailog}>Add Product</button>
             </div>
             <div className="admin-main">
