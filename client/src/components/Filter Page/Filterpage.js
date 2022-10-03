@@ -55,8 +55,8 @@ function Filterpage() {
                 }
         }
         product();
-    }, [])
-
+    }, [location.search])
+console.log(totalprod)
     const theme = createTheme({
         palette: {
           primary: {
