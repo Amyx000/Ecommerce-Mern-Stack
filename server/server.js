@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser')
 const dotenv= require("dotenv").config({path:"config/config.env"})
 require("./config/config.js")
-const productroute = require("../server/routes/productrout")
+const productroute = require("./routes/productrout")
 const userrout = require("./routes/userrout")
 const orderrout = require("./routes/orderrout")
 
