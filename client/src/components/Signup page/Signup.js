@@ -14,6 +14,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from '@mui/material/TextField';
 import dayjs from 'dayjs';
+import Message from '../Dialog Box/Message';
 
 
 function Signup() {
@@ -25,6 +26,7 @@ function Signup() {
   const[password, Setpassword] = useState("")
   const[open,setOpen]=useState(false)
   const[value,setValue]=useState(dayjs(''))
+  const[err,Seterr]=useState(false)
   const navigate = useNavigate()
 
   const loader = ()=>{
@@ -41,17 +43,22 @@ function Signup() {
   
 
   const clickfuc = async ()=>{
-    try {
-      await axios.post("http://localhost:5000/auth/register",{
-        name:name,
-        email:email,
-        mobile:number,
-        password:password,
-        dob:bdayval
-      })
-      loader()
-    } catch (error) {
-      console.log(error.response.data)
+    if (!name||!email||!number||!password||!bdayval) {
+      Seterr(true)
+    } else {
+      try {
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/register`,{
+          name:name,
+          email:email,
+          mobile:number,
+          password:password,
+          dob:bdayval
+        })
+        Seterr(false)
+        loader()
+      } catch (error) {
+        console.log(error.response.data)
+      }
     }
   }
 
@@ -102,6 +109,7 @@ function Signup() {
                   }} />}
                 />
             </LocalizationProvider>
+            {err?<Message cls="msg-color-r loginerr" msg={"Enter all the field"}/>:null}
             <div className='form-btn-div'><button className='form-btn' onClick={clickfuc}>REGISTER</button></div>
             </div>
             <div className='form-endline'>ALREADY REGISTER? <Link className='form-endline-btn' to={"/login"}>LOGIN</Link></div>

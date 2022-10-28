@@ -18,7 +18,7 @@ function Product(){
     useEffect(() => {
        async function getproductdetails () {
         try {
-            const res = await axios.get(`http://localhost:5000/products/${product_id}`)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products/${product_id}`)
             Setproduct(res.data.productdata)
             Setprodimg(res.data.productdata.images[0]?.productpage_url)
         } catch (error) {

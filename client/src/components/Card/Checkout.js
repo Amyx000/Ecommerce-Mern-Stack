@@ -37,8 +37,8 @@ function Checkout() {
 
     useEffect(() => {
         async function getdata(){
-            const {data:{key}} = await axios.get("http://localhost:5000/getkey",{withCredentials:true})
-            const {data:{id}} = await axios.post("http://localhost:5000/order/checkout",{amount:cart.total},{withCredentials:true})
+            const {data:{key}} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getkey`,{withCredentials:true})
+            const {data:{id}} = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/order/checkout`,{amount:cart.total},{withCredentials:true})
             const options = {
                 key:key, // Enter the Key ID generated from the Dashboard
                 amount: cart.total*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -49,7 +49,7 @@ function Checkout() {
                 order_id: id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                 handler:async (response)=>{
                     try {
-                        await axios.post("http://localhost:5000/order/checkout/payment",
+                        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/order/checkout/payment`,
                         
                         {
                             "user":userdata.userid,

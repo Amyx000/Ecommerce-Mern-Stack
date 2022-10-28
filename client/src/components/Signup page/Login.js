@@ -5,6 +5,7 @@ import {AiOutlineMail} from "react-icons/ai"
 import {RiLockPasswordLine} from "react-icons/ri"
 import axios from 'axios'
 import ClockLoader from "react-spinners/ClockLoader"
+import Message from '../Dialog Box/Message'
 
 
 function Login() {
@@ -12,6 +13,7 @@ function Login() {
   const navigate = useNavigate();
   const[email, Setemail] = useState("")
   const[password, Setpassword] = useState("")
+  const[err,Seterr]=useState("")
 
 
   const loader = ()=>{
@@ -23,15 +25,21 @@ function Login() {
   }
   const clickfuc = async ()=>{
     setLoading(false)
-    try {
-      await axios.post("http://localhost:5000/auth/login",{
-        email:email,
-        password:password
-      },{withCredentials: true})
-      loader()
-    } 
-    catch (error) {
-      console.log(error.response.data)
+    if (!email||!password) {
+      Seterr("Enter All the Field")
+    } else {
+      try {
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`,{
+          email:email,
+          password:password
+        },{withCredentials: true})
+        Seterr("")
+        loader()
+      } 
+      catch (error) {
+        console.log(error.response.data)
+        Seterr("Wrong Credentials")
+      }
     }
    
   }
@@ -48,6 +56,7 @@ function Login() {
             <div className='font-icon-div'><RiLockPasswordLine className='font-icon'/></div>
             <input className='form-input' placeholder='Enter Password' type="password" value={password} onChange={(e)=>{Setpassword(e.target.value)}}></input> 
             <div className='forgot-pass'>Forget Password?</div>
+            {err?<Message cls="msg-color-r loginerr" msg={err}/>:null}
             <div className='form-btn-div'><button className='form-btn' onClick={clickfuc}>Login</button></div>
             </div>
             <div className='form-endline'>NOT REGISTERED? <Link className='form-endline-btn' to={"/signup"}>SIGN UP</Link></div>

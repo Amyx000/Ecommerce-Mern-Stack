@@ -16,7 +16,7 @@ function Adminpanel (){
     useEffect(()=>{
         async function getcounts(){
            try {
-            const res = await axios.get("http://localhost:5000/getcounts",{withCredentials:true})
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcounts`,{withCredentials:true})
             Setcounts(res.data)
            } catch (error) {
             console.log(error.response)

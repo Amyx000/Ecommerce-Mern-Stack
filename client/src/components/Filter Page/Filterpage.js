@@ -46,7 +46,7 @@ function Filterpage() {
         async function product(){
 
               try {
-                  const res = await axios.get(`http://localhost:5000/products${location.search}`)
+                  const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products${location.search}`)
                   if(res.data.totalprod>=5){Settotalprod(Math.ceil(res.data.totalprod/5))}
                   else{Settotalprod(1)}
                

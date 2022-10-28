@@ -16,7 +16,7 @@ function Adminorderpanel() {
         }
         else{
             Setorderid(id)
-            const res = await axios.get(`http://localhost:5000/order/${id}`,{withCredentials:true})
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/order/${id}`,{withCredentials:true})
             Setorder(res.data)
             Setshowdailog(true)
         }
@@ -24,7 +24,7 @@ function Adminorderpanel() {
     // eslint-disable-next-line
     const updateStatus= async ()=>{
         try {
-            await axios.put(`http://localhost:5000/updateorder/${orderid}`,{status:order.orderitems[0].orderstatus},{withCredentials:true})
+            await axios.put(`${process.env.REACT_APP_BACKEND_URL}/updateorder/${orderid}`,{status:order.orderitems[0].orderstatus},{withCredentials:true})
             Setshowdailog(false)
         } catch (error) {
             console.log(error)
@@ -39,7 +39,7 @@ function Adminorderpanel() {
     useEffect(() => {
         async function getallorders(){
               try {
-                  const res = await axios.get("http://localhost:5000/allorders",{withCredentials:true})
+                  const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/allorders`,{withCredentials:true})
                   Setorders(res.data.orders)
               } catch (error) {
                   console.log(error)

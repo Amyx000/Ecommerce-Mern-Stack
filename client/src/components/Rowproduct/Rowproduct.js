@@ -26,7 +26,7 @@ function Rowproduct (){
             async function product(){
 
                   try {
-                      const res = await axios.get(`http://localhost:5000/products${location.search}`)
+                      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products${location.search}`)
                       Setproducts(res.data.productdata)
                       dispatch(showProductdata(products.length))
                       loader()

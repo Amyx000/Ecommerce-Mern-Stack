@@ -20,7 +20,7 @@ function Adminproductpanel() {
         }
         else{
             Setproductid(id)
-            const res = await axios.get(`http://localhost:5000/products/${id}`,{withCredentials:true})
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products/${id}`,{withCredentials:true})
             Setproduct(res.data.productdata)
             Setshowdailog(true)
         }
@@ -37,7 +37,7 @@ function Adminproductpanel() {
     // eslint-disable-next-line
     const updateProduct= async()=>{
         try {
-            await axios.put(`http://localhost:5000/products/update/${productid}`,product,{withCredentials:true})
+            await axios.put(`${process.env.REACT_APP_BACKEND_URL}/products/update/${productid}`,product,{withCredentials:true})
             Setshowdailog(false)
         } catch (error) {
             console.log(error)
@@ -47,7 +47,7 @@ function Adminproductpanel() {
     // eslint-disable-next-line
     const addProduct= async()=>{
         try {
-            await axios.post("http://localhost:5000/products/new",
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/products/new`,
             {
                 "brand":newproduct.brand,
                 "series":newproduct.series,
@@ -93,13 +93,13 @@ function Adminproductpanel() {
 
     // eslint-disable-next-line
     const deleteProduct=async(id)=>{
-        await axios.delete(`http://localhost:5000/products/delete/${id}`,{withCredentials:true})
+        await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/products/delete/${id}`,{withCredentials:true})
     }
  
     useEffect(() => {
         async function getallproducts(){
               try {
-                  const res = await axios.get("http://localhost:5000/allproduct",{withCredentials:true})
+                  const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/allproduct`,{withCredentials:true})
                   Setproducts(res.data)
               } catch (error) {
                   console.log(error)

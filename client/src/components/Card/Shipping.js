@@ -23,7 +23,7 @@ function Shipping() {
         }else{
             Seterr(false)
             try {
-                await axios.post("http://localhost:5000/account/addresses",{
+                await axios.post(`${process.env.REACT_APP_BACKEND_URL}/account/addresses`,{
                   shipname:updateadd.shipname,
                   street:updateadd.street,
                   city:updateadd.city,
@@ -43,7 +43,7 @@ function Shipping() {
 
         const getloggeduser=async()=>{
           try {
-            const res = await axios.get("http://localhost:5000/account",{withCredentials: true,})
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/account`,{withCredentials: true,})
             if(res.data.address.length!==0){
              Setaddress(res.data.address[0])
              dispatch(loggedUser({"userid":res.data._id,"address":res.data.address[0]}))

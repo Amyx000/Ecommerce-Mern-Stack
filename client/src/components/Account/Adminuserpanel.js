@@ -18,7 +18,7 @@ function Adminuserpanel(props) {
         }
         else{
             Setuserid(id)
-            const res = await axios.get(`http://localhost:5000/account/${id}`,{withCredentials:true})
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/account/${id}`,{withCredentials:true})
             Setuser(res.data)
             Setshowdailog(true)
         }
@@ -26,19 +26,19 @@ function Adminuserpanel(props) {
 
   // eslint-disable-next-line
   const updateuser =async ()=>{
-        await axios.put(`http://localhost:5000/account/${userid}`,{userType:user.userType},{withCredentials:true})
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/account/${userid}`,{userType:user.userType},{withCredentials:true})
         Setshowdailog(false)
   }
 
   // eslint-disable-next-line
   const deleteuser= async(id)=>{
-        await axios.delete(`http://localhost:5000/account/${id}`,{withCredentials:true})
+        await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/account/${id}`,{withCredentials:true})
   }
 
   useEffect(() => {
     async function getalluser(){
           try {
-              const res = await axios.get("http://localhost:5000/users",{withCredentials:true})
+              const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users`,{withCredentials:true})
               Setusers(res.data)
           } catch (error) {
               console.log(error)

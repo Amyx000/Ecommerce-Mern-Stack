@@ -27,7 +27,7 @@ function Header() {
 
     useEffect(() => {
         async function authenticated(){
-          const res = await axios.get("http://localhost:5000/account/isauth",{withCredentials: true,})
+          const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/account/isauth`,{withCredentials: true,})
           if(res.data===false){
            SetisAuth(false)
           }
@@ -46,7 +46,7 @@ function Header() {
     const logoutfuc = async()=>{
         Setuser("user-drop-hide");
        try {
-        await axios.get("http://localhost:5000/account/logout",{withCredentials:true})
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/account/logout`,{withCredentials:true})
 
        } catch (error) {
         console.log(error.code)

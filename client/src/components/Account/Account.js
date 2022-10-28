@@ -42,8 +42,8 @@ function Account() {
 
   useEffect(() => {
     async function authenticated(){
-      const res = await axios.get("http://localhost:5000/account/isauth",{withCredentials: true,})
-      const adminCheck = await axios.get("http://localhost:5000/admin",{withCredentials:true})
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/account/isauth`,{withCredentials: true,})
+      const adminCheck = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/admin`,{withCredentials:true})
       Setadmin(adminCheck.data)
       console.log(admin)
       loader()
@@ -60,7 +60,7 @@ function Account() {
 
     const getloggeduser=async()=>{
       try {
-        const res = await axios.get("http://localhost:5000/account",{withCredentials: true,})
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/account`,{withCredentials: true,})
         setuser(res.data)
         Setname(res.data.name)
         if(res.data.address.length!==0){
@@ -79,7 +79,7 @@ function Account() {
 
   const submitAddress = async()=>{
     try {
-      await axios.post("http://localhost:5000/account/addresses",{
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/account/addresses`,{
         shipname,
         street,
         city,
@@ -95,7 +95,7 @@ function Account() {
 
   const delAddress = async ()=>{
       try {
-        await axios.get("http://localhost:5000/account/addresses/deladdress",
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/account/addresses/deladdress`,
           {withCredentials:true}
         )
         Setaddress("")
@@ -107,7 +107,7 @@ function Account() {
 
   const updateAddress = async ()=>{
     try {
-      await axios.post("http://localhost:5000/account/addresses/editaddress",
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/account/addresses/editaddress`,
       {updateadd},
       {withCredentials:true}
     )
@@ -125,7 +125,7 @@ function Account() {
       Setalert("confirm password not match !")
     }else{
       try {
-        const res = await axios.post("http://localhost:5000/account/password",
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/account/password`,
           {currpass,confirmpass},
           {withCredentials:true}
         )
@@ -141,7 +141,7 @@ function Account() {
      Setprofilealert("Please enter the name !") 
     }else{
       try {
-        const res =await axios.post("http://localhost:5000/account/profile",
+        const res =await axios.post(`${process.env.REACT_APP_BACKEND_URL}/account/profile`,
           {name},
           {withCredentials:true}
         )
@@ -158,7 +158,7 @@ function Account() {
   useEffect(() => {
     async function loggedorder() {
       try {
-        const res = await axios.get("http://localhost:5000/user/order",{withCredentials:true})
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/order`,{withCredentials:true})
         Setorders(res.data)
         console.log(orders)
       } catch (error) {
