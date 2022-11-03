@@ -37,7 +37,7 @@ const login_user =async (req,res)=>{
                 )
 
                 const{password, ...restdata}=user._doc;
-                res.cookie("token",accesstoken,{httpOnly: true,sameSite: 'none',expires: new Date(Date.now() + 2592000000)})
+                res.cookie("token",accesstoken,{httpOnly: true,sameSite: 'none',secure:true,expires: new Date(Date.now() + 2592000000)})
                 res.json({...restdata, accesstoken})
                 
             }else{
