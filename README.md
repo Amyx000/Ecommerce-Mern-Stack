@@ -6,7 +6,7 @@ Project duration: 2 months
 
 ---
 ## Screenshots:
-![image](https://user-images.githubusercontent.com/104687128/193516619-286bb94b-1c17-4747-a4ee-ae47923e7c06.png)
+![image](https://user-images.githubusercontent.com/104687128/201467183-1b283c2c-c4c4-4b75-a450-02dae9edd64e.png)
 
 ---
 ## Preview:
