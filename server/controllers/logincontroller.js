@@ -52,7 +52,7 @@ const login_user =async (req,res)=>{
 
 const logout_user = (req,res)=>{
 try {
-    res.clearCookie("token")
+    res.clearCookie("token",{httpOnly: true,sameSite: 'none',secure:true})
     res.status(200).json("Logout Success")
 } catch (error) {
     console.log(error)
